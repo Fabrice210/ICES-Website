@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import bg from "../assets/hero/bg.jpg";
 import logo from "../assets/hero/logo.svg";
-import arrow from "../assets/hero/arrow.svg";
 
 const NAV_LINKS = ["Présentation", "Nos offres", "Incubation", "Réalisations", "Formations"];
 
@@ -182,18 +181,17 @@ export default function Hero() {
         </AnimatePresence>
 
         <div className="flex flex-1 flex-col justify-end px-6 pb-16 sm:px-10 sm:pb-20 lg:justify-center lg:px-[104px] lg:pb-0">
-          <h1 className="max-w-3xl font-extrabold text-[36px] leading-[1.1] tracking-[-0.01em] sm:text-[44px] lg:text-[53px]">
+          <h1 className="max-w-3xl font-extrabold text-[36px] leading-[1.2] tracking-[-0.01em] sm:text-[44px] lg:text-[53px]">
             {HEADLINE.map((word, i) => (
-              <span key={word + i} className="mr-[0.3em] inline-block overflow-hidden align-top">
-                <motion.span
-                  className="inline-block"
-                  initial={{ y: "110%" }}
-                  animate={{ y: "0%" }}
-                  transition={{ duration: 0.7, delay: 0.15 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {word}
-                </motion.span>
-              </span>
+              <motion.span
+                key={word + i}
+                className="mr-[0.3em] inline-block"
+                initial={{ clipPath: "inset(0 0 100% 0)" }}
+                animate={{ clipPath: "inset(0 0 0% 0)" }}
+                transition={{ duration: 0.7, delay: 0.15 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {word}
+              </motion.span>
             ))}
           </h1>
 
@@ -214,16 +212,24 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.8, ease: "easeOut" }}
             whileHover="hover"
             whileTap={{ scale: 0.97 }}
-            className="mt-8 flex w-fit items-center gap-2 bg-brand px-6 py-3.5 font-semibold text-[14px] text-white sm:mt-9"
+            className="mt-8 flex w-fit items-center gap-2.5 bg-brand px-5 py-3 font-bold text-[14px] text-white sm:mt-9"
           >
             Parlons de votre projet
-            <motion.img
-              src={arrow}
-              alt=""
-              className="block size-[18px] shrink-0 self-center"
+            <motion.svg
+              viewBox="0 0 14 14"
+              fill="none"
+              className="block size-4 shrink-0 self-center"
               variants={{ hover: { x: 3, y: -3 } }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-            />
+            >
+              <path
+                d="M1 13L13 1M13 9V1H5"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </motion.svg>
           </motion.a>
         </div>
 
