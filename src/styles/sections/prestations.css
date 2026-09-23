@@ -1,0 +1,23 @@
+/* =========================================================
+   PAGE PRESTATIONS
+   ========================================================= */
+.domains-title { margin-top: 50px; font-size: clamp(28px, 3vw, 38px); font-weight: 500; line-height: 1.25; color: var(--ink); max-width: 21ch; }
+.domains-intro { margin-top: 36px; font-size: 14.5px; max-width: 880px; }
+.domains-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-top: 90px; }
+.domain-card {
+  background: var(--blue); color: var(--white); padding: 34px 16px 30px 18px; min-height: 300px;
+  transition: background-color .3s var(--ease);
+}
+.domain-card:hover { background: var(--blue-dark); }
+.domain-card .icon-square { width: 34px; height: 34px; border-radius: 7px; }
+.domain-card h3 { margin-top: 22px; font-size: 18px; font-weight: 500; line-height: 1.2; }
+.domain-card p { margin-top: 22px; font-size: 13.5px; line-height: 1.45; }
+
+.positioning { padding-block: 70px 80px; }
+.positioning__grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: end; margin-top: 30px; }
+.positioning h2 { font-size: clamp(28px, 3vw, 38px); font-weight: 500; line-height: 1.2; max-width: 22ch; }
+.positioning p { margin-top: 36px; font-size: 14.5px; max-width: 560px; }
+.positioning .btn { margin-top: 26px; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 40px; }
+.stat strong { display: block; font-size: 52px; font-weight: 300; line-height: 1; }
+.stat span { display: block; margin-top: 6px; font-size: 19px; font-weight: 300; line-height: 1.2; }

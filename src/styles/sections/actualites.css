@@ -1,0 +1,26 @@
+/* =========================================================
+   Actualités & Événements — rotation
+   ========================================================= */
+.news { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 40px; }
+.rotator { position: relative; min-height: 400px; overflow: hidden; background: var(--blue-dark); }
+.rotator__item {
+  position: absolute; inset: 0; opacity: 0; visibility: hidden;
+  transition: opacity .9s var(--ease), visibility .9s;
+}
+.rotator__item.is-active { opacity: 1; visibility: visible; }
+.rotator__item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rotator__item::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,116,191,.35) 0%, rgba(10,116,191,.72) 45%, rgba(10,116,191,.92) 100%);
+}
+.rotator__content { position: absolute; inset: auto 0 0 0; z-index: 1; padding: 0 30px 34px; color: var(--white); }
+.rotator__label {
+  position: absolute; top: 26%; left: 30px; z-index: 2; font-size: 26px; font-weight: 500; color: var(--white); pointer-events: none;
+}
+.rotator__content p { font-size: 16px; line-height: 1.45; max-width: 520px; }
+.rotator__content .link-arrow { margin-top: 28px; }
+.rotator__dots { position: absolute; top: 24px; right: 26px; z-index: 3; display: flex; gap: 6px; }
+.rotator__dots button {
+  width: 22px; height: 3px; border: 0; padding: 0; background: rgba(255,255,255,.4); border-radius: 2px; transition: background-color .3s;
+}
+.rotator__dots button[aria-current="true"] { background: var(--white); }

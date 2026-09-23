@@ -1,11 +1,20 @@
-import Hero from "./components/Hero";
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { IconSprite } from './components/icons/IconSprite'
+import { SiteLayout } from './components/layout/SiteLayout'
+import { HomePage } from './pages/HomePage'
+import { PrestationsPage } from './pages/PrestationsPage'
 
-function App() {
+export function App() {
   return (
-    <main>
-      <Hero />
-    </main>
-  );
+    <>
+      <IconSprite />
+      <Routes>
+        <Route element={<SiteLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="prestations" element={<PrestationsPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+    </>
+  )
 }
-
-export default App;

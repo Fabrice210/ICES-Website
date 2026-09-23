@@ -1,0 +1,78 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+h1, h2, h3, h4, p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+:focus-visible { outline: 2px solid var(--blue-light); outline-offset: 3px; }
+
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.icon { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Images de secours : si une photo ne charge pas, le fond bleu reste propre */
+.media { background: linear-gradient(160deg, #1C3D66, var(--blue-dark)); overflow: hidden; }
+.media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Boutons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: .5em;
+  padding: .72em 1.15em;
+  font-size: 13px; font-weight: 600; line-height: 1.2;
+  border: 1px solid transparent; border-radius: 2px;
+  transition: background-color .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+  white-space: nowrap;
+}
+.btn .icon { width: 14px; height: 14px; }
+.btn--primary { background: var(--blue); color: var(--white); }
+.btn--primary:hover { background: var(--blue-dark); }
+.btn--ghost-light { border-color: var(--white); color: var(--white); background: transparent; }
+.btn--ghost-light:hover { background: var(--white); color: var(--navy); }
+.btn--ghost-dark { border-color: var(--gray-300); color: var(--ink); background: var(--white); }
+.btn--ghost-dark:hover { border-color: var(--blue); color: var(--blue); }
+.btn--outline-blue { border-color: var(--blue); color: var(--blue); background: transparent; }
+.btn--outline-blue:hover { background: var(--blue); color: var(--white); }
+
+.link-arrow {
+  display: inline-flex; align-items: center; gap: .4em;
+  font-size: 13px; font-weight: 600; color: var(--blue);
+}
+.link-arrow .icon { width: 13px; height: 13px; transition: transform .25s var(--ease); }
+.link-arrow:hover .icon { transform: translate(2px, -2px); }
+.link-arrow--light { color: var(--white); }
+
+/* ---------- Titres de section ---------- */
+.section { padding-block: 96px; }
+.section-label {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 24px; font-weight: 600; color: var(--ink);
+}
+.section-label::before {
+  content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--blue); flex: none;
+}
+.section-label--light { color: var(--white); }
+.section-intro { max-width: 860px; margin-top: 20px; font-size: 15px; color: var(--text); }
+.section-head { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }

@@ -1,0 +1,12 @@
+/* =========================================================
+   ACCUEIL — Nos interlocuteurs
+   ========================================================= */
+.audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 40px; }
+.audience-card { background: var(--gray-200); padding: 30px 26px 36px; min-height: 260px; }
+.icon-chip {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--white); color: var(--blue);
+  display: grid; place-items: center;
+}
+.icon-chip .icon { width: 17px; height: 17px; }
+.audience-card h3 { margin-top: 26px; font-size: 16px; font-weight: 500; color: var(--ink); line-height: 1.3; }
+.audience-card p { margin-top: 18px; font-size: 13px; line-height: 1.55; }

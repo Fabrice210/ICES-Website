@@ -1,0 +1,28 @@
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer { background: var(--gray-200); padding-top: 70px; margin-top: 96px; color: var(--text); }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 2.2fr auto; gap: 30px; }
+.footer-brand .logo { color: var(--navy); }
+.footer-brand p { margin-top: 18px; font-size: 12.5px; line-height: 1.55; max-width: 330px; }
+.footer-col h4 { font-size: 13px; font-weight: 600; color: var(--ink); letter-spacing: .02em; }
+.footer-col ul { margin-top: 12px; display: grid; gap: 6px; font-size: 13px; }
+.footer-col a:hover { color: var(--blue); }
+.footer-company { display: grid; grid-template-columns: auto 1fr; gap: 0 24px; }
+
+.place { display: flex; gap: 8px; font-size: 12.5px; }
+.place .icon { color: var(--blue); width: 16px; height: 16px; margin-top: 2px; }
+.place strong { color: var(--ink); font-weight: 600; display: block; }
+.places { margin-top: 12px; display: grid; gap: 12px; }
+.footer-side { display: flex; flex-direction: column; align-items: flex-end; gap: 22px; }
+.lang-pill { display: inline-flex; gap: 6px; border: 1px solid var(--navy); border-radius: 20px; padding: 3px 12px; font-size: 11px; font-weight: 600; }
+.lang-pill a { color: var(--muted); }
+.lang-pill a.is-active { color: var(--blue); }
+.socials { display: flex; gap: 12px; }
+.socials a { width: 34px; height: 34px; border-radius: 50%; background: var(--white); color: var(--navy); display: grid; place-items: center; transition: color .2s; }
+.socials a:hover { color: var(--blue); }
+.socials .icon { width: 15px; height: 15px; }
+.footer-bottom { margin-top: 60px; border-top: 1px solid var(--gray-300); padding-block: 30px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 11.5px; }
+.footer-legal { display: flex; gap: 14px; }
+.footer-legal a + a::before { content: "|"; margin-right: 14px; color: var(--gray-300); }
+.footer-legal a:hover { color: var(--blue); }

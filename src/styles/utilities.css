@@ -1,0 +1,10 @@
+/* =========================================================
+   Remplacent les attributs style="" de l'original.
+   Specificite doublee : doit l'emporter sur `.section` redefini
+   dans responsive.css (sinon le padding revient sous 600px).
+   ========================================================= */
+.section.section--flush-top { padding-top: 0; }
+.section.section--flush-bottom { padding-bottom: 0; }
+.section-intro.section-intro--narrow { max-width: 520px; }
+.steps.steps--reset { list-style: none; padding: 0; }
+.btn.btn--spaced { margin-top: 22px; }

@@ -1,0 +1,33 @@
+/* =========================================================
+   ACCUEIL — Notre vision
+   ========================================================= */
+.vision { display: grid; grid-template-columns: 1fr 2.4fr; gap: 40px; align-items: baseline; }
+.vision > .section-label { display: block; line-height: 1.2; }
+.vision > .section-label::before { display: inline-block; vertical-align: middle; margin: -4px 12px 0 0; }
+.vision h2 { font-size: clamp(28px, 3vw, 38px); font-weight: 500; line-height: 1.2; color: var(--ink); max-width: 20ch; }
+.vision__text p { margin-top: 18px; font-size: 14px; max-width: 800px; }
+.values { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 26px; }
+.values__tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.values__panel {
+  flex-basis: 100%; display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows .5s var(--ease);
+}
+.values.is-open .values__panel { grid-template-rows: 1fr; }
+.values__inner { overflow: hidden; }
+.values__text {
+  margin-top: 16px; padding: 4px 0 4px 16px; border-left: 2px solid var(--blue);
+  font-size: 14px; line-height: 1.55; color: var(--ink); max-width: 640px;
+}
+.values__text.is-rolling { animation: text-roll .8s var(--ease) both; }
+@keyframes text-roll {
+  from { clip-path: inset(0 100% 0 0); opacity: .3; transform: translateX(-10px); }
+  to { clip-path: inset(0 0 0 0); opacity: 1; transform: none; }
+}
+.values__label { font-size: 15px; font-weight: 500; color: var(--ink); margin-right: 8px; }
+.value-tab {
+  border: 0; background: transparent; color: var(--text); font-size: 13px; padding: 8px 12px; border-radius: 2px;
+  transition: background-color .2s, color .2s;
+}
+.value-tab:hover { color: var(--blue); }
+.value-tab[aria-selected="true"] { background: var(--blue); color: var(--white); }
+.vision .link-arrow { margin-top: 30px; }

@@ -1,0 +1,44 @@
+/* =========================================================
+   Zones tactiles agrandies sur écran tactile (téléphone, tablette).
+   Pseudo-élément invisible autour de la cible : le rendu reste
+   identique au pixel près, seule la surface « tapable » grandit.
+   Cible : 44×44 px pour les contrôles isolés (WCAG 2.5.5),
+   au moins 24 px ailleurs sans chevaucher la cible voisine (WCAG 2.5.8).
+   ========================================================= */
+@media (pointer: coarse) {
+  .rotator__dots button,
+  .burger,
+  .socials a,
+  .lang-pill a,
+  .link-arrow,
+  .footer-col a,
+  .place a {
+    position: relative;
+  }
+
+  .rotator__dots button::after,
+  .burger::after,
+  .socials a::after,
+  .lang-pill a::after,
+  .link-arrow::after,
+  .footer-col a::after,
+  .place a::after {
+    content: "";
+    position: absolute;
+  }
+
+  /* 22×3 → 28×45 ; l'écart de 6 px entre pastilles est partagé en deux */
+  .rotator__dots button::after { inset: -21px -3px; }
+  /* 42×42 → 44×44 */
+  .burger::after { inset: -1px; }
+  /* 34×34 → 44×44 ; écart de 12 px entre icônes */
+  .socials a::after { inset: -5px; }
+  /* FR | EN : 17 px → 45 px de haut */
+  .lang-pill a::after { inset: -14px -3px; }
+  /* liens fléchés isolés : 20 px → 44 px */
+  .link-arrow::after { inset: -12px -4px; }
+  /* liste du footer au pas de 22 px (16 + 6) : on couvre tout le pas sans chevauchement */
+  .footer-col a::after { inset: -3px -4px; }
+  /* e-mails des implantations : 15 px → 25 px */
+  .place a::after { inset: -5px -4px; }
+}

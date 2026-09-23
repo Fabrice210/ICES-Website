@@ -1,0 +1,18 @@
+/* =========================================================
+   Notre approche
+   ========================================================= */
+.steps { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 60px; }
+/* Une seule ligne continue sur toute la largeur */
+.steps::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 68px; height: 1px; background: #8C8C8C;
+}
+.step__num {
+  position: relative; height: 68px; font-size: 46px; font-weight: 300; color: var(--blue); line-height: 1;
+  padding: 0 0 0 4px;
+}
+/* Repère vertical au départ de chaque étape, posé sur la ligne */
+.step__num::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 1px; height: 11px; background: #8C8C8C;
+}
+.step h3 { margin-top: 28px; padding-right: 24px; font-size: 16px; font-weight: 600; color: var(--ink); line-height: 1.3; max-width: 12ch; }
+.step p { margin-top: 20px; padding-right: 24px; font-size: 13.5px; color: var(--muted); max-width: 170px; }

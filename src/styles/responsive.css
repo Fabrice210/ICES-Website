@@ -1,0 +1,76 @@
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 1100px) {
+  .main-nav > ul { gap: 18px; }
+  .domains-grid { grid-template-columns: repeat(3, 1fr); }
+  .works { gap: 30px; }
+  .footer-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .footer-company { grid-column: span 2; }
+}
+
+@media (max-width: 960px) {
+  :root { --header-h: 72px; }
+  .burger { display: inline-flex; }
+  .header-actions .btn, .header-actions .lang { display: none; }
+  .main-nav {
+    position: fixed; inset: var(--header-h) 0 auto 0; background: var(--dark); padding: 16px var(--gutter) 28px;
+    display: block; transform: translateY(-8px); opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s, visibility .25s;
+  }
+  .nav-open .main-nav { opacity: 1; visibility: visible; transform: none; }
+  .nav-open .site-header { background: var(--dark); }
+  .main-nav > ul { flex-direction: column; gap: 4px; }
+  .main-nav a, .main-nav button.nav-drop { font-size: 16px; padding: 10px 0; }
+  .main-nav .mobile-only { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .dropdown { position: static; box-shadow: none; background: transparent; padding: 0 0 0 14px; opacity: 1; visibility: visible; transform: none; display: none; }
+  .has-dropdown.is-open .dropdown { display: block; }
+  .dropdown a { color: rgba(255,255,255,.85); }
+  .dropdown a:hover { background: transparent; color: var(--white); }
+  .header-actions { margin-left: auto; }
+
+  .audience-grid { grid-template-columns: 1fr 1fr; }
+  .vision { grid-template-columns: 1fr; gap: 20px; }
+  .offers { grid-template-columns: 1fr; }
+  .offers__visual { min-height: 380px; }
+  .offers__text { margin-top: 30px; }
+  .offers__nav { margin-top: 30px; }
+  .expertise-row { grid-template-columns: 1fr; gap: 36px; }
+  .steps { grid-template-columns: 1fr 1fr; row-gap: 50px; }
+  .steps::before { display: none; }
+  .step__num { border-bottom: 1px solid #8C8C8C; }
+  .step__num::after { bottom: -1px; }
+  .news { grid-template-columns: 1fr; }
+  .team { grid-template-columns: 1fr 1fr; }
+  .team__intro { grid-column: 1 / -1; }
+  .team__intro p { margin-top: 24px; }
+  .team-tabs { grid-column: 1 / -1; }
+  .presence { grid-template-columns: 1fr; }
+  .contact { grid-template-columns: 1fr; }
+  .positioning__grid { grid-template-columns: 1fr; }
+  .domains-grid { grid-template-columns: 1fr 1fr; margin-top: 50px; }
+}
+
+@media (min-width: 961px) { .main-nav .mobile-only { display: none; } }
+
+@media (max-width: 600px) {
+  :root { --gutter: 18px; }
+  .section { padding-block: 64px; }
+  .hero { height: auto; min-height: 100svh; }
+  .audience-grid, .works, .steps, .team, .domains-grid { grid-template-columns: 1fr; }
+  .offers__panel { padding: 32px 24px; }
+  .offers__caption { left: 24px; bottom: 30px; }
+  .contact__info, .contact__form { padding: 40px 24px; }
+  .pform { grid-template-columns: 1fr; }
+  .modal__inner { padding: 26px 20px 30px; }
+  .modal__head h2 { font-size: 24px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand, .footer-company, .footer-side { grid-column: 1 / -1; }
+  .footer-side { align-items: flex-start; flex-direction: row; }
+  .rotator { min-height: 440px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+[data-page][hidden] { display: none !important; }

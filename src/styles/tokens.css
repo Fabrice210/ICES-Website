@@ -1,0 +1,24 @@
+/* =========================================================
+   ICES — Feuille de style principale
+   ========================================================= */
+
+:root {
+  --blue: #0A74BF;
+  --blue-dark: #075C99;
+  --blue-light: #1E8FD9;
+  --navy: #13284A;
+  --ink: #1B1B1B;
+  --text: #3C3C3C;
+  --muted: #6B6B6B;
+  --gray-100: #F4F5F7;
+  --gray-200: #ECECEC;
+  --gray-300: #DCDCDC;
+  --white: #FFFFFF;
+  --dark: #0E1A2B;
+
+  --font: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --container: 1240px;
+  --gutter: 24px;
+  --header-h: 84px;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}

@@ -1,4 +1,17 @@
 node_modules/
 dist/
-*.tsbuildinfo
 .DS_Store
+*.local
+.env
+.env.*
+!.env.example
+
+# Navigateurs Playwright (installes via `npx playwright install`)
+/test-results/
+/playwright-report/
+
+# Sorties de comparaison visuelle (regenerees a chaque recette)
+/baseline/diff/
+
+# Captures de la version React (regenerees a chaque npm run test:visual)
+/baseline/react/

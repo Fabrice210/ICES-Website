@@ -1,0 +1,41 @@
+/* =========================================================
+   ACCUEIL — Nos offres (slider)
+   ========================================================= */
+.offers { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; min-height: 580px; background: var(--gray-200); }
+
+.offers__visual { position: relative; overflow: hidden; background: var(--blue-dark); }
+.offers__img {
+  position: absolute; inset: 0; opacity: 0; transition: opacity 1s var(--ease);
+}
+.offers__img.is-active { opacity: 1; }
+.offers__img img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); transition: transform 5s linear; }
+.offers__img.is-active img { transform: scale(1); }
+.offers__visual::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(10,116,191,.18) 0%, rgba(10,116,191,.55) 50%, rgba(8,108,184,.97) 100%);
+  mix-blend-mode: normal;
+}
+.offers__visual .tint { position: absolute; inset: 0; background: rgba(8, 90, 160, .28); mix-blend-mode: multiply; z-index: 1; pointer-events: none; }
+.offers__caption {
+  position: absolute; left: 50px; right: 40px; bottom: 50px; z-index: 2;
+  font-size: clamp(22px, 2.3vw, 34px); font-weight: 600; line-height: 1.2; color: var(--white);
+  transition: opacity .45s var(--ease), transform .45s var(--ease);
+}
+.offers__caption.is-swapping { opacity: 0; transform: translateY(10px); }
+
+.offers__panel { position: relative; padding: 48px 56px 48px 50px; display: flex; flex-direction: column; }
+.offers__counter { font-size: 20px; font-weight: 300; color: #8A8A8A; }
+.offers__body { transition: opacity .4s var(--ease), transform .4s var(--ease); }
+.offers__body.is-swapping { opacity: 0; transform: translateX(14px); }
+.offers__title { margin-top: 26px; font-size: clamp(24px, 2.4vw, 34px); font-weight: 600; line-height: 1.25; color: var(--ink); max-width: 15ch; }
+.offers__title em { font-style: normal; color: var(--blue); }
+.offers__text { margin-top: 60px; font-size: 13px; line-height: 1.55; max-width: 360px; color: var(--ink); }
+.offers__body .btn { margin-top: 26px; }
+.offers__nav { margin-top: auto; align-self: flex-end; display: flex; gap: 10px; }
+.round-btn {
+  width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--white); color: var(--ink);
+  display: grid; place-items: center; transition: background-color .2s, color .2s, transform .2s;
+}
+.round-btn:hover { background: var(--blue); color: var(--white); }
+.round-btn:active { transform: scale(.94); }
+.round-btn .icon { width: 18px; height: 18px; }

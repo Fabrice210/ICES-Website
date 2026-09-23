@@ -6,23 +6,40 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "oxlint",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "framer-motion": "^13.4.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "tailwindcss": "^4.3.3"
+    "preview": "vite preview --port 4173 --strictPort",
+    "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
+    "typecheck": "tsc -b --noEmit",
+    "baseline:assets": "node scripts/fetch-assets.mjs",
+    "baseline:fonts": "node scripts/fetch-fonts.mjs",
+    "baseline:capture": "node scripts/capture-baseline.mjs",
+    "test:content": "node scripts/verify-content.mjs",
+    "test:visual": "node scripts/visual/capture.mjs --target=react --out=baseline/react --base=http://localhost:4173 && node scripts/visual/compare.mjs --a=baseline/screenshots --b=baseline/react --out=baseline/diff",
+    "test:timings": "node scripts/visual/timings.mjs --target=react --base=http://localhost:4173",
+    "test:mobile": "node scripts/visual/mobile-audit.mjs --target=react --base=http://localhost:4173",
+    "test": "npm run test:content && npm run test:visual && npm run test:timings && npm run test:mobile"
   },
   "devDependencies": {
-    "@types/node": "^24.13.3",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.7",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
-    "oxlint": "^1.81.0",
-    "typescript": "~6.0.2",
+    "eslint": "^10.11.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.12.0",
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.49.0",
+    "pngjs": "^7.0.0",
+    "prettier": "^3.9.9",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.70.1",
     "vite": "^8.3.0"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^7.18.4"
   }
 }
