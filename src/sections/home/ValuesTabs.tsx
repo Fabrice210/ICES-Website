@@ -1,9 +1,10 @@
 import { useRef, useState, type FocusEvent } from 'react'
 import { useCanHover } from '../../hooks/useMediaQuery'
+import type { Tone } from '../../types/content'
 
 interface ValuesTabsProps {
   label: string
-  values: { label: string; text: string }[]
+  values: { label: string; text: string; tone: Tone }[]
 }
 
 /**
@@ -36,6 +37,7 @@ export function ValuesTabs({ label, values }: ValuesTabsProps) {
       ref={blockRef}
       className={open ? 'values is-open' : 'values'}
       data-values
+      data-tone={values[selected].tone}
       onMouseLeave={onMouseLeave}
       onBlur={onBlur}
     >
@@ -47,6 +49,7 @@ export function ValuesTabs({ label, values }: ValuesTabsProps) {
           <button
             key={value.label}
             className="value-tab"
+            data-tone={value.tone}
             role="tab"
             aria-selected={index === selected}
             aria-controls="values-panel"

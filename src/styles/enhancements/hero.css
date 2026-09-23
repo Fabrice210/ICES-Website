@@ -1,0 +1,27 @@
+/* =========================================================
+   Hero — entrée animée au chargement :
+   léger zoom arrière de la photo, titre révélé mot par mot
+   (MaskedWords, masque défini dans reveal.css), puis texte et
+   bouton en fondu montant. L'état final est identique à l'original.
+   ========================================================= */
+.hero__bg img { animation: hero-zoom 7s var(--ease) both; }
+
+.hero h1 .mask-word > span {
+  animation: mask-rise .9s var(--ease) backwards;
+  animation-delay: calc(150ms + var(--w, 0) * 70ms);
+}
+
+.hero .container > p,
+.hero .container > .btn { animation: hero-fade .8s var(--ease) backwards; }
+.hero .container > p { animation-delay: .6s; }
+.hero .container > .btn { animation-delay: .75s; }
+
+@keyframes hero-zoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+@keyframes hero-fade { from { opacity: 0; transform: translateY(16px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg img,
+  .hero h1 .mask-word > span,
+  .hero .container > p,
+  .hero .container > .btn { animation: none; }
+}

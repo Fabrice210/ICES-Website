@@ -1,0 +1,10 @@
+/* =========================================================
+   Nos valeurs — chaque onglet prend sa propre teinte au survol,
+   et le filet du texte déroulé reprend la teinte de la valeur active.
+   ========================================================= */
+.value-tab:hover { color: var(--tone, var(--blue)); }
+.value-tab[aria-selected="true"] { background: var(--tone, var(--blue)); color: var(--white); }
+.values__text {
+  border-left-color: var(--tone, var(--blue));
+  transition: border-color .3s var(--ease);
+}

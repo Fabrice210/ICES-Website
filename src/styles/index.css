@@ -18,4 +18,11 @@
 @import './sections/modale.css';
 @import './responsive.css';
 @import './utilities.css';
+/* Évolutions de design validées après la migration (hors original). */
+@import './enhancements/tones.css';
+@import './enhancements/values.css';
+@import './enhancements/reveal.css';
+@import './enhancements/hero.css';
+@import './enhancements/audiences.css';
+@import './enhancements/domains.css';
 @import './touch.css';

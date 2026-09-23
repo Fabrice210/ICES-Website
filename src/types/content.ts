@@ -10,10 +10,26 @@ export interface LinkItem {
   to: string
 }
 
+/** Teintes de la palette ICES (cf. styles/enhancements/tones.css). */
+export type Tone =
+  | 'blue'
+  | 'navy'
+  | 'indigo'
+  | 'violet'
+  | 'plum'
+  | 'burgundy'
+  | 'coral'
+  | 'orange'
+  | 'gold'
+  | 'green'
+  | 'teal'
+
 export interface IconCard {
   icon: IconName
   title: string
   text: string
+  /** Couleur d'accent de la carte (Interlocuteurs ; survol des domaines). */
+  tone?: Tone
 }
 
 export interface HeaderVariant {
@@ -78,7 +94,7 @@ export interface SiteContent {
       title: string
       paragraphs: string[]
       valuesLabel: string
-      values: { label: string; text: string }[]
+      values: { label: string; text: string; tone: Tone }[]
       link: LinkItem
     }
     offers: {

@@ -16,6 +16,8 @@ const decode = (s) =>
     .replace(/&#39;/g, "'")
 
 const original = decode(readFileSync('baseline/original/index.html', 'utf8'))
+// Textes nouveaux, demandés explicitement par le client (hors original).
+const approved = JSON.parse(readFileSync('scripts/approved-texts.json', 'utf8')).map((t) => t.text)
 const dir = 'src/content/fr'
 const TECHNICAL = /^(\/|#|\.\.?\/|https?:|mailto:|tel:|photo-|[\w-]+\.(jpg|png|docx)$|fr$|en$)/
 
@@ -66,7 +68,7 @@ for (const file of readdirSync(dir).filter((f) => f.endsWith('.ts'))) {
     const found = value.includes('{')
       ? value.split(/\{\w+\}/).every((part) => original.includes(part))
       : original.includes(value)
-    if (!found) missing.push(`${file}: ${value}`)
+    if (!found && !approved.includes(value)) missing.push(`${file}: ${value}`)
   }
 }
 

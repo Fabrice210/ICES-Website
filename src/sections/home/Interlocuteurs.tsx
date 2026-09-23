@@ -1,11 +1,14 @@
 import { Icon } from '../../components/icons/Icon'
+import type { CSSProperties } from 'react'
 import { useOpenPartnerModal } from '../../components/partner/PartnerModalContext'
+import { useInView } from '../../hooks/useInView'
 import { useContent } from '../../i18n/useLanguage'
 
 export function Interlocuteurs() {
   const { home, header } = useContent()
   const { audiences } = home
   const openPartner = useOpenPartnerModal()
+  const { ref, inView } = useInView<HTMLDivElement>()
 
   return (
     <section className="section" id="interlocuteurs" aria-labelledby="aud-title">
@@ -19,9 +22,14 @@ export function Interlocuteurs() {
           </button>
         </div>
         <p className="section-intro">{audiences.intro}</p>
-        <div className="audience-grid">
-          {audiences.cards.map((card) => (
-            <article key={card.title} className="audience-card">
+        <div ref={ref} className={inView ? 'audience-grid reveal is-revealing' : 'audience-grid reveal is-hidden'}>
+          {audiences.cards.map((card, i) => (
+            <article
+              key={card.title}
+              className="audience-card reveal-item"
+              data-tone={card.tone}
+              style={{ '--i': i } as CSSProperties}
+            >
               <span className="icon-chip">
                 <Icon name={card.icon} />
               </span>

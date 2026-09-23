@@ -17,21 +17,25 @@ export const home: SiteContent['home'] = {
     cards: [
       {
         icon: 'landmark',
+        tone: 'blue',
         title: 'États & institutions publiques',
         text: 'Nous accompagnons les États, administrations et institutions dans leurs projets de transformation, de gouvernance et de développement.',
       },
       {
         icon: 'building',
+        tone: 'violet',
         title: 'Entreprises & organisations',
         text: 'Nous aidons les entreprises et organisations à structurer leurs projets, renforcer leur performance et déployer des solutions adaptées à leurs enjeux.',
       },
       {
         icon: 'handshake',
+        tone: 'coral',
         title: 'Partenaires & acteurs du développement',
         text: 'Nous collaborons avec les partenaires techniques, financiers et institutionnels autour de projets contribuant au développement des territoires et des populations.',
       },
       {
         icon: 'user',
+        tone: 'teal',
         title: 'Porteurs de projets & entrepreneurs',
         text: 'Nous accompagnons les initiatives innovantes dans leur structuration, leur développement et leur passage à l’échelle.',
       },
@@ -50,22 +54,27 @@ export const home: SiteContent['home'] = {
     values: [
       {
         label: 'Souveraineté',
+        tone: 'blue',
         text: 'Nous aidons les États et les organisations à rester maîtres de leurs choix : autonomie décisionnelle, maîtrise des données et valorisation durable de leurs ressources souveraines.',
       },
       {
         label: 'Anticipation',
+        tone: 'violet',
         text: 'Façonner l’avenir plutôt que le subir : nous intégrons dès aujourd’hui les ruptures technologiques, énergétiques et géoéconomiques qui redessineront l’Afrique francophone.',
       },
       {
         label: 'Excellence',
+        tone: 'gold',
         text: 'Nous diagnostiquons, restructurons et optimisons avec rigueur pour garantir la fiabilité et la qualité des services, sur toute la durée de nos missions.',
       },
       {
         label: 'Innovation',
+        tone: 'teal',
         text: 'L’innovation ne se décrète pas, elle s’ingénie : nous traduisons les technologies de rupture en solutions concrètes, adaptées au terrain africain.',
       },
       {
         label: 'Impact',
+        tone: 'coral',
         text: 'Chaque mission vise des résultats mesurables et une valeur pérenne pour nos clients, nos partenaires et les populations africaines.',
       },
     ],

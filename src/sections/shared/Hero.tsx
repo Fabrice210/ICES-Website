@@ -1,6 +1,7 @@
 import { image } from '../../assets/images'
 import { Icon } from '../../components/icons/Icon'
 import { FallbackImg } from '../../components/ui/FallbackImg'
+import { MaskedWords } from '../../components/ui/MaskedWords'
 import { SmartLink } from '../../components/ui/SmartLink'
 import type { LinkItem } from '../../types/content'
 
@@ -20,7 +21,9 @@ export function Hero({ image: file, title, text, cta, wide = false }: HeroProps)
         <FallbackImg src={image(file)} alt="" fetchPriority="high" />
       </div>
       <div className="container">
-        <h1>{title}</h1>
+        <h1>
+          <MaskedWords text={title} />
+        </h1>
         <p>{text}</p>
         <SmartLink className="btn btn--primary" to={cta.to}>
           {cta.label} <Icon name="arrow" />

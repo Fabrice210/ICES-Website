@@ -1,0 +1,39 @@
+/* =========================================================
+   Nos interlocuteurs — une teinte par carte.
+   Au repos : icône et court trait colorés. Au survol : la carte se soulève,
+   un filet de couleur se déploie en haut et la pastille se remplit.
+   À l'apparition : les cartes montent en cascade (useInView).
+   ========================================================= */
+.audience-card {
+  position: relative;
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease), background-color .4s var(--ease);
+}
+.audience-card::before {
+  content: "";
+  position: absolute; inset: 0 0 auto 0; height: 3px;
+  background: var(--tone, var(--blue));
+  transform: scaleX(.16); transform-origin: left;
+  transition: transform .5s var(--ease);
+}
+.audience-card .icon-chip {
+  color: var(--tone, var(--blue));
+  transition: background-color .35s var(--ease), color .35s var(--ease), transform .35s var(--ease);
+}
+
+@media (hover: hover) {
+  .audience-card:hover {
+    transform: translateY(-6px);
+    background: var(--white);
+    box-shadow: 0 22px 44px -26px rgba(19, 40, 74, .45);
+  }
+  .audience-card:hover::before { transform: scaleX(1); }
+  .audience-card:hover .icon-chip { background: var(--tone, var(--blue)); color: var(--white); transform: scale(1.08); }
+}
+
+/* Écran tactile (pas de survol) : le filet de couleur reste visible. */
+@media (hover: none) {
+  .audience-card::before { transform: scaleX(1); }
+}
+
+/* Apparition en cascade : mécanisme commun, cf. reveal.css */
+.audience-grid { --reveal-step: 110ms; }

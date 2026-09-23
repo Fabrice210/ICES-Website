@@ -1,0 +1,32 @@
+/* =========================================================
+   Palette de teintes ICES — une couleur par valeur, interlocuteur ou domaine,
+   sans répétition au sein d'une même section.
+   Même intensité perçue pour toutes, et assez sombres pour du texte
+   blanc lisible (contraste ≥ 4,9:1, WCAG AA).
+   ========================================================= */
+:root {
+  --tone-blue: #0A74BF;   /* Souveraineté — bleu ICES */
+  --tone-navy: #13284A;   /* bleu nuit ICES */
+  --tone-indigo: #3F51B5;
+  --tone-plum: #A23B8C;
+  --tone-burgundy: #8E2442;
+  --tone-orange: #B4531A; /* orange brûlé */
+  --tone-green: #2E7D32;  /* vert forêt */
+  --tone-violet: #6A4BC4; /* Anticipation */
+  --tone-gold: #9A6200;   /* Excellence — or ocre */
+  --tone-teal: #007A74;   /* Innovation — sarcelle */
+  --tone-coral: #C2413A;  /* Impact — corail */
+}
+
+/* `data-tone` expose la teinte sous une variable unique : --tone */
+[data-tone="blue"] { --tone: var(--tone-blue); }
+[data-tone="navy"] { --tone: var(--tone-navy); }
+[data-tone="indigo"] { --tone: var(--tone-indigo); }
+[data-tone="plum"] { --tone: var(--tone-plum); }
+[data-tone="burgundy"] { --tone: var(--tone-burgundy); }
+[data-tone="orange"] { --tone: var(--tone-orange); }
+[data-tone="green"] { --tone: var(--tone-green); }
+[data-tone="violet"] { --tone: var(--tone-violet); }
+[data-tone="gold"] { --tone: var(--tone-gold); }
+[data-tone="teal"] { --tone: var(--tone-teal); }
+[data-tone="coral"] { --tone: var(--tone-coral); }

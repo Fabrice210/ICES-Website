@@ -1,0 +1,27 @@
+/* =========================================================
+   Page Prestations — 10 domaines.
+   Au repos : cartes bleues, inchangées. Au survol : chaque carte
+   prend sa teinte, se soulève, et son icône pivote légèrement.
+   Dix teintes, aucune répétée ; les cartes restent bleues au repos.
+   ========================================================= */
+.domain-card {
+  transition: background-color .45s var(--ease), transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.domain-card .icon-square { transition: color .45s var(--ease), transform .45s var(--ease); }
+
+/* Apparition : titre mot par mot, puis cartes en cascade (reveal.css) */
+.domains-grid { --reveal-step: 70ms; }
+
+@media (hover: hover) {
+  .domain-card:hover {
+    background: var(--tone, var(--blue-dark));
+    transform: translateY(-6px);
+    box-shadow: 0 24px 44px -26px rgba(19, 40, 74, .55);
+  }
+  .domain-card:hover .icon-square { color: var(--tone, var(--blue)); transform: rotate(-6deg) scale(1.06); }
+}
+
+/* Écran tactile : la teinte apparaît pendant l'appui. */
+@media (hover: none) {
+  .domain-card:active { background: var(--tone, var(--blue-dark)); }
+}

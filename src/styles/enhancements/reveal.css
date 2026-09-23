@@ -1,0 +1,32 @@
+/* =========================================================
+   Apparition au défilement (hook useInView).
+   `.reveal` passe de `.is-hidden` à `.is-revealing` quand le bloc
+   entre à l'écran ; chaque `.reveal-item` monte en fondu avec un
+   décalage (--i × --reveal-step).
+   `backwards` : l'état de départ ne s'applique que pendant l'attente,
+   puis l'élément retrouve ses styles normaux (le survol reste libre).
+   ========================================================= */
+.mask-word { display: inline-block; clip-path: inset(-0.2em -0.1em -0.25em -0.1em); }
+.mask-word > span { display: inline-block; }
+
+.reveal.is-hidden .reveal-item { opacity: 0; }
+.reveal.is-hidden .mask-word > span { transform: translateY(110%); }
+
+.reveal.is-revealing .reveal-item {
+  animation: reveal-rise .75s var(--ease) backwards;
+  animation-delay: calc(var(--i, 0) * var(--reveal-step, 90ms));
+}
+.reveal.is-revealing .mask-word > span {
+  animation: mask-rise .9s var(--ease) backwards;
+  animation-delay: calc(var(--mask-delay, 120ms) + var(--w, 0) * 60ms);
+}
+
+@keyframes reveal-rise { from { opacity: 0; transform: translateY(28px); } }
+@keyframes mask-rise { from { transform: translateY(110%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal.is-hidden .reveal-item { opacity: 1; }
+  .reveal.is-hidden .mask-word > span { transform: none; }
+  .reveal.is-revealing .reveal-item,
+  .reveal.is-revealing .mask-word > span { animation: none; }
+}
