@@ -30,6 +30,12 @@
 }
 @media (max-width: 720px) { .curve-top { --curve-h: 64px; } }
 
+/* Points d'arrêt du défilement entre sections (snap « proximité » : la page s'y cale
+   seulement si le scroll s'arrête tout près, ailleurs il reste libre). Repères invisibles
+   de hauteur nulle, placés en absolu dans une section non figée. */
+html { scroll-snap-type: y proximity; }
+.snap-point { position: absolute; left: 0; width: 1px; height: 0; pointer-events: none; }
+
 .pill-tag {
   display: inline-block; padding: 6px 14px; border-radius: 999px;
   background: var(--gray-100); color: var(--blue); font-size: 12px; font-weight: 600;

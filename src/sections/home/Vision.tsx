@@ -3,7 +3,7 @@ import { image } from '../../assets/images'
 import { Icon } from '../../components/icons/Icon'
 import { FallbackImg } from '../../components/ui/FallbackImg'
 import { MaskedWords } from '../../components/ui/MaskedWords'
-import { OrbitCardStack } from '../../components/ui/OrbitCardStack'
+import { ValuesBento } from './ValuesBento'
 import { SmartLink } from '../../components/ui/SmartLink'
 import { useInView } from '../../hooks/useInView'
 import { useContent } from '../../i18n/useLanguage'
@@ -11,7 +11,7 @@ import { useContent } from '../../i18n/useLanguage'
 /**
  * Notre ambition (ex-« Notre vision ») : bande blanche qui monte en arc sur le bleu.
  * Écran 1 : titre, texte et lien à gauche, photo en arche avec la carte « Notre
- * ambition » flottante à droite. Écran 2 : les valeurs en pile de cartes (OrbitCardStack).
+ * ambition » flottante à droite. Écran 2 : les valeurs en grille bento (ValuesBento).
  */
 export function Vision() {
   const { vision } = useContent().home
@@ -20,15 +20,11 @@ export function Vision() {
   const { ref: blocksRef, inView: blocksIn } = useInView<HTMLDivElement>(0.25)
   const [expanded, setExpanded] = useState(false)
 
-  const values = vision.values.map((value) => ({
-    kicker: vision.valuesLabel,
-    title: value.label,
-    text: value.text,
-    badge: 'ICES',
-  }))
-
   return (
     <section ref={sectionRef} className="amb curve-top" id="vision" aria-labelledby="vision-title">
+      {/* Points d'arrêt du défilement : Interlocuteurs entière avant le dôme, puis Ambition en haut. */}
+      <span className="snap-point amb__snap-pause" aria-hidden="true" />
+      <span className="snap-point amb__snap-top" aria-hidden="true" />
       {/* Écran 1 : titre + texte + lien à gauche ; photo en arche + carte « Notre ambition »
           flottante à droite. Centré sous le header. */}
       <div className="container amb__screen">
@@ -83,14 +79,9 @@ export function Vision() {
         </div>
       </div>
 
-      {/* Écran 2 : les valeurs en pile de cartes, centrées sous le header. */}
+      {/* Écran 2 : les valeurs en grille bento (le titre est une tuile), centrées sous le header. */}
       <div className="container amb__screen">
-        <div className="amb__values">
-          <div className="amb__values-head">
-            <h3>{vision.valuesLabel}</h3>
-          </div>
-          <OrbitCardStack items={values} label={vision.valuesLabel} scaleToViewport />
-        </div>
+        <ValuesBento title={vision.valuesLabel} intro={vision.valuesIntro} values={vision.values} />
       </div>
     </section>
   )

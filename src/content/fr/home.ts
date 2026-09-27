@@ -63,6 +63,8 @@ export const home: SiteContent['home'] = {
     readMore: 'Lire la suite',
     readLess: 'Réduire',
     valuesLabel: 'Nos valeurs',
+    valuesIntro:
+      'Cinq principes qui guident chacune de nos missions, du diagnostic à la gestion déléguée.',
     values: [
       {
         label: 'Souveraineté',

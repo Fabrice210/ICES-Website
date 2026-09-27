@@ -115,6 +115,8 @@ export interface SiteContent {
       readMore: string
       readLess: string
       valuesLabel: string
+      /** Phrase courte à côté du titre « Nos valeurs ». */
+      valuesIntro: string
       values: { label: string; text: string; tone: Tone }[]
       link: LinkItem
     }

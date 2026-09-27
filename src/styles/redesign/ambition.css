@@ -8,6 +8,11 @@
 /* Temps de pause : Interlocuteurs (figée) reste affichée une demi-hauteur d'écran
    de défilement avant que le dôme blanc ne monte. */
 .aud + .amb { margin-top: 50svh; }
+/* Arrêt 1 : bas d'Interlocuteurs au bas de l'écran, au début de la pause (50svh au-dessus). */
+.amb__snap-pause { display: none; top: -50svh; scroll-snap-align: end; }
+.aud + .amb .amb__snap-pause { display: block; }
+/* Arrêt 2 : haut d'Ambition en haut de l'écran (annule le scroll-padding du header). */
+.amb__snap-top { top: 0; scroll-snap-align: start; scroll-margin-top: calc(var(--header-h) * -1); }
 
 .amb__split { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 64px; align-items: center; }
 
@@ -69,19 +74,19 @@
   .amb__card-label { font-size: max(10px, calc(var(--u) * 12)); }
   .amb__card-text { margin-top: calc(var(--u) * 10); font-size: max(15px, calc(var(--u) * 20)); }
 
-  /* Écran des valeurs : la pile de cartes suit la même échelle. */
-  .amb__values { margin-top: 0; gap: calc(var(--u) * 12); }
-  .amb__values-head h3 { font-size: max(28px, calc(var(--u) * 52)); }
-  .amb .orbit__stage { height: calc(var(--u) * 520); }
-  .amb .orbit__card { width: calc(var(--u) * 320); padding: calc(var(--u) * 14); border-radius: calc(var(--u) * 28); }
-  .amb .orbit__visual { border-radius: calc(var(--u) * 22); padding: calc(var(--u) * 18) calc(var(--u) * 20); }
-  .amb .orbit__num { font-size: calc(var(--u) * 76); }
-  .amb .orbit__arrow { top: calc(var(--u) * 14); right: calc(var(--u) * 14); width: calc(var(--u) * 44); height: calc(var(--u) * 44); }
-  .amb .orbit__body { padding: calc(var(--u) * 22) calc(var(--u) * 8) calc(var(--u) * 6); }
-  .amb .orbit__kicker { font-size: max(10px, calc(var(--u) * 11)); }
-  .amb .orbit__body h3 { margin-top: calc(var(--u) * 8); font-size: max(22px, calc(var(--u) * 30)); }
-  .amb .orbit__text { margin-top: calc(var(--u) * 14); font-size: max(13px, calc(var(--u) * 15)); }
-  .amb .orbit__badge { margin-top: calc(var(--u) * 18); padding-top: calc(var(--u) * 14); font-size: max(10px, calc(var(--u) * 11)); }
+  /* Écran des valeurs : pas de plein écran, il suit directement le premier
+     (le premier écran perd sa marge basse, le 2e démarre sans marge). */
+  .amb__screen:has(+ .amb__screen) { padding-bottom: 0; }
+  .amb__screen + .amb__screen {
+    min-height: 0; justify-content: flex-start;
+    padding-top: 0; padding-bottom: calc(var(--u) * 96);
+  }
+}
+
+/* Tablette portrait : l'écran est très haut, le premier écran ne le remplit plus
+   (sinon un grand vide le sépare des valeurs). */
+@media (min-width: 721px) and (max-width: 1100px) and (orientation: portrait) {
+  .amb__screen:has(+ .amb__screen) { min-height: 0; padding-bottom: calc(var(--u) * 72); }
 }
 
 /* Éléments propres au mobile, masqués ailleurs. */
@@ -93,6 +98,7 @@
 @media (max-width: 720px) {
   .amb { padding: calc(var(--header-h) + 8px) 0 64px; }
   .amb__split { grid-template-columns: 1fr; gap: 0; }
+  .amb__screen + .amb__screen { margin-top: 56px; }
   .amb__visual { order: -1; }
   .amb__visual .amb__card { display: none; }
   .amb__arch {
