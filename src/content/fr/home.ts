@@ -4,10 +4,12 @@ import { offerSlides } from './offers'
 
 export const home: SiteContent['home'] = {
   hero: {
-    image: 'photo-1486406146926-c627a92ad1ab-w2000.jpg',
-    title: 'Façonnons l’Afrique de demain.',
-    text: 'ICES accompagne les États, institutions et organisations dans la conception et le déploiement de transformations stratégiques, opérationnelles et technologiques à fort impact.',
+    title: { lead: 'Façonnons', tail: 'l’Afrique', end: 'de demain.' },
+    text: 'Nous accompagnons les États, les institutions et les organisations dans la conception et le déploiement de transformations stratégiques, opérationnelles et technologiques à fort impact.',
     cta: { label: 'Parlons de votre projet', to: '#contact' },
+    secondaryCta: { label: 'Nous connaître', to: '#vision' },
+    scrollLabel: 'Défiler',
+    expandCta: { label: 'Découvrir nos offres', to: '#offres' },
   },
 
   audiences: {

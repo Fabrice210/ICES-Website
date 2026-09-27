@@ -36,7 +36,9 @@ export function Header({ variant }: { variant: HeaderVariant }) {
   const closeNav = () => setNavOpen(false)
 
   return (
-    <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
+    <header
+      className={`site-header${variant === 'home' ? ' site-header--on-light' : ''}${scrolled ? ' is-scrolled' : ''}`}
+    >
       <div className="container">
         <Logo />
         <nav className="main-nav" id="main-nav" aria-label="Navigation principale">
@@ -73,7 +75,12 @@ export function Header({ variant }: { variant: HeaderVariant }) {
               {config.cta.label}
             </SmartLink>
             {config.showPartnerButton && (
-              <button className="btn btn--ghost-light" type="button" data-open-partner onClick={openPartner}>
+              <button
+                className="btn btn--ghost-light"
+                type="button"
+                data-open-partner
+                onClick={openPartner}
+              >
                 {header.partnerLabel}
               </button>
             )}
@@ -101,7 +108,12 @@ export function Header({ variant }: { variant: HeaderVariant }) {
             {config.cta.label}
           </SmartLink>
           {config.showPartnerButton && (
-            <button className="btn btn--ghost-light" type="button" data-open-partner onClick={openPartner}>
+            <button
+              className="btn btn--ghost-light"
+              type="button"
+              data-open-partner
+              onClick={openPartner}
+            >
               {header.partnerLabel}
             </button>
           )}

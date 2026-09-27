@@ -1,0 +1,26 @@
+/* =========================================================
+   Refonte DA — primitives de forme partagées par les sections.
+   Formes inspirées de la maquette de référence ; couleurs et
+   typographie strictement issues de tokens.css (charte ICES).
+   ========================================================= */
+.btn--pill { border-radius: 999px; padding: 1.05em 1.9em; }
+
+.round-btn {
+  display: inline-grid; place-items: center; flex: none;
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--gray-300); color: var(--ink); background: transparent;
+  transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+}
+.round-btn .icon { width: 16px; height: 16px; transition: transform .3s var(--ease); }
+
+.link-round {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink);
+}
+.link-round:hover .round-btn { background: var(--blue); border-color: var(--blue); color: var(--white); }
+.link-round:hover .round-btn .icon { transform: translate(2px, -2px); }
+
+.pill-tag {
+  display: inline-block; padding: 6px 14px; border-radius: 999px;
+  background: var(--gray-100); color: var(--blue); font-size: 12px; font-weight: 600;
+}

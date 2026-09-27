@@ -1,4 +1,3 @@
-import { useContent } from '../i18n/useLanguage'
 import { Actualites } from '../sections/home/Actualites'
 import { Approche } from '../sections/home/Approche'
 import { Equipe } from '../sections/home/Equipe'
@@ -7,13 +6,12 @@ import { Interlocuteurs } from '../sections/home/Interlocuteurs'
 import { Offres } from '../sections/home/Offres'
 import { Realisations } from '../sections/home/Realisations'
 import { Vision } from '../sections/home/Vision'
-import { Hero } from '../sections/shared/Hero'
+import { HomeHero } from '../sections/home/HomeHero'
 
 export function HomePage() {
-  const { hero } = useContent().home
   return (
     <div data-page="home">
-      <Hero {...hero} />
+      <HomeHero />
       <Interlocuteurs />
       <Vision />
       <Offres />

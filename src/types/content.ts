@@ -40,10 +40,13 @@ export interface HeaderVariant {
 }
 
 export interface OfferSlide {
+  /** Nom du segment dans la plaquette (ex. « Prestations Intellectuelles »). */
+  segment: string
   /** Les segments entre <em>…</em> sont rendus en bleu (cf. renderEmphasis). */
   title: string
   text: string
-  images: { file: string; label: string }[]
+  /** Un visuel par axe de services ; `services` = composantes indicatives de la plaquette. */
+  images: { file: string; label: string; services: string[] }[]
 }
 
 export interface RotatorItem {
@@ -87,7 +90,16 @@ export interface SiteContent {
     legal: LinkItem[]
   }
   home: {
-    hero: { image: string; title: string; text: string; cta: LinkItem }
+    /** Titre découpé autour de la pilule d'images : « lead [pilule] tail / end ». */
+    hero: {
+      title: { lead: string; tail: string; end: string }
+      text: string
+      cta: LinkItem
+      secondaryCta: LinkItem
+      scrollLabel: string
+      /** Lien affiché quand la pilule occupe tout l'écran. */
+      expandCta: LinkItem
+    }
     audiences: { title: string; intro: string; cards: IconCard[] }
     vision: {
       label: string
@@ -107,8 +119,17 @@ export interface SiteContent {
       slides: OfferSlide[]
     }
     expertises: { image: string; title: string; intro: string; items: IconCard[]; link: LinkItem }
-    realisations: { title: string; intro: string; works: { image: string; label: string }[]; link: LinkItem }
-    approach: { title: string; intro: string; steps: { num: string; title: string; text: string }[] }
+    realisations: {
+      title: string
+      intro: string
+      works: { image: string; label: string }[]
+      link: LinkItem
+    }
+    approach: {
+      title: string
+      intro: string
+      steps: { num: string; title: string; text: string }[]
+    }
     news: {
       title: string
       intro: string
@@ -127,7 +148,14 @@ export interface SiteContent {
   prestations: {
     hero: { image: string; title: string; text: string; cta: LinkItem }
     domains: { label: string; title: string; intro: string[]; cards: IconCard[] }
-    positioning: { image: string; label: string; title: string; text: string; cta: LinkItem; stats: Stat[] }
+    positioning: {
+      image: string
+      label: string
+      title: string
+      text: string
+      cta: LinkItem
+      stats: Stat[]
+    }
   }
   contact: {
     title: string

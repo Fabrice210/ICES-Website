@@ -25,4 +25,7 @@
 @import './enhancements/hero.css';
 @import './enhancements/audiences.css';
 @import './enhancements/domains.css';
+/* Refonte DA (branche feat/nouvelle-da-creative). */
+@import './redesign/primitives.css';
+@import './redesign/home-hero.css';
 @import './touch.css';
