@@ -14,9 +14,12 @@ import { useContent } from '../../i18n/useLanguage'
 const pad = (n: number) => String(n).padStart(2, '0')
 
 /** --g décale chaque groupe de mots pour que le titre se révèle dans l'ordre de lecture. */
-function Group({ text, order }: { text: string; order: number }) {
+function Group({ text, order, accent }: { text: string; order: number; accent?: boolean }) {
   return (
-    <span className="home-hero__group" style={{ '--g': order } as CSSProperties}>
+    <span
+      className={accent ? 'home-hero__group home-hero__group--accent' : 'home-hero__group'}
+      style={{ '--g': order } as CSSProperties}
+    >
       <MaskedWords text={text} />
     </span>
   )
@@ -98,7 +101,7 @@ export function HomeHero() {
                 <span ref={pillRef} className="home-hero__pill">
                   {visuals(current)}
                 </span>
-                <Group text={tail} order={2} />
+                <Group text={tail} order={2} accent />
               </span>
               <span className="home-hero__line" aria-hidden="true">
                 <Group text={end} order={3} />

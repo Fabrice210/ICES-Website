@@ -79,11 +79,13 @@
    limitée par la largeur ET la hauteur : les rapports titre / texte / cartes restent
    identiques, seules les proportions globales s'adaptent. Planchers pour la lisibilité. */
 @media (min-width: 721px) {
+  /* Contenu centré verticalement dans l'espace visible sous le header (même marge haut/bas). */
   .aud {
     --u: min(calc(100vw / 1440), calc(100svh / 900));
-    min-height: 100svh;
-    padding: max(calc(var(--u) * 120), calc(var(--header-h) + 20px)) 0 calc(var(--u) * 56);
+    min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
+    padding: calc(var(--header-h) + var(--u) * 32) 0 calc(var(--u) * 32);
   }
+  .aud > .container { width: 100%; }
   .aud__title { font-size: max(40px, calc(var(--u) * 96)); }
   .aud__intro { margin-top: calc(var(--u) * 20); max-width: calc(var(--u) * 780); font-size: max(14px, calc(var(--u) * 17)); }
   .aud__head .link-round { margin-top: calc(var(--u) * 24); }
@@ -106,14 +108,30 @@
 
 /* Mobile : les cartes défilent au doigt, une par écran, avec des pastilles. */
 @media (max-width: 720px) {
-  .aud { padding: 100px 0 84px; }
-  .aud__intro { font-size: 16px; }
+  /* Tailles mobiles réduites (réf. maquette mobile Hope Rise), mêmes rapports que desktop. */
+  /* Toute la hauteur d'écran : pendant la pause, rien de la section d'avant ne dépasse. */
+  .aud {
+    min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
+    padding: calc(var(--header-h) + 8px) 0 32px;
+  }
+  .aud > .container { width: 100%; }
+  .aud__title { font-size: clamp(28px, 8.4vw, 34px); letter-spacing: -.02em; }
+  .aud__intro { margin-top: 14px; max-width: 34ch; font-size: 14px; line-height: 1.55; }
+  .aud__head .link-round { margin-top: 18px; gap: 10px; font-size: 11px; }
+  .aud__head .round-btn { width: 40px; height: 40px; }
+  .aud-card { padding: 22px; }
+  .aud-card__icon { width: 44px; height: 44px; border-radius: 14px; }
+  .aud-card__icon .icon { width: 19px; height: 19px; }
+  .aud-card h3 { margin-top: 18px; font-size: 18px; }
+  .aud-card p { margin-top: 8px; font-size: 14px; line-height: 1.5; }
+  .aud-card__foot { padding-top: 16px; }
+  .aud-card .round-btn { width: 40px; height: 40px; }
   .aud__cards {
     display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
-    margin: 48px calc(var(--gutter) * -1) 0; padding: 0 var(--gutter); scroll-padding: 0 var(--gutter);
+    margin: 32px calc(var(--gutter) * -1) 0; padding: 0 var(--gutter); scroll-padding: 0 var(--gutter);
   }
   .aud__cards::-webkit-scrollbar { display: none; }
-  .aud__card { flex: 0 0 84%; min-height: 340px; scroll-snap-align: start; transform: translateX(70px) rotate(3deg); }
+  .aud__card { flex: 0 0 84%; min-height: 280px; scroll-snap-align: start; transform: translateX(70px) rotate(3deg); }
   .aud__dots { display: flex; justify-content: center; gap: 8px; margin-top: 22px; }
   .aud__dots span {
     width: 8px; height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--white) 35%, transparent);

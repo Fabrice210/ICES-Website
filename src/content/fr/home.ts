@@ -59,6 +59,9 @@ export const home: SiteContent['home'] = {
       label: 'Notre ambition',
       text: 'Transformer les défis complexes en trajectoires durables, en impacts mesurables et en capacités pérennes pour nos clients et leurs écosystèmes.',
     },
+    image: 'photo-1552664730-d307ca884978-w1400.jpg',
+    readMore: 'Lire la suite',
+    readLess: 'Réduire',
     valuesLabel: 'Nos valeurs',
     values: [
       {

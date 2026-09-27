@@ -109,6 +109,11 @@ export interface SiteContent {
       paragraphs: string[]
       /** Phrase qui justifie la création d'ICES, mise en valeur à part. */
       ambition: { label: string; text: string }
+      /** Photo en arche à côté du texte (provisoire en attendant les visuels). */
+      image: string
+      /** Mobile : texte coupé, bouton pour le déplier / replier. */
+      readMore: string
+      readLess: string
       valuesLabel: string
       values: { label: string; text: string; tone: Tone }[]
       link: LinkItem

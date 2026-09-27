@@ -1,4 +1,12 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type FocusEvent } from 'react'
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type CSSProperties,
+  type FocusEvent,
+} from 'react'
 import { useInView } from '../../hooks/useInView'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { Icon } from '../icons/Icon'
@@ -16,9 +24,23 @@ interface OrbitCardStackProps {
   defaultActiveIndex?: number
   spread?: number
   lift?: number
+  /** Réduit l'éventail avec l'écran (référence 1440 × 900), comme les tailles CSS en --u. */
+  scaleToViewport?: boolean
 }
 
 const clampIndex = (i: number, n: number) => Math.min(Math.max(0, i), n - 1)
+
+const viewportScale = () => Math.min(1, window.innerWidth / 1440, window.innerHeight / 900)
+function useViewportScale(enabled: boolean) {
+  return useSyncExternalStore(
+    (onChange) => {
+      window.addEventListener('resize', onChange)
+      return () => window.removeEventListener('resize', onChange)
+    },
+    () => (enabled ? viewportScale() : 1),
+    () => 1
+  )
+}
 
 /**
  * Pile de cartes qui s'ouvre en éventail au survol / focus ; la carte active remonte.
@@ -30,10 +52,14 @@ export function OrbitCardStack({
   items,
   label,
   defaultActiveIndex = 2,
-  spread = 168,
-  lift = 34,
+  spread: baseSpread = 168,
+  lift: baseLift = 34,
+  scaleToViewport = false,
 }: OrbitCardStackProps) {
   const compact = useMediaQuery('(max-width: 720px)')
+  const k = useViewportScale(scaleToViewport)
+  const spread = baseSpread * k
+  const lift = baseLift * k
   const resting = clampIndex(defaultActiveIndex, items.length)
   const [active, setActive] = useState(resting)
   const [userOpen, setUserOpen] = useState(false)
@@ -59,13 +85,13 @@ export function OrbitCardStack({
         return {
           open: {
             x: orbit * spread,
-            y: Math.abs(orbit) * 30 + Math.max(0, Math.abs(orbit) - 1) * 10,
+            y: (Math.abs(orbit) * 30 + Math.max(0, Math.abs(orbit) - 1) * 10) * k,
             r: orbit * 8.5,
           },
           closed: { x: stack * 10, y: Math.abs(stack) * 5, r: stack * 2.8 },
         }
       }),
-    [items, midpoint, resting, spread]
+    [items, midpoint, resting, spread, k]
   )
 
   const activate = (i: number) => {
