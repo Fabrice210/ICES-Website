@@ -4,7 +4,7 @@ import { useOpenPartnerModal } from '../../components/partner/PartnerModalContex
 import { HoverTransition } from '../../components/ui/HoverTransition'
 import { MaskedWords } from '../../components/ui/MaskedWords'
 import { useInView } from '../../hooks/useInView'
-import { useScrollVar } from '../../hooks/useScrollVar'
+import { useStackPin } from '../../hooks/useStackPin'
 import { useContent } from '../../i18n/useLanguage'
 import type { IconCard } from '../../types/content'
 
@@ -52,7 +52,8 @@ export function Interlocuteurs() {
   const { ref: listRef, inView: cardsIn } = useInView<HTMLDivElement>(0.2)
   const [active, setActive] = useState(0)
 
-  useScrollVar(sectionRef, '--enter')
+  // Figée à la fin, pendant que la bande blanche de « Notre ambition » monte par-dessus.
+  useStackPin(sectionRef)
 
   const onListScroll = () => {
     const list = listRef.current

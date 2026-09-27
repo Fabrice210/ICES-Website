@@ -6,6 +6,7 @@ import { FallbackImg } from '../../components/ui/FallbackImg'
 import { MaskedWords } from '../../components/ui/MaskedWords'
 import { SmartLink } from '../../components/ui/SmartLink'
 import { useHeroExpand } from '../../hooks/useHeroExpand'
+import { useStackPin } from '../../hooks/useStackPin'
 import { useInterval } from '../../hooks/useInterval'
 import { useContent } from '../../i18n/useLanguage'
 
@@ -41,6 +42,8 @@ export function HomeHero() {
   }
 
   useHeroExpand(sectionRef, stageRef, pillRef)
+  // Le plein écran reste figé pendant que la bande bleue d'Interlocuteurs monte par-dessus.
+  useStackPin(sectionRef)
   // Les pôles défilent toutes les 6 s (rythme de 5-6 s demandé en réunion).
   useInterval(
     () => setCurrent((c) => (c + 1) % slides.length),

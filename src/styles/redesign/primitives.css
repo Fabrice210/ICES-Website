@@ -20,15 +20,15 @@
 .link-round:hover .round-btn { background: var(--blue); border-color: var(--blue); color: var(--white); }
 .link-round:hover .round-btn .icon { transform: translate(2px, -2px); }
 
-/* Changement de fond entre sections : la section monte en arc (couleur de son propre
-   fond) par-dessus la précédente ; l'arc s'aplatit selon --enter (useScrollVar). */
-.curve-top { --curve-h: 140px; position: relative; }
+/* Changement de fond entre sections (comme la maquette de référence) : la section
+   précédente est figée (useStackPin) et celle-ci monte par-dessus avec un dôme de sa
+   propre couleur, qui reste bombé jusqu'à couvrir l'écran. */
+.curve-top { --curve-h: clamp(80px, 16vh, 170px); position: relative; }
 .curve-top::before {
   content: ""; position: absolute; left: 0; right: 0; top: 1px; height: var(--curve-h); pointer-events: none;
-  background: inherit; border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  transform-origin: bottom; transform: translateY(-100%) scaleY(calc(1 - var(--enter, 0)));
+  background: inherit; border-radius: 50% 50% 0 0 / 100% 100% 0 0; transform: translateY(-100%);
 }
-@media (max-width: 720px) { .curve-top { --curve-h: 60px; } }
+@media (max-width: 720px) { .curve-top { --curve-h: 64px; } }
 
 .pill-tag {
   display: inline-block; padding: 6px 14px; border-radius: 999px;

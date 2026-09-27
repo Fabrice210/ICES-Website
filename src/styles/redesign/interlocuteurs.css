@@ -1,6 +1,6 @@
 /* =========================================================
    Interlocuteurs — refonte DA : bande --blue au bord supérieur
-   incurvé (s'aplanit au défilement via --enter), titre blanc à la
+   en dôme (monte par-dessus le hero figé), titre blanc à la
    taille du hero, cartes à double face (HoverTransition).
    ========================================================= */
 .aud { z-index: 3; padding: 140px 0 120px; background: var(--blue); color: var(--white); }

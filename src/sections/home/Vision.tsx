@@ -4,7 +4,6 @@ import { MaskedWords } from '../../components/ui/MaskedWords'
 import { OrbitCardStack } from '../../components/ui/OrbitCardStack'
 import { SmartLink } from '../../components/ui/SmartLink'
 import { useInView } from '../../hooks/useInView'
-import { useScrollVar } from '../../hooks/useScrollVar'
 import { useContent } from '../../i18n/useLanguage'
 
 const pad = (n: number) => String(n).padStart(2, '0')
@@ -19,8 +18,6 @@ export function Vision() {
   const sectionRef = useRef<HTMLElement>(null)
   const { ref: headRef, inView: headIn } = useInView<HTMLDivElement>(0.3)
   const { ref: blocksRef, inView: blocksIn } = useInView<HTMLDivElement>(0.25)
-
-  useScrollVar(sectionRef, '--enter')
 
   const values = vision.values.map((value) => ({
     kicker: vision.valuesLabel,
