@@ -28,4 +28,8 @@
 /* Refonte DA (branche feat/nouvelle-da-creative). */
 @import './redesign/primitives.css';
 @import './redesign/home-hero.css';
+@import './redesign/hover-transition.css';
+@import './redesign/interlocuteurs.css';
+@import './redesign/orbit-stack.css';
+@import './redesign/ambition.css';
 @import './touch.css';

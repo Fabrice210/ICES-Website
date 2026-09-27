@@ -1,0 +1,62 @@
+/* =========================================================
+   OrbitCardStack — pile de cartes en éventail (cf. components/ui/OrbitCardStack).
+   Les positions (translate/rotate) sont posées en style inline ; ici le rendu
+   des cartes, la transition et la version mobile en rangée défilante.
+   ========================================================= */
+.orbit { width: 100%; display: flex; justify-content: center; }
+.orbit__stage { position: relative; width: 100%; max-width: 980px; height: 500px; }
+
+.orbit__card {
+  position: absolute; left: 50%; top: 50%; width: min(78vw, 20rem);
+  padding: 14px; border-radius: 28px; cursor: pointer; outline: none;
+  background: var(--gray-100); border: 1px solid var(--gray-200); color: var(--ink);
+  transform-origin: bottom center;
+  transition: transform .42s cubic-bezier(.2, .8, .2, 1), box-shadow .42s var(--ease), background-color .3s var(--ease);
+}
+.orbit__card.is-active {
+  background: var(--white);
+  box-shadow: 0 30px 60px color-mix(in srgb, var(--navy) 16%, transparent);
+}
+.orbit__card:focus-visible { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--blue); }
+
+/* Visuel de tête : aplat aux couleurs de la charte, numéro en grand. */
+.orbit__visual {
+  position: relative; aspect-ratio: 1.36; border-radius: 22px; overflow: hidden; background: var(--blue);
+  display: flex; align-items: flex-end; padding: 18px 20px;
+}
+.orbit__card:nth-child(2) .orbit__visual { background: var(--navy); }
+.orbit__card:nth-child(3) .orbit__visual { background: var(--blue-dark); }
+.orbit__card:nth-child(4) .orbit__visual { background: var(--blue-light); }
+.orbit__card:nth-child(5) .orbit__visual { background: var(--dark); }
+.orbit__visual::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--white) 22%, transparent), transparent 42%);
+}
+.orbit__num { position: relative; font-size: 76px; font-weight: 800; line-height: .9; letter-spacing: -.04em; color: var(--white); }
+.orbit__arrow {
+  position: absolute; top: 14px; right: 14px; display: grid; place-items: center;
+  width: 44px; height: 44px; border-radius: 50%; background: var(--white); color: var(--ink);
+}
+.orbit__arrow .icon { width: 16px; height: 16px; }
+
+.orbit__body { padding: 22px 8px 6px; }
+.orbit__kicker { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.orbit__body h3 { margin-top: 8px; font-size: 30px; font-weight: 800; line-height: 1; letter-spacing: -.03em; color: var(--navy); }
+.orbit__text { margin-top: 14px; font-size: 15px; line-height: 1.45; color: var(--text); }
+.orbit__badge {
+  margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--gray-200);
+  font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+}
+
+/* Mobile : rangée de cartes qui défile au doigt. */
+.orbit--list .orbit__stage {
+  height: auto; max-width: none; display: flex; gap: 16px; overflow-x: auto;
+  scroll-snap-type: x mandatory; scrollbar-width: none;
+  margin: 0 calc(var(--gutter) * -1); padding: 8px var(--gutter) 24px; scroll-padding: 0 var(--gutter);
+}
+.orbit--list .orbit__stage::-webkit-scrollbar { display: none; }
+.orbit--list .orbit__card { position: relative; left: auto; top: auto; flex: 0 0 80%; scroll-snap-align: start; }
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit__card { transition: none; }
+}

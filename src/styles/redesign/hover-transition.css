@@ -1,0 +1,38 @@
+/* =========================================================
+   HoverTransition — carte à double face (cf. components/ui/HoverTransition).
+   La face arrière recouvre l'avant (clip-path piloté en JS), avec une
+   inclinaison légère et un reflet qui suivent la souris.
+   ========================================================= */
+.hover-tr {
+  position: relative; isolation: isolate; overflow: hidden; border-radius: 28px; outline: none;
+}
+.hover-tr:focus-visible { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--blue-dark); }
+
+.hover-tr__inner {
+  position: relative; height: 100%;
+  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform .55s cubic-bezier(.22, 1, .36, 1);
+}
+.hover-tr[data-active='true'] .hover-tr__inner {
+  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(1.012);
+  transition-duration: .22s;
+}
+.hover-tr__front { height: 100%; }
+.hover-tr__back {
+  position: absolute; inset: 0; filter: blur(1.5px);
+  transition: clip-path .72s cubic-bezier(.22, 1, .36, 1), filter .72s cubic-bezier(.22, 1, .36, 1);
+}
+.hover-tr[data-active='true'] .hover-tr__back { filter: blur(0); }
+
+.hover-tr__glare {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; opacity: 0;
+  background: radial-gradient(circle 180px at var(--glare-x, 50%) var(--glare-y, 50%),
+    color-mix(in srgb, var(--white) 22%, transparent), transparent 78%);
+  transition: opacity .3s var(--ease);
+}
+.hover-tr[data-active='true'] .hover-tr__glare { opacity: .16; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-tr__inner, .hover-tr[data-active='true'] .hover-tr__inner { transform: none; transition: none; }
+  .hover-tr__back { transition: none; filter: none; }
+}

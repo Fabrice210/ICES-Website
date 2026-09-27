@@ -29,7 +29,7 @@ export const header: SiteContent['header'] = {
     dropdown: {
       label: 'Présentation',
       links: [
-        { label: 'Notre vision', to: '/#vision' },
+        { label: 'Notre ambition', to: '/#vision' },
         { label: 'Notre approche', to: '/#approche' },
         { label: 'Équipe & implantation', to: '/#equipe' },
       ],

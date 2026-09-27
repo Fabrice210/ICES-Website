@@ -1,0 +1,55 @@
+/* =========================================================
+   Notre ambition — refonte DA : bande blanche en arc sur le bleu,
+   grand titre, 2 blocs de contexte + l'ambition en carte bleue,
+   puis les valeurs (OrbitCardStack), bien espacées du texte.
+   ========================================================= */
+.amb { z-index: 4; padding: 140px 0 130px; background: var(--white); color: var(--ink); }
+
+.amb__head { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+.amb__title {
+  max-width: 21ch; font-size: clamp(34px, 4.8vw, 72px); font-weight: 800; line-height: 1.05; letter-spacing: -.025em;
+}
+
+.amb__blocks {
+  margin-top: 72px; display: grid; grid-template-columns: 1fr 1fr 1.15fr; gap: 24px; align-items: stretch;
+}
+.amb__block { padding-top: 22px; border-top: 1px solid var(--gray-300); }
+.amb__num { font-size: 12px; font-weight: 600; letter-spacing: .12em; color: var(--blue); }
+.amb__block p { margin-top: 14px; font-size: 16px; line-height: 1.65; color: var(--text); }
+
+/* L'ambition, ce qui justifie la création d'ICES : carte bleue, texte en gras. */
+.amb__block--ambition { border: 0; padding: 28px 30px 32px; border-radius: 28px; background: var(--blue); }
+.amb__block--ambition .amb__num { color: color-mix(in srgb, var(--white) 70%, transparent); }
+.amb__block--ambition .amb__ambition-label {
+  margin-top: 12px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--white) 82%, transparent);
+}
+.amb__block--ambition .amb__ambition-text {
+  margin-top: 10px; font-size: clamp(19px, 1.6vw, 23px); font-weight: 700; line-height: 1.35; color: var(--white);
+}
+.amb__blocks.is-revealing .amb__block--ambition {
+  animation: amb-fill 1.1s cubic-bezier(.22, 1, .36, 1) backwards;
+  animation-delay: .3s;
+}
+@keyframes amb-fill {
+  from { clip-path: inset(100% 0 0 0 round 28px); transform: translateY(24px); }
+  to { clip-path: inset(0 0 0 0 round 28px); transform: none; }
+}
+
+.amb__values { margin-top: 140px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.amb__values-head { width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.amb__values-head h3 { font-size: clamp(30px, 3.4vw, 52px); font-weight: 800; line-height: 1; letter-spacing: -.02em; }
+
+@media (max-width: 1100px) {
+  .amb__blocks { grid-template-columns: 1fr 1fr; }
+  .amb__block--ambition { grid-column: 1 / -1; }
+}
+@media (max-width: 720px) {
+  .amb { padding: 100px 0 90px; }
+  .amb__blocks { grid-template-columns: 1fr; margin-top: 48px; }
+  .amb__values { margin-top: 90px; align-items: stretch; }
+  .amb__values-head { flex-direction: column; align-items: flex-start; margin-bottom: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amb__blocks.is-revealing .amb__block--ambition { animation: none; }
+}

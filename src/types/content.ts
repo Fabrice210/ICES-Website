@@ -105,6 +105,8 @@ export interface SiteContent {
       label: string
       title: string
       paragraphs: string[]
+      /** Phrase qui justifie la création d'ICES, mise en valeur à part. */
+      ambition: { label: string; text: string }
       valuesLabel: string
       values: { label: string; text: string; tone: Tone }[]
       link: LinkItem
