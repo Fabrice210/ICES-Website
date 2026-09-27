@@ -13,7 +13,9 @@ const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 
 export function useHeroExpand(
   sectionRef: RefObject<HTMLElement | null>,
   stageRef: RefObject<HTMLElement | null>,
-  pillRef: RefObject<HTMLElement | null>
+  pillRef: RefObject<HTMLElement | null>,
+  /** Change quand la pilule est rendue ailleurs (mise en page mobile / desktop) : on remesure. */
+  layoutKey?: string
 ) {
   useEffect(() => {
     const section = sectionRef.current
@@ -68,5 +70,5 @@ export function useHeroExpand(
       window.removeEventListener('scroll', schedule)
       reduce.removeEventListener('change', refresh)
     }
-  }, [sectionRef, stageRef, pillRef])
+  }, [sectionRef, stageRef, pillRef, layoutKey])
 }

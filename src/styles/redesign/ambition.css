@@ -4,6 +4,9 @@
    puis les valeurs (OrbitCardStack), bien espacées du texte.
    ========================================================= */
 .amb { z-index: 4; padding: 140px 0 130px; background: var(--white); color: var(--ink); }
+/* Temps de pause : Interlocuteurs (figée) reste affichée une demi-hauteur d'écran
+   de défilement avant que le dôme blanc ne monte. */
+.aud + .amb { margin-top: 50svh; }
 
 .amb__head { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
 .amb__title {

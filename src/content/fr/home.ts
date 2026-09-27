@@ -10,6 +10,10 @@ export const home: SiteContent['home'] = {
     secondaryCta: { label: 'Nous connaître', to: '#vision' },
     scrollLabel: 'Défiler',
     expandCta: { label: 'Découvrir nos offres', to: '#offres' },
+    facts: [
+      { icon: 'atom', title: '6 pôles d’offres', text: 'Du conseil stratégique à l’innovation' },
+      { icon: 'globe', title: 'Afrique francophone', text: 'Présents au Bénin et en Guinée' },
+    ],
   },
 
   audiences: {

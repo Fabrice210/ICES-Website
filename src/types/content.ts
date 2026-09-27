@@ -99,6 +99,8 @@ export interface SiteContent {
       scrollLabel: string
       /** Lien affiché quand la pilule occupe tout l'écran. */
       expandCta: LinkItem
+      /** Repères fixes de la colonne de droite (tirés de la plaquette). */
+      facts: { icon: IconName; title: string; text: string }[]
     }
     audiences: { title: string; intro: string; cards: IconCard[] }
     vision: {

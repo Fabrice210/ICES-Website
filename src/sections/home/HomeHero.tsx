@@ -6,6 +6,7 @@ import { FallbackImg } from '../../components/ui/FallbackImg'
 import { MaskedWords } from '../../components/ui/MaskedWords'
 import { SmartLink } from '../../components/ui/SmartLink'
 import { useHeroExpand } from '../../hooks/useHeroExpand'
+import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { useStackPin } from '../../hooks/useStackPin'
 import { useInterval } from '../../hooks/useInterval'
 import { useContent } from '../../i18n/useLanguage'
@@ -41,7 +42,11 @@ export function HomeHero() {
     setRestart((n) => n + 1)
   }
 
-  useHeroExpand(sectionRef, stageRef, pillRef)
+  // Mobile : mise en page d'origine (pilule dans le titre centré). Tablette et desktop :
+  // version 3 zones (réduite sur tablette, cf. home-hero.css).
+  const compact = useMediaQuery('(max-width: 720px)')
+
+  useHeroExpand(sectionRef, stageRef, pillRef, compact ? 'compact' : 'wide')
   // Le plein écran reste figé pendant que la bande bleue d'Interlocuteurs monte par-dessus.
   useStackPin(sectionRef)
   // Les pôles défilent toutes les 6 s (rythme de 5-6 s demandé en réunion).
@@ -63,41 +68,94 @@ export function HomeHero() {
       />
     ))
 
+  const actions = (
+    <div className="home-hero__actions">
+      <SmartLink className="btn btn--primary btn--pill" to={hero.cta.to}>
+        {hero.cta.label}
+      </SmartLink>
+      <SmartLink className="link-round" to={hero.secondaryCta.to}>
+        {hero.secondaryCta.label}
+        <span className="round-btn">
+          <Icon name="arrow" />
+        </span>
+      </SmartLink>
+    </div>
+  )
+
   return (
     <section ref={sectionRef} className="home-hero" aria-labelledby="home-hero-title">
       <div ref={stageRef} className="home-hero__stage">
-        <div className="container home-hero__inner">
-          <h1
-            className="home-hero__title"
-            id="home-hero-title"
-            aria-label={`${lead} ${tail} ${end}`}
-          >
-            <span className="home-hero__line" aria-hidden="true">
-              <Group text={lead} order={0} />
-              <span ref={pillRef} className="home-hero__pill">
-                {visuals(current)}
+        {compact ? (
+          /* Mobile : mise en page d'origine, centrée, pilule entre « Façonnons » et « l'Afrique ». */
+          <div className="container home-hero__inner home-hero__inner--compact">
+            <h1
+              className="home-hero__title"
+              id="home-hero-title"
+              aria-label={`${lead} ${tail} ${end}`}
+            >
+              <span className="home-hero__line" aria-hidden="true">
+                <Group text={lead} order={0} />
+                <span ref={pillRef} className="home-hero__pill">
+                  {visuals(current)}
+                </span>
+                <Group text={tail} order={2} />
               </span>
-              <Group text={tail} order={2} />
-            </span>
-            <span className="home-hero__line" aria-hidden="true">
-              <Group text={end} order={3} />
-            </span>
-          </h1>
-
-          <p className="home-hero__text">{hero.text}</p>
-
-          <div className="home-hero__actions">
-            <SmartLink className="btn btn--primary btn--pill" to={hero.cta.to}>
-              {hero.cta.label}
-            </SmartLink>
-            <SmartLink className="link-round" to={hero.secondaryCta.to}>
-              {hero.secondaryCta.label}
-              <span className="round-btn">
-                <Icon name="arrow" />
+              <span className="home-hero__line" aria-hidden="true">
+                <Group text={end} order={3} />
               </span>
-            </SmartLink>
+            </h1>
+            <p className="home-hero__text">{hero.text}</p>
+            {actions}
           </div>
-        </div>
+        ) : (
+          /* Desktop : 3 zones — titre + boutons, pilule au centre, repères + texte. */
+          <div className="container home-hero__inner">
+            <h1
+              className="home-hero__title"
+              id="home-hero-title"
+              aria-label={`${lead} ${tail} ${end}`}
+            >
+              <span className="home-hero__line" aria-hidden="true">
+                <Group text={lead} order={0} />
+              </span>
+              <span className="home-hero__line home-hero__line--accent" aria-hidden="true">
+                <Group text={tail} order={1} />
+              </span>
+              <span className="home-hero__line" aria-hidden="true">
+                <Group text={end} order={2} />
+              </span>
+            </h1>
+
+            <span ref={pillRef} className="home-hero__pill" aria-hidden="true">
+              {visuals(current)}
+              <span className="home-hero__pill-label" key={current}>
+                <span className="home-hero__pill-count">
+                  {pad(current + 1)} / {pad(slides.length)}
+                </span>
+                <span className="home-hero__pill-name">{slide.segment}</span>
+              </span>
+            </span>
+
+            <div className="home-hero__aside">
+              <ul className="home-hero__facts">
+                {hero.facts.map((fact) => (
+                  <li key={fact.title}>
+                    <span className="home-hero__fact-icon">
+                      <Icon name={fact.icon} />
+                    </span>
+                    <span>
+                      <strong>{fact.title}</strong>
+                      <small>{fact.text}</small>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="home-hero__text">{hero.text}</p>
+            </div>
+
+            {actions}
+          </div>
+        )}
 
         <div className="home-hero__band">
           <div className="container home-hero__band-inner">
