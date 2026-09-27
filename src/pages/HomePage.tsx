@@ -15,10 +15,10 @@ export function HomePage() {
       <Interlocuteurs />
       <Vision />
       <Offres />
+      <Actualites />
       <Expertises />
       <Realisations />
       <Approche />
-      <Actualites />
       <Equipe />
     </div>
   )

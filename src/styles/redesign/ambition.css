@@ -79,7 +79,7 @@
   .amb__screen:has(+ .amb__screen) { padding-bottom: 0; }
   .amb__screen + .amb__screen {
     min-height: 0; justify-content: flex-start;
-    padding-top: 0; padding-bottom: calc(var(--u) * 96);
+    padding-top: 0; padding-bottom: calc(var(--curve-h) + var(--u) * 48);
   }
 }
 
@@ -96,7 +96,7 @@
    arrondi qui chevauche le bas de la photo — titre compact, texte coupé à 3 lignes
    dépliable, carte « Notre ambition » compacte, lien. */
 @media (max-width: 720px) {
-  .amb { padding: calc(var(--header-h) + 8px) 0 64px; }
+  .amb { padding: calc(var(--header-h) + 8px) 0 calc(var(--curve-h) + 40px); }
   .amb__split { grid-template-columns: 1fr; gap: 0; }
   .amb__screen + .amb__screen { margin-top: 56px; }
   .amb__visual { order: -1; }

@@ -1,0 +1,171 @@
+/* =========================================================
+   Nos offres — refonte DA : bande bleue en dôme, rangée de cartes
+   (réf. « Our services » de la vidéo). Une carte par segment de la
+   plaquette ; la photo défile entre ses axes, la carte s'ouvre au
+   survol / toucher sur l'accroche, le texte et le devis.
+   Cartes visibles : 3 (ordinateur), 2 (tablette), 1 + amorce (téléphone).
+   ========================================================= */
+.offr { --k: 1px; z-index: 5; padding: 120px 0 110px; background: var(--blue); color: var(--white); }
+
+/* En-tête : grand titre blanc, plaquette à droite. */
+.offr__head {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: calc(var(--k) * 32);
+  margin-bottom: calc(var(--k) * 36);
+}
+.offr__title {
+  font-size: max(34px, calc(var(--k) * 76)); font-weight: 800; line-height: .95; letter-spacing: -.035em;
+}
+.offr__brochure { flex: none; background: var(--white); color: var(--blue); }
+.offr__brochure:hover { background: var(--navy); color: var(--white); }
+.offr__title, .offr__brochure {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity .8s var(--ease), transform .9s cubic-bezier(.22, 1, .36, 1), background .3s var(--ease), color .3s var(--ease);
+}
+.offr__brochure { transition-delay: .12s, .12s, 0s, 0s; }
+.offr__head.is-in .offr__title, .offr__head.is-in .offr__brochure { opacity: 1; transform: none; }
+
+/* Rangée : défilement horizontal natif, aimanté carte par carte. */
+.offr__row { --per: 3; --gap: calc(var(--k) * 16); }
+.offr__track {
+  display: flex; gap: var(--gap); margin: 0; padding: 0; list-style: none;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  overscroll-behavior-x: contain; scrollbar-width: none;
+}
+.offr__track::-webkit-scrollbar { display: none; }
+
+.offr-card {
+  position: relative; isolation: isolate; overflow: hidden; cursor: pointer;
+  flex: 0 0 calc((100% - var(--gap) * (var(--per) - 1)) / var(--per));
+  height: max(400px, calc(var(--k) * 540)); border-radius: calc(var(--k) * 28);
+  background: var(--navy); scroll-snap-align: start;
+  /* Apparition : les cartes glissent depuis la droite l'une après l'autre. */
+  opacity: 0; transform: translateX(80px);
+  transition: opacity .8s var(--ease) calc(var(--i, 0) * 90ms), transform 1s cubic-bezier(.22, 1, .36, 1) calc(var(--i, 0) * 90ms);
+}
+.offr__row.is-in .offr-card { opacity: 1; transform: none; }
+
+/* Photo : fondu entre les axes du segment, léger zoom arrière. */
+.offr-card__media { position: absolute; inset: 0; z-index: -1; }
+.offr-card__media img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transform: scale(1.08); transition: opacity 1.1s var(--ease), transform 6s linear;
+}
+.offr-card__media img.is-active { opacity: 1; transform: scale(1); }
+.offr-card__media::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--dark) 72%, transparent) 0%, transparent 38%),
+    linear-gradient(0deg, color-mix(in srgb, var(--dark) 78%, transparent) 0%, transparent 45%);
+}
+
+.offr-card__top { position: absolute; left: 0; right: 0; top: 0; padding: calc(var(--k) * 26); }
+.offr-card__num { font-size: max(11px, calc(var(--k) * 13)); font-weight: 700; letter-spacing: .14em; opacity: .8; }
+.offr-card__segment {
+  margin-top: calc(var(--k) * 8); max-width: 16ch;
+  font-size: max(20px, calc(var(--k) * 27)); font-weight: 700; line-height: 1.15; letter-spacing: -.015em;
+}
+
+/* Axe en cours : pastille translucide en bas à gauche. */
+.offr-card__axis {
+  position: absolute; left: calc(var(--k) * 26); right: calc(var(--k) * 90); bottom: calc(var(--k) * 26);
+}
+.offr-card__axis span {
+  display: inline-block; padding: 8px 14px; border-radius: 999px;
+  background: color-mix(in srgb, var(--white) 16%, transparent); backdrop-filter: blur(8px);
+  font-size: max(12px, calc(var(--k) * 13)); font-weight: 600; line-height: 1.3;
+  animation: offr-axis .6s var(--ease) both;
+}
+@keyframes offr-axis { from { opacity: 0; transform: translateY(10px); } }
+
+/* Bouton rond : ouvre / referme la carte (devient une croix bleue). */
+.offr-card__toggle {
+  position: absolute; z-index: 2; right: calc(var(--k) * 22); bottom: calc(var(--k) * 22);
+  display: grid; place-items: center; width: max(44px, calc(var(--k) * 52)); height: max(44px, calc(var(--k) * 52));
+  border-radius: 50%; border: 1px solid color-mix(in srgb, var(--white) 55%, transparent);
+  background: transparent; color: var(--white); cursor: pointer;
+  transition: background .35s var(--ease), border-color .35s var(--ease), transform .45s var(--ease);
+}
+.offr-card__toggle .icon { width: 18px; height: 18px; }
+
+/* Panneau : monte depuis le bas et recouvre la carte. */
+.offr-card__panel {
+  position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; justify-content: flex-end;
+  gap: calc(var(--k) * 14); padding: calc(var(--k) * 28) calc(var(--k) * 28) calc(var(--k) * 92);
+  background: var(--white); color: var(--ink); cursor: default;
+  transform: translateY(101%); transition: transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+.offr-card__title { font-size: max(19px, calc(var(--k) * 25)); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; color: var(--navy); }
+.offr-card__title em { font-style: normal; color: var(--blue); }
+.offr-card__text { font-size: max(13px, calc(var(--k) * 15)); line-height: 1.55; color: var(--text); }
+.offr-card__cta {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; margin-top: calc(var(--k) * 6);
+  padding: .85em 1.5em; border-radius: 999px; background: var(--blue); color: var(--white);
+  font-size: max(13px, calc(var(--k) * 14)); font-weight: 600; transition: background .3s var(--ease);
+}
+.offr-card__cta:hover { background: var(--blue-dark); }
+.offr-card__cta .icon { width: 14px; height: 14px; }
+.offr-card__panel > * { opacity: 0; transform: translateY(14px); transition: opacity .4s var(--ease), transform .5s var(--ease); }
+
+.offr-card.is-open .offr-card__panel { transform: none; }
+.offr-card.is-open .offr-card__panel > * { opacity: 1; transform: none; }
+.offr-card.is-open .offr-card__panel > :nth-child(2) { transition-delay: .08s; }
+.offr-card.is-open .offr-card__panel > :nth-child(3) { transition-delay: .16s; }
+.offr-card.is-open .offr-card__toggle { background: var(--blue); border-color: var(--blue); transform: rotate(180deg); }
+@media (hover: hover) {
+  .offr-card:hover .offr-card__panel { transform: none; }
+  .offr-card:hover .offr-card__panel > * { opacity: 1; transform: none; }
+  .offr-card:hover .offr-card__panel > :nth-child(2) { transition-delay: .08s; }
+  .offr-card:hover .offr-card__panel > :nth-child(3) { transition-delay: .16s; }
+  .offr-card:hover .offr-card__toggle { background: var(--blue); border-color: var(--blue); transform: rotate(45deg); }
+}
+
+/* Contrôles : barre de progression + flèches. */
+.offr__controls { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: calc(var(--k) * 28); }
+.offr__progress {
+  position: relative; width: min(50%, calc(var(--k) * 320)); height: 3px; border-radius: 3px;
+  background: color-mix(in srgb, var(--white) 25%, transparent);
+}
+.offr__progress span {
+  position: absolute; top: 0; bottom: 0; border-radius: 3px; background: var(--white);
+  left: calc(var(--start, 0) * 100%); width: calc(var(--size, 1) * 100%); transition: left .35s var(--ease);
+}
+.offr__nav { display: flex; gap: 10px; }
+.offr__nav .round-btn { border-color: color-mix(in srgb, var(--white) 45%, transparent); color: var(--white); }
+.offr__nav .round-btn:hover { background: var(--white); border-color: var(--white); color: var(--blue); }
+
+/* Ordinateur et tablette : un écran entier, tailles en --u (mêmes rapports qu'Ambition). */
+@media (min-width: 721px) {
+  .offr { --u: min(calc(100vw / 1440), calc(100svh / 900)); --k: var(--u); padding: 0; }
+  .offr__screen {
+    min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
+    padding-top: calc(var(--header-h) + var(--u) * 32); padding-bottom: calc(var(--curve-h) + var(--u) * 32);
+  }
+  .offr-card { height: max(360px, calc(var(--u) * 540)); }
+}
+/* Tablette : 2 cartes ; en portrait l'écran est très haut, la section ne le remplit plus. */
+@media (min-width: 721px) and (max-width: 1100px) {
+  .offr__row { --per: 2; }
+}
+@media (min-width: 721px) and (max-width: 1100px) and (orientation: portrait) {
+  .offr__screen { min-height: 0; padding-top: 72px; padding-bottom: calc(var(--curve-h) + 40px); }
+  .offr-card { height: min(64vw, 560px); }
+}
+/* Téléphone : 1 carte et l'amorce de la suivante, la rangée va jusqu'aux bords. */
+@media (max-width: 720px) {
+  .offr { padding: 96px 0 calc(var(--curve-h) + 40px); }
+  .offr__head { flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 26px; }
+  .offr__title { font-size: clamp(34px, 10vw, 42px); }
+  .offr__row { --per: 1; --gap: 12px; }
+  .offr__track { margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter); scroll-padding: 0 var(--gutter); }
+  .offr-card { flex-basis: 84%; height: 500px; border-radius: 24px; }
+  .offr-card__panel { justify-content: flex-start; overflow-y: auto; gap: 12px; padding: 26px 24px 84px; }
+  .offr-card__title { font-size: 19px; }
+  .offr-card__text { font-size: 14px; }
+  .offr__progress { width: 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .offr__title, .offr__brochure, .offr-card, .offr-card__panel, .offr-card__panel > * { transition: none; }
+  .offr__title, .offr__brochure, .offr-card { opacity: 1; transform: none; }
+  .offr-card__media img, .offr-card__axis span { transition: none; animation: none; }
+  .offr__track { scroll-behavior: auto; }
+}

@@ -146,6 +146,8 @@ export interface SiteContent {
       intro: string
       rotators: { label: string; items: RotatorItem[] }[]
       dotLabelTemplate: string
+      prevLabel: string
+      nextLabel: string
     }
     team: {
       title: string

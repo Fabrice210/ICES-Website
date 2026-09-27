@@ -178,6 +178,8 @@ export const home: SiteContent['home'] = {
     intro:
       'ICES accompagne également le développement des compétences à travers des formations, des programmes de renforcement des capacités et des initiatives favorisant le partage d’expertise.',
     dotLabelTemplate: 'Afficher l’élément {n}',
+    prevLabel: 'Élément précédent',
+    nextLabel: 'Élément suivant',
     rotators: [
       {
         label: 'Actualités',
