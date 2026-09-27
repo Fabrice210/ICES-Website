@@ -23,6 +23,23 @@
 /* Changement de fond entre sections (comme la maquette de référence) : la section
    précédente est figée (useStackPin) et celle-ci monte par-dessus avec un dôme de sa
    propre couleur, qui reste bombé jusqu'à couvrir l'écran. */
+/* Échelle commune sur téléphone (≤ 720 px, réf. Hope Rise mobile) : toutes les sections
+   refaites utilisent ces tailles, pour une responsivité cohérente. Pas de texte sous 12 px,
+   cibles tactiles d'au moins 44 px. */
+@media (max-width: 720px) {
+  :root {
+    --m-h2: 26px;       /* titre de section */
+    --m-h2-long: 22px;  /* titre-phrase (Ambition) */
+    --m-lead: 14px;     /* intro sous un titre */
+    --m-title: 17px;    /* titre de carte */
+    --m-body: 14px;     /* texte de carte, boutons */
+    --m-label: 12px;    /* numéros, étiquettes, pastilles */
+    --m-tap: 44px;      /* cible tactile minimale */
+    --m-gap: 12px;      /* écart entre cartes */
+    --m-card: 78%;      /* largeur d'une carte de carrousel */
+  }
+}
+
 .curve-top { --curve-h: clamp(80px, 16vh, 170px); position: relative; }
 .curve-top::before {
   content: ""; position: absolute; left: 0; right: 0; top: 1px; height: var(--curve-h); pointer-events: none;
@@ -30,10 +47,15 @@
 }
 @media (max-width: 720px) { .curve-top { --curve-h: 64px; } }
 
-/* Points d'arrêt du défilement entre sections (snap « proximité » : la page s'y cale
-   seulement si le scroll s'arrête tout près, ailleurs il reste libre). Repères invisibles
-   de hauteur nulle, placés en absolu dans une section non figée. */
-html { scroll-snap-type: y proximity; }
+/* Autre changement de section : une feuille aux coins arrondis monte sur la section figée
+   (qui recule, cf. useCoverProgress), au lieu du dôme. */
+.sheet-top {
+  position: relative; border-radius: clamp(28px, 4vw, 64px) clamp(28px, 4vw, 64px) 0 0;
+  box-shadow: 0 -30px 60px color-mix(in srgb, var(--dark) 28%, transparent);
+}
+
+/* Repères invisibles des points d'arrêt du défilement (lus par useScrollStops),
+   de hauteur nulle, placés en absolu dans une section. */
 .snap-point { position: absolute; left: 0; width: 1px; height: 0; pointer-events: none; }
 
 .pill-tag {

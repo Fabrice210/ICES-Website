@@ -7,7 +7,7 @@ export function Actualites() {
   const { ref: headRef, inView: headIn } = useInView<HTMLDivElement>(0.4)
 
   return (
-    <section className="news2 curve-top" id="actualites" aria-labelledby="news-title">
+    <section className="news2 sheet-top" id="actualites" aria-labelledby="news-title">
       <div className="news2__screen">
         <div
           ref={headRef}

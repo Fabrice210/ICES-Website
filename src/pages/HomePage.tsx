@@ -1,3 +1,4 @@
+import { useScrollStops } from '../hooks/useScrollStops'
 import { Actualites } from '../sections/home/Actualites'
 import { Approche } from '../sections/home/Approche'
 import { Equipe } from '../sections/home/Equipe'
@@ -9,6 +10,7 @@ import { Vision } from '../sections/home/Vision'
 import { HomeHero } from '../sections/home/HomeHero'
 
 export function HomePage() {
+  useScrollStops()
   return (
     <div data-page="home">
       <HomeHero />

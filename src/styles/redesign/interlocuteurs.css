@@ -115,23 +115,23 @@
     padding: calc(var(--header-h) + 8px) 0 32px;
   }
   .aud > .container { width: 100%; }
-  .aud__title { font-size: clamp(28px, 8.4vw, 34px); letter-spacing: -.02em; }
-  .aud__intro { margin-top: 14px; max-width: 34ch; font-size: 14px; line-height: 1.55; }
-  .aud__head .link-round { margin-top: 18px; gap: 10px; font-size: 11px; }
-  .aud__head .round-btn { width: 40px; height: 40px; }
-  .aud-card { padding: 22px; }
+  .aud__title { font-size: var(--m-h2); line-height: 1.1; letter-spacing: -.02em; }
+  .aud__intro { margin-top: 14px; max-width: 34ch; font-size: var(--m-lead); line-height: 1.55; }
+  .aud__head .link-round { margin-top: 18px; gap: 10px; font-size: var(--m-label); }
+  .aud__head .round-btn { width: var(--m-tap); height: var(--m-tap); }
+  .aud-card { padding: 20px; }
   .aud-card__icon { width: 44px; height: 44px; border-radius: 14px; }
   .aud-card__icon .icon { width: 19px; height: 19px; }
-  .aud-card h3 { margin-top: 18px; font-size: 18px; }
-  .aud-card p { margin-top: 8px; font-size: 14px; line-height: 1.5; }
+  .aud-card h3 { margin-top: 16px; font-size: var(--m-title); }
+  .aud-card p { margin-top: 8px; font-size: var(--m-body); line-height: 1.5; }
   .aud-card__foot { padding-top: 16px; }
-  .aud-card .round-btn { width: 40px; height: 40px; }
+  .aud-card .round-btn { width: var(--m-tap); height: var(--m-tap); }
   .aud__cards {
-    display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    display: flex; gap: var(--m-gap); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
     margin: 32px calc(var(--gutter) * -1) 0; padding: 0 var(--gutter); scroll-padding: 0 var(--gutter);
   }
   .aud__cards::-webkit-scrollbar { display: none; }
-  .aud__card { flex: 0 0 84%; min-height: 280px; scroll-snap-align: start; transform: translateX(70px) rotate(3deg); }
+  .aud__card { flex: 0 0 var(--m-card); min-height: 240px; scroll-snap-align: start; transform: translateX(70px) rotate(3deg); }
   .aud__dots { display: flex; justify-content: center; gap: 8px; margin-top: 22px; }
   .aud__dots span {
     width: 8px; height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--white) 35%, transparent);
