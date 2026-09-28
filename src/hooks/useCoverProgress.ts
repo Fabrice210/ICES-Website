@@ -8,11 +8,15 @@ import { useEffect, type RefObject } from 'react'
 export function useCoverProgress(ref: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const el = ref.current
-    const next = el?.nextElementSibling
-    if (!el || !next) return
+    if (!el) return
     let frame = 0
     const update = () => {
       frame = 0
+      // Relu à chaque fois : la section suivante peut être remplacée (réordonnancement,
+      // rechargement à chaud) ; une référence gardée resterait détachée (top 0 → figée à 1).
+      let next = el.nextElementSibling
+      while (next?.classList.contains('stack-pause')) next = next.nextElementSibling
+      if (!next) return
       const top = next.getBoundingClientRect().top
       const progress = Math.min(1, Math.max(0, 1 - top / window.innerHeight))
       el.style.setProperty('--cover', progress.toFixed(3))

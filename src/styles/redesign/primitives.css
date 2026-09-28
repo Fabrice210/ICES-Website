@@ -58,7 +58,15 @@
    de hauteur nulle, placés en absolu dans une section. */
 .snap-point { position: absolute; left: 0; width: 1px; height: 0; pointer-events: none; }
 
+/* Temps de pause entre deux sections (cf. HomePage) : vide, il passe sous la section figée
+   d'avant, qui reste donc affichée entière pendant une demi-hauteur d'écran de scroll. */
+.stack-pause { height: 50svh; pointer-events: none; }
+
 .pill-tag {
   display: inline-block; padding: 6px 14px; border-radius: 999px;
   background: var(--gray-100); color: var(--blue); font-size: 12px; font-weight: 600;
 }
+
+/* Les sections figées (Interlocuteurs, Ambition, Offres) restent collées jusqu'à la fin de
+   la page d'accueil : les anciennes sections qui suivent doivent passer devant, opaques. */
+[data-page="home"] > .section { position: relative; z-index: 7; background: var(--white); }

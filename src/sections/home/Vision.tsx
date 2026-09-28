@@ -25,8 +25,7 @@ export function Vision() {
 
   return (
     <section ref={sectionRef} className="amb curve-top" id="vision" aria-labelledby="vision-title">
-      {/* Points d'arrêt du défilement : Interlocuteurs entière avant le dôme, puis Ambition en haut. */}
-      <span className="snap-point amb__snap-pause" data-align="end" aria-hidden="true" />
+      {/* Point d'arrêt doux : Ambition posée en haut de l'écran. */}
       <span className="snap-point amb__snap-top" aria-hidden="true" />
       {/* Écran 1 : titre + texte + lien à gauche ; photo en arche + carte « Notre ambition »
           flottante à droite. Centré sous le header. */}

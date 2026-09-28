@@ -30,6 +30,8 @@ export interface IconCard {
   text: string
   /** Couleur d'accent de la carte (Interlocuteurs ; survol des domaines). */
   tone?: Tone
+  /** Photo de la carte (Nos expertises). */
+  image?: string
 }
 
 export interface HeaderVariant {
@@ -132,7 +134,11 @@ export interface SiteContent {
     expertises: { image: string; title: string; intro: string; items: IconCard[]; link: LinkItem }
     realisations: {
       title: string
+      /** Petite étiquette au-dessus de l'intro (colonne de droite de l'en-tête). */
+      kicker: string
       intro: string
+      /** Libellé en bas de chaque carte de réalisation. */
+      cardCta: string
       works: { image: string; label: string }[]
       link: LinkItem
     }

@@ -1,0 +1,132 @@
+/* =========================================================
+   Missions & Réalisations — refonte DA (réf. « Everything your
+   diagnosis needs » de la vidéo) : bande bleue en dôme sur les
+   expertises figées, titre à gauche / étiquette + intro à droite,
+   rangée de grandes cartes (photos puis carte pleine blanche).
+   .is-scrolly : section figée, la rangée glisse avec le scroll.
+   ========================================================= */
+.real2 { --k: 1px; z-index: 7; background: var(--blue); color: var(--white); }
+.real2__pin { padding: 110px 0 100px; }
+
+.real2__head {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: calc(var(--k) * 48); align-items: end;
+}
+.real2__title {
+  max-width: 12ch; font-size: max(32px, calc(var(--k) * 64)); font-weight: 800; line-height: 1.02; letter-spacing: -.03em;
+}
+.real2__kicker {
+  font-size: max(12px, calc(var(--k) * 12)); font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--white) 70%, transparent);
+}
+.real2__intro {
+  margin-top: calc(var(--k) * 10); font-size: max(14px, calc(var(--k) * 15)); line-height: 1.6;
+  color: color-mix(in srgb, var(--white) 86%, transparent);
+}
+.real2__head > * {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity .8s var(--ease), transform .9s cubic-bezier(.22, 1, .36, 1);
+}
+.real2__head > :nth-child(2) { transition-delay: .12s; }
+.real2__head.is-in > * { opacity: 1; transform: none; }
+
+/* Rangée de cartes. */
+.real2__row { margin-top: calc(var(--k) * 40); }
+.real2__track {
+  --w: calc(var(--k) * 400);
+  display: flex; gap: calc(var(--k) * 16); margin: 0; padding: 0; list-style: none;
+}
+.real2-card {
+  flex: 0 0 var(--w); height: calc(var(--k) * 460);
+  opacity: 0; transform: translateX(80px);
+  transition: opacity .8s var(--ease) calc(var(--i, 0) * 90ms), transform 1s cubic-bezier(.22, 1, .36, 1) calc(var(--i, 0) * 90ms);
+}
+.real2__row.is-in .real2-card { opacity: 1; transform: none; }
+
+.real2-card__link {
+  position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column;
+  height: 100%; padding: calc(var(--k) * 26); border-radius: calc(var(--k) * 28); color: var(--white);
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.real2-card__link--photo { background: var(--navy); }
+.real2-card__img {
+  position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover;
+  transition: transform .9s cubic-bezier(.22, 1, .36, 1);
+}
+.real2-card__link--photo::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--dark) 70%, transparent) 0%, transparent 36%),
+    linear-gradient(0deg, color-mix(in srgb, var(--dark) 60%, transparent) 0%, transparent 34%);
+}
+.real2-card__link--solid { background: var(--white); color: var(--ink); }
+
+.real2-card__num { font-size: max(12px, calc(var(--k) * 13)); font-weight: 700; letter-spacing: .14em; opacity: .8; }
+.real2-card__title {
+  margin-top: calc(var(--k) * 8); max-width: 14ch;
+  font-size: max(20px, calc(var(--k) * 28)); font-weight: 700; line-height: 1.15; letter-spacing: -.015em;
+}
+.real2-card__link--solid .real2-card__title { color: var(--navy); }
+.real2-card__foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto;
+  font-size: max(13px, calc(var(--k) * 14)); font-weight: 600;
+}
+.real2-card__link--solid .real2-card__foot { justify-content: flex-end; }
+.real2-card__btn {
+  display: grid; place-items: center; flex: none; width: max(44px, calc(var(--k) * 52)); height: max(44px, calc(var(--k) * 52));
+  border-radius: 50%; border: 1px solid color-mix(in srgb, currentColor 50%, transparent);
+  transition: background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease), transform .45s var(--ease);
+}
+.real2-card__btn .icon { width: 18px; height: 18px; }
+.real2-card__link--solid .real2-card__btn { background: var(--blue); border-color: var(--blue); color: var(--white); }
+
+@media (hover: hover) {
+  .real2-card__link:hover { transform: translateY(-6px); box-shadow: 0 24px 48px color-mix(in srgb, var(--dark) 30%, transparent); }
+  .real2-card__link:hover .real2-card__img { transform: scale(1.06); }
+  .real2-card__link:hover .real2-card__btn { background: var(--white); border-color: var(--white); color: var(--blue); transform: rotate(45deg); }
+  .real2-card__link--solid:hover .real2-card__btn { background: var(--navy); border-color: var(--navy); color: var(--white); }
+}
+.real2-card__link:focus-visible { outline: 3px solid var(--white); outline-offset: 4px; }
+
+/* Ordinateur et tablette : tailles en --u. */
+@media (min-width: 721px) {
+  .real2 { --u: min(calc(100vw / 1440), calc(100svh / 900)); --k: var(--u); }
+  .real2__pin { padding: calc(var(--header-h) + var(--u) * 32) 0 calc(var(--u) * 48); }
+}
+/* Défilement horizontal piloté par le scroll (≥ 1024 px de large). */
+.real2.is-scrolly { height: calc(100svh + var(--dist, 0px)); }
+.real2.is-scrolly .real2__pin {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.real2.is-scrolly .real2__track { transform: translateX(calc(var(--p, 0) * var(--dist, 0px) * -1)); will-change: transform; }
+/* Sinon : rangée native qu'on fait glisser, aimantée carte par carte. */
+.real2:not(.is-scrolly) .real2__track {
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter); scroll-padding: 0 var(--gutter);
+}
+.real2:not(.is-scrolly) .real2__track::-webkit-scrollbar { display: none; }
+.real2:not(.is-scrolly) .real2-card { scroll-snap-align: start; }
+
+@media (min-width: 721px) and (max-width: 1100px) and (orientation: portrait) {
+  .real2 { --k: min(calc(100vw / 1100), 1px); }
+  .real2__pin { padding-block: 72px 110px; }
+}
+/* Téléphone : en-tête empilé, cartes compactes à ~78 % de la largeur. */
+@media (max-width: 720px) {
+  .real2__pin { padding: 88px 0 80px; }
+  .real2__head { grid-template-columns: 1fr; gap: 14px; }
+  .real2__title { font-size: var(--m-h2); line-height: 1.1; letter-spacing: -.02em; }
+  .real2__kicker { font-size: var(--m-label); }
+  .real2__intro { font-size: var(--m-lead); }
+  .real2__row { margin-top: 24px; }
+  .real2__track { --w: var(--m-card); gap: var(--m-gap); }
+  .real2-card { height: 380px; }
+  .real2-card__link { padding: 20px; border-radius: 22px; }
+  .real2-card__num { font-size: var(--m-label); }
+  .real2-card__title { font-size: 20px; }
+  .real2-card__foot { font-size: var(--m-body); }
+  .real2-card__btn { width: var(--m-tap); height: var(--m-tap); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .real2__head > *, .real2-card { opacity: 1; transform: none; transition: none; }
+}

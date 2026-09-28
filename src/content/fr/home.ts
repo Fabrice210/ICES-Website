@@ -117,16 +117,19 @@ export const home: SiteContent['home'] = {
       {
         icon: 'user',
         title: 'Capital Humain & Organisations',
+        image: 'photo-1522071820081-009f0129c71c-w1400.jpg',
         text: 'Transformer les compétences, les organisations et les cultures pour libérer l’intelligence collective.',
       },
       {
         icon: 'gauge',
         title: 'Excellence Opérationnelle & Performance Publique',
+        image: 'photo-1454165804606-c3d57bc86b40-w1400.jpg',
         text: 'Optimiser les organisations, les processus et les projets pour renforcer leur efficacité durable.',
       },
       {
         icon: 'shield',
         title: 'Gouvernance & Conformité',
+        image: 'photo-1521791136064-7986c2920216-w1400.jpg',
         text: 'Sécuriser les décisions, les risques et les trajectoires dans un environnement en mutation.',
       },
     ],
@@ -135,6 +138,8 @@ export const home: SiteContent['home'] = {
 
   realisations: {
     title: 'Missions & Réalisations',
+    kicker: 'Sur le terrain',
+    cardCta: 'Voir la mission',
     intro:
       'Derrière chaque mission, une problématique, des parties prenantes et un objectif de transformation. Découvrez comment nos expertises, nos offres et nos solutions se traduisent en interventions concrètes au service des organisations et des territoires.',
     works: [

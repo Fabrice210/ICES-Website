@@ -5,13 +5,7 @@
    Écran 2 : les valeurs (OrbitCardStack).
    ========================================================= */
 .amb { z-index: 4; padding: 110px 0 90px; background: var(--white); color: var(--ink); }
-/* Temps de pause : Interlocuteurs (figée) reste affichée une demi-hauteur d'écran
-   de défilement avant que le dôme blanc ne monte. */
-.aud + .amb { margin-top: 50svh; }
-/* Arrêt 1 : bas d'Interlocuteurs au bas de l'écran, au début de la pause (50svh au-dessus). */
-.amb__snap-pause { display: none; top: -50svh; }
-.aud + .amb .amb__snap-pause { display: block; }
-/* Arrêt 2 : haut d'Ambition en haut de l'écran. */
+/* Arrêt doux : haut d'Ambition en haut de l'écran. */
 .amb__snap-top { top: 0; }
 
 .amb__split { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 64px; align-items: center; }
@@ -80,6 +74,15 @@
   .amb__screen + .amb__screen {
     min-height: 0; justify-content: flex-start;
     padding-top: 0; padding-bottom: calc(var(--curve-h) + var(--u) * 48);
+  }
+}
+/* Écran en paysage : l'écran des valeurs occupe exactement la hauteur visible sous le
+   header, contenu centré. À l'arrêt (Ambition figée, bas aligné sur le bas de l'écran),
+   « Nos valeurs » est donc centrée ; le dôme des offres passe ensuite par-dessus. */
+@media (min-width: 721px) and (orientation: landscape) {
+  .amb__screen + .amb__screen {
+    min-height: calc(100svh - var(--header-h)); justify-content: center;
+    padding-top: calc(var(--u) * 24); padding-bottom: calc(var(--u) * 24);
   }
 }
 
