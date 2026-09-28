@@ -1,68 +1,82 @@
-import { useRef, type CSSProperties } from 'react'
-import { image } from '../../assets/images'
+import { useRef, useState, type CSSProperties } from 'react'
 import { Icon } from '../../components/icons/Icon'
-import { FallbackImg } from '../../components/ui/FallbackImg'
 import { SmartLink } from '../../components/ui/SmartLink'
-import { useInView } from '../../hooks/useInView'
-import { useStackPin } from '../../hooks/useStackPin'
+import { useReducedMotion } from '../../hooks/useMediaQuery'
+import { useScrollProgress } from '../../hooks/useScrollProgress'
 import { useContent } from '../../i18n/useLanguage'
 
-/** Hauteurs relatives des photos, de gauche à droite : un escalier en V (réf. Hope Rise). */
-const STEPS = [1, 0.8, 0.62, 0.8, 1]
-
 /**
- * Nos cibles (réf. « Updates From HopeRise », contenu de la plaquette) : titre centré, intro
- * et lien, puis une rangée de cartes photo en escalier, avec icône, numéro, cible et précision
- * sous chaque photo. Feuille blanche qui monte sur les offres (sheet-top) ; figée à la fin,
- * le dôme bleu de « Missions & Réalisations » monte ensuite par-dessus.
- * Tablette et téléphone : la rangée se fait glisser, l'escalier est conservé.
+ * Nos cibles (réf. « Benchmark » de motionin.design, contenu de la plaquette) : la section
+ * se fige et, au fil du scroll, les cibles défilent comme un tambour à droite (la cible au
+ * centre est grande et blanche, les autres rétrécissent et s'estompent). À gauche : titre,
+ * intro, grand numéro en dégradé et précision de la cible active. Téléphone : tout est empilé.
+ * Sans animation (préférence système) : simple liste.
  */
 export function Cibles() {
   const { targets } = useContent().home
+  const items = targets.items
+  const live = !useReducedMotion()
   const sectionRef = useRef<HTMLElement>(null)
-  useStackPin(sectionRef)
-  const { ref: headRef, inView: headIn } = useInView<HTMLDivElement>(0.4)
-  const { ref: rowRef, inView: rowIn } = useInView<HTMLUListElement>(0.25)
+  const listRef = useRef<HTMLOListElement>(null)
+  const [active, setActive] = useState(0)
+
+  useScrollProgress(sectionRef, live, (progress) => {
+    const pos = progress * (items.length - 1)
+    // Écrit directement dans le DOM : position de chaque ligne par rapport au centre.
+    listRef.current?.querySelectorAll<HTMLElement>('.tgt__item').forEach((el, i) => {
+      el.style.setProperty('--off', (i - pos).toFixed(3))
+      el.style.setProperty('--d', Math.min(3, Math.abs(i - pos)).toFixed(3))
+    })
+    const index = Math.round(pos)
+    setActive((current) => (current === index ? current : index))
+  })
+
+  const current = items[active]
 
   return (
-    <section ref={sectionRef} className="exp2 sheet-top" id="cibles" aria-labelledby="targets-title">
-      <div className="container exp2__screen">
-        <div ref={headRef} className={headIn ? 'exp2__head is-in' : 'exp2__head'}>
-          <h2 className="exp2__title" id="targets-title">
-            {targets.title}
-          </h2>
-          <p className="exp2__intro">{targets.intro}</p>
-          <SmartLink className="link-round exp2__all" to={targets.link.to}>
-            {targets.link.label}
-            <span className="round-btn" aria-hidden="true">
-              <Icon name="arrow" />
-            </span>
-          </SmartLink>
-        </div>
+    <section
+      ref={sectionRef}
+      className={live ? 'tgt is-live' : 'tgt'}
+      id="cibles"
+      aria-labelledby="targets-title"
+      style={{ '--n': items.length } as CSSProperties}
+    >
+      <div className="tgt__pin">
+        <div className="container tgt__grid">
+          <div className="tgt__aside">
+            <h2 className="tgt__title" id="targets-title">
+              {targets.title}
+            </h2>
+            <p className="tgt__intro">{targets.intro}</p>
+            <p className="tgt__num" aria-hidden="true">
+              <span key={active}>{String(active + 1).padStart(2, '0')}</span>
+            </p>
+            <p className="tgt__detail" aria-live="polite">
+              <span key={active}>
+                <Icon name={current.icon} />
+                {current.text ?? current.title}
+              </span>
+            </p>
+            <SmartLink className="link-round link-round--light tgt__link" to={targets.link.to}>
+              {targets.link.label}
+              <span className="round-btn" aria-hidden="true">
+                <Icon name="arrow" />
+              </span>
+            </SmartLink>
+          </div>
 
-        <ul
-          ref={rowRef}
-          className={rowIn ? 'exp2__row is-in' : 'exp2__row'}
-          style={{ '--n': targets.items.length } as CSSProperties}
-        >
-          {targets.items.map((item, i) => (
-            <li
-              key={item.title}
-              className="exp2-card"
-              style={{ '--i': i, '--h': STEPS[i % STEPS.length] } as CSSProperties}
-            >
-              <div className="exp2-card__media">
-                <FallbackImg src={image(item.image)} alt="" loading="lazy" />
-              </div>
-              <p className="exp2-card__meta">
-                <Icon name={item.icon} />
-                {String(i + 1).padStart(2, '0')}
-              </p>
-              <h3 className="exp2-card__title">{item.title}</h3>
-              {item.text && <p className="exp2-card__text">{item.text}</p>}
-            </li>
-          ))}
-        </ul>
+          <ol ref={listRef} className="tgt__list">
+            {items.map((item, i) => (
+              <li
+                key={item.title}
+                className={i === active ? 'tgt__item is-active' : 'tgt__item'}
+                style={{ '--off': i, '--d': Math.min(3, i) } as CSSProperties}
+              >
+                <h3>{item.title}</h3>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   )

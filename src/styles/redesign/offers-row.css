@@ -185,18 +185,6 @@
   .offr__track { scroll-behavior: auto; }
 }
 
-/* Recouvrement par la feuille des actualités (--cover posé par useCoverProgress) :
-   le contenu recule et la bande s'assombrit pendant que la feuille blanche monte. */
-.offr__screen {
-  transform: translateY(calc(var(--cover, 0) * -40px)) scale(calc(1 - var(--cover, 0) * .08));
-  transform-origin: 50% 100%;
-  will-change: transform; /* couche composée : le recul ne repeint pas les cartes à chaque image */
-}
-.offr::after {
-  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: var(--dark); opacity: calc(var(--cover, 0) * .5); will-change: opacity;
-}
-@media (prefers-reduced-motion: reduce) { .offr__screen { transform: none; } }
 
 /* Téléphone en paysage (écran bas) : les cartes tiennent dans la hauteur visible. */
 @media (min-width: 721px) and (max-height: 500px) and (orientation: landscape) {

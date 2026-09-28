@@ -1,11 +1,11 @@
 /* =========================================================
    Missions & Réalisations — refonte DA (réf. « Everything your
-   diagnosis needs » de la vidéo) : bande bleue en dôme sur les
-   expertises figées, titre à gauche / étiquette + intro à droite,
+   diagnosis needs » de la vidéo) : suite de la bande bleue des
+   offres et des cibles, titre à gauche / étiquette + intro à droite,
    rangée de grandes cartes (photos puis carte pleine blanche).
    .is-scrolly : section figée, la rangée glisse avec le scroll.
    ========================================================= */
-.real2 { --k: 1px; z-index: 7; background: var(--blue); color: var(--white); }
+.real2 { --k: 1px; position: relative; z-index: 7; background: var(--blue); color: var(--white); }
 .real2__pin { padding: 110px 0 100px; }
 
 .real2__head {

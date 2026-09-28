@@ -48,7 +48,7 @@
 @media (max-width: 720px) { .curve-top { --curve-h: 64px; } }
 
 /* Autre changement de section : une feuille aux coins arrondis monte sur la section figée
-   (qui recule, cf. useCoverProgress), au lieu du dôme. */
+   (cf. Actualités), au lieu du dôme. */
 .sheet-top {
   position: relative; border-radius: clamp(28px, 4vw, 64px) clamp(28px, 4vw, 64px) 0 0;
   box-shadow: 0 -30px 60px color-mix(in srgb, var(--dark) 28%, transparent);

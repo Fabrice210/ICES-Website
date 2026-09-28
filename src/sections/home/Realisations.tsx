@@ -10,7 +10,7 @@ import { useContent } from '../../i18n/useLanguage'
 
 /**
  * Missions & Réalisations (réf. « Everything your diagnosis needs, under one roof » de la
- * vidéo) : bande bleue en dôme, titre à gauche, étiquette + intro à droite, puis une rangée
+ * vidéo) : suite de la bande bleue des offres, titre à gauche, étiquette + intro à droite, puis une rangée
  * de grandes cartes numérotées (photos des missions, puis une carte pleine vers toutes les
  * réalisations). Ordinateur / tablette paysage : la section se fige et la rangée défile à
  * l'horizontale avec le scroll. En dessous : rangée qu'on fait glisser.
@@ -30,7 +30,7 @@ export function Realisations() {
   return (
     <section
       ref={sectionRef}
-      className={scrolly ? 'real2 curve-top is-scrolly' : 'real2 curve-top'}
+      className={scrolly ? 'real2 is-scrolly' : 'real2'}
       id="realisations"
       aria-labelledby="real-title"
     >

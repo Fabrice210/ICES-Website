@@ -24,9 +24,7 @@ export function HomePage() {
       <Vision />
       <StackPause />
       <Offres />
-      <StackPause />
       <Cibles />
-      <StackPause />
       <Realisations />
       <Approche />
       <Actualites />
