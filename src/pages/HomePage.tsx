@@ -2,7 +2,7 @@ import { useScrollStops } from '../hooks/useScrollStops'
 import { Actualites } from '../sections/home/Actualites'
 import { Approche } from '../sections/home/Approche'
 import { Equipe } from '../sections/home/Equipe'
-import { Expertises } from '../sections/home/Expertises'
+import { Cibles } from '../sections/home/Cibles'
 import { Interlocuteurs } from '../sections/home/Interlocuteurs'
 import { Offres } from '../sections/home/Offres'
 import { Realisations } from '../sections/home/Realisations'
@@ -25,7 +25,7 @@ export function HomePage() {
       <StackPause />
       <Offres />
       <StackPause />
-      <Expertises />
+      <Cibles />
       <StackPause />
       <Realisations />
       <Approche />

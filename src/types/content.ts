@@ -132,6 +132,13 @@ export interface SiteContent {
       slides: OfferSlide[]
     }
     expertises: { image: string; title: string; intro: string; items: IconCard[]; link: LinkItem }
+    /** Nos cibles (plaquette, « 01 - Notre mission ») : une carte photo par cible. */
+    targets: {
+      title: string
+      intro: string
+      link: LinkItem
+      items: { icon: IconName; title: string; text?: string; image: string }[]
+    }
     realisations: {
       title: string
       /** Petite étiquette au-dessus de l'intro (colonne de droite de l'en-tête). */

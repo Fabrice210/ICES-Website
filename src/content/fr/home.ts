@@ -136,6 +136,43 @@ export const home: SiteContent['home'] = {
     link: { label: 'Voir toutes nos expertises', to: '/prestations' },
   },
 
+  targets: {
+    title: 'Nos cibles',
+    intro:
+      'Partenaire stratégique des États, institutions et organisations en Afrique francophone, avec une expertise renforcée sur la gestion des concessions, des mandats institutionnels et des ressources souveraines.',
+    link: { label: 'Parlons de votre projet', to: '#contact' },
+    items: [
+      {
+        icon: 'landmark',
+        title: 'Gouvernements et administrations',
+        image: 'photo-1486406146926-c627a92ad1ab-w2000.jpg',
+      },
+      {
+        icon: 'shield',
+        title: 'Sociétés d’État et autorités concédantes',
+        text: 'Agences de régulation et de gestion des concessions et du patrimoine public.',
+        image: 'photo-1473341304170-971dccb5ac1e-w1400.jpg',
+      },
+      {
+        icon: 'globe',
+        title: 'Institutions internationales et bailleurs de fonds',
+        text: 'Organismes de financement du développement, institutions régionales incluses.',
+        image: 'photo-1554224155-6726b3ff858f-w1400.jpg',
+      },
+      {
+        icon: 'building',
+        title: 'Entreprises, multinationales et concessionnaires',
+        image: 'photo-1497366216548-37526070297c-w1400.jpg',
+      },
+      {
+        icon: 'bulb',
+        title: 'Écosystèmes d’innovation',
+        text: 'Filières stratégiques et porteurs de projets structurants.',
+        image: 'photo-1531482615713-2afd69097998-w1400.jpg',
+      },
+    ],
+  },
+
   realisations: {
     title: 'Missions & Réalisations',
     kicker: 'Sur le terrain',

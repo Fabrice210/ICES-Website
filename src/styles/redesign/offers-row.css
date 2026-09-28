@@ -71,7 +71,7 @@
 }
 .offr-card__axis span {
   display: inline-block; padding: 8px 14px; border-radius: 999px;
-  background: color-mix(in srgb, var(--white) 16%, transparent); backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--dark) 45%, transparent);
   font-size: max(12px, calc(var(--k) * 13)); font-weight: 600; line-height: 1.3;
   animation: offr-axis .6s var(--ease) both;
 }
@@ -190,10 +190,11 @@
 .offr__screen {
   transform: translateY(calc(var(--cover, 0) * -40px)) scale(calc(1 - var(--cover, 0) * .08));
   transform-origin: 50% 100%;
+  will-change: transform; /* couche composée : le recul ne repeint pas les cartes à chaque image */
 }
 .offr::after {
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: var(--dark); opacity: calc(var(--cover, 0) * .5);
+  background: var(--dark); opacity: calc(var(--cover, 0) * .5); will-change: opacity;
 }
 @media (prefers-reduced-motion: reduce) { .offr__screen { transform: none; } }
 
