@@ -30,17 +30,17 @@ export function Equipe() {
     running ? (canHover ? 1300 : 3200) : null
   )
   const member = members[current]
-  // Deux fois la liste : le défilement en boucle ne montre jamais de vide.
-  const partners = [...team.partners.items, ...team.partners.items]
+  // Liste répétée (la boucle défile d'une moitié) : le cadre n'est jamais vide, même avec peu de logos.
+  const partners = Array.from({ length: 4 }, () => team.partners.items).flat()
 
   return (
     <section className="team3" id="equipe" aria-labelledby="team-label">
       <div ref={ref} className={inView ? 'container team3__grid is-in' : 'container team3__grid'}>
         <div className="team3__text">
-          <p className="team3__kicker">{team.title}</p>
           <h2 className="team3__title" id="team-label">
-            {team.introTitle}
+            {team.title}
           </h2>
+          <p className="team3__subtitle">{team.introTitle}</p>
           <p className="team3__intro">{team.introText}</p>
         </div>
 
@@ -85,8 +85,15 @@ export function Equipe() {
               <span className="team3__badge team3__badge--light">{team.partners.label}</span>
               <div className="team3__marquee" aria-hidden="true">
                 <ul>
-                  {partners.map((name, i) => (
-                    <li key={`${name}-${i}`}>{name}</li>
+                  {partners.map((p, i) => (
+                    <li key={`${p.name}-${i}`}>
+                      {p.logo ? (
+                        <FallbackImg src={image(p.logo)} alt="" loading="lazy" />
+                      ) : (
+                        <span className="team3__wordmark">{p.name}</span>
+                      )}
+                      <span className="team3__kind">{p.kind}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -98,8 +105,10 @@ export function Equipe() {
               </span>
             </figcaption>
             <ul className="sr-only">
-              {team.partners.items.map((name) => (
-                <li key={name}>{name}</li>
+              {team.partners.items.map((p) => (
+                <li key={p.name}>
+                  {p.name} ({p.kind})
+                </li>
               ))}
             </ul>
           </figure>

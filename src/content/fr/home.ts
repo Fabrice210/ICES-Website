@@ -276,10 +276,15 @@ export const home: SiteContent['home'] = {
     expertiseLabel: 'Expertise:',
     teamCard: { label: 'Notre équipe', hint: 'Survolez pour découvrir l’équipe' },
     partners: {
-      label: 'Nos partenaires',
-      text: 'Partenaires académiques, technologiques et institutionnels.',
-      // [À remplacer] par les logos des partenaires.
-      items: ['Partenaire 1', 'Partenaire 2', 'Partenaire 3', 'Partenaire 4', 'Partenaire 5', 'Partenaire 6'],
+      label: 'Partenaires & clients',
+      text: 'Ils nous font confiance et nous accompagnent.',
+      // Repris de la section « Partenaires & Clients » de ices-consulting.com. Le logo PECB du
+      // site en ligne est un fichier corrompu : nom en texte en attendant le bon fichier.
+      items: [
+        { name: 'PECB', kind: 'Partenaire' },
+        { name: 'Groupe OFMAS', kind: 'Client', logo: 'logo-ofmas.png' },
+        { name: 'CEPEPE', kind: 'Client', logo: 'logo-cepepe.png' },
+      ],
     },
     tabs: [
       {

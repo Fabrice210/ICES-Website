@@ -170,7 +170,12 @@ export interface SiteContent {
       /** Carte équipe : étiquette et consigne (les portraits défilent au survol). */
       teamCard: { label: string; hint: string }
       /** Carte partenaires : les logos défilent en continu. */
-      partners: { label: string; text: string; items: string[] }
+      partners: {
+        label: string
+        text: string
+        /** Logos (src/assets/images) ; sans logo, le nom s'affiche en texte. */
+        items: { name: string; kind: string; logo?: string }[]
+      }
       tabs: { label: string; members: TeamMember[] }[]
       presence: { map: string; mapAlt: string; title: string; text: string; places: string[] }
     }

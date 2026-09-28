@@ -6,11 +6,12 @@
    ========================================================= */
 .team3 { --k: 1px; position: relative; z-index: 8; padding: 100px 0; background: var(--white); color: var(--ink); }
 
-.team3__grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: calc(var(--k) * 56); align-items: center; }
+.team3__grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: calc(var(--k) * 56); align-items: start; }
 
 /* Texte (aligné à gauche). */
-.team3__kicker { font-size: max(12px, calc(var(--k) * 13)); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); }
-.team3__title { margin-top: calc(var(--k) * 14); max-width: 14ch; font-size: max(30px, calc(var(--k) * 52)); font-weight: 800; line-height: 1.05; letter-spacing: -.025em; }
+/* Titre de section : même taille et graisse que « Nos cibles » ; sous-titre plus petit. */
+.team3__title { font-size: max(32px, calc(var(--k) * 64)); font-weight: 800; line-height: 1.05; letter-spacing: -.03em; }
+.team3__subtitle { margin-top: calc(var(--k) * 16); max-width: 20ch; font-size: max(20px, calc(var(--k) * 30)); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; color: var(--ink); }
 .team3__intro { margin-top: calc(var(--k) * 20); max-width: 50ch; font-size: max(14px, calc(var(--k) * 16)); line-height: 1.6; color: var(--text); }
 .team3__text > * {
   opacity: 0; transform: translateY(30px);
@@ -62,11 +63,21 @@
   mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
 }
 .team3__marquee ul { margin: 0; padding: 0; list-style: none; animation: team3-marquee 14s linear infinite; }
+/* Tuile blanche par logo (les logos sont en couleur), type en petit dessous. */
 .team3__marquee li {
-  display: grid; place-items: center; height: calc(var(--k) * 64); margin-bottom: calc(var(--k) * 10);
-  border-radius: calc(var(--k) * 14); border: 1px solid color-mix(in srgb, var(--white) 35%, transparent);
-  background: color-mix(in srgb, var(--white) 10%, transparent); color: var(--white);
-  font-size: max(13px, calc(var(--k) * 15)); font-weight: 700; letter-spacing: .02em;
+  position: relative; display: grid; place-items: center; height: calc(var(--k) * 92); margin-bottom: calc(var(--k) * 10);
+  padding: calc(var(--k) * 12) calc(var(--k) * 16) calc(var(--k) * 22); border-radius: calc(var(--k) * 14);
+  background: var(--white); color: var(--navy);
+}
+.team3__marquee li { overflow: hidden; }
+.team3__marquee img {
+  position: absolute; left: calc(var(--k) * 16); right: calc(var(--k) * 16); top: calc(var(--k) * 10); bottom: calc(var(--k) * 24);
+  width: calc(100% - var(--k) * 32); height: calc(100% - var(--k) * 34); object-fit: contain;
+}
+.team3__wordmark { font-size: max(20px, calc(var(--k) * 26)); font-weight: 800; letter-spacing: .04em; color: var(--navy); }
+.team3__kind {
+  position: absolute; left: 0; right: 0; bottom: calc(var(--k) * 6); text-align: center;
+  font-size: max(12px, calc(var(--k) * 11)); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--blue);
 }
 @keyframes team3-marquee { to { transform: translateY(-50%); } }
 @media (hover: hover) { .team3__card--partners:hover .team3__marquee ul { animation-duration: 7s; } }
@@ -94,8 +105,8 @@
 @media (max-width: 720px) {
   .team3 { padding: 80px 0 72px; }
   .team3__grid { grid-template-columns: 1fr; gap: 28px; }
-  .team3__kicker { font-size: var(--m-label); }
   .team3__title { font-size: var(--m-h2); line-height: 1.1; letter-spacing: -.02em; }
+  .team3__subtitle { margin-top: 10px; font-size: 19px; }
   .team3__intro { margin-top: 12px; font-size: var(--m-lead); }
   .team3__cards { grid-template-columns: 1fr; gap: 20px; }
   .team3__frame { aspect-ratio: 1 / 1; }
