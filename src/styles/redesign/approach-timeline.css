@@ -1,0 +1,112 @@
+/* =========================================================
+   Notre approche — maquette Figma « Notre approche », sur la bande
+   bleue : frise de 4 étapes (grand numéro fin, ligne continue avec
+   un repère par étape, titre, texte). La ligne est faite des segments
+   de chaque étape (.apt__rail), dessinés l'un après l'autre.
+   Téléphone : même frise en vertical.
+   ========================================================= */
+.apt {
+  --k: 1px; --step: 260ms; --line: color-mix(in srgb, var(--white) 38%, transparent);
+  position: relative; z-index: 7; padding: 100px 0; background: var(--blue); color: var(--white);
+}
+
+.apt__title { font-size: max(32px, calc(var(--k) * 64)); font-weight: 800; line-height: 1.02; letter-spacing: -.03em; }
+.apt__intro {
+  max-width: 50ch; margin-top: calc(var(--k) * 16);
+  font-size: max(14px, calc(var(--k) * 16)); line-height: 1.6; color: color-mix(in srgb, var(--white) 86%, transparent);
+}
+.apt__head > * {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .8s var(--ease), transform .9s cubic-bezier(.22, 1, .36, 1);
+}
+.apt__head > :nth-child(2) { transition-delay: .12s; }
+.apt__head.is-in > * { opacity: 1; transform: none; }
+
+/* Frise horizontale : 4 colonnes jointives, la ligne court d'une colonne à l'autre. */
+.apt__steps {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: calc(var(--k) * 56) 0 0; padding: 0; list-style: none;
+}
+.apt__step {
+  --d: calc(var(--i, 0) * var(--step));
+  display: flex; flex-direction: column; padding-right: calc(var(--k) * 36); cursor: default;
+}
+.apt__num {
+  font-size: max(44px, calc(var(--k) * 76)); font-weight: 300; line-height: 1; letter-spacing: -.02em;
+  color: color-mix(in srgb, var(--white) 78%, transparent);
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .6s var(--ease) calc(var(--d) + 150ms), transform .7s cubic-bezier(.22, 1, .36, 1) calc(var(--d) + 150ms), color .35s var(--ease);
+}
+
+/* Segment de ligne + repère vertical au début de chaque étape. */
+.apt__rail {
+  position: relative; display: block; height: 1px; margin: calc(var(--k) * 18) calc(var(--k) * -36) 0 0;
+  background: var(--line); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--step) linear var(--d);
+}
+.apt__step:last-child .apt__rail { margin-right: 0; }
+.apt__rail::before {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 1px; height: 13px; background: var(--white);
+  transform: scaleY(0); transform-origin: bottom; transition: transform .3s var(--ease) var(--d);
+}
+/* Remplissage blanc du segment (au survol, cf. plus bas). */
+.apt__rail::after {
+  content: ""; position: absolute; inset: -1px 0; background: var(--white);
+  transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.22, 1, .36, 1);
+}
+.apt__name, .apt__text {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .6s var(--ease) calc(var(--d) + 280ms), transform .7s var(--ease) calc(var(--d) + 280ms), color .35s var(--ease);
+}
+.apt__name { margin-top: calc(var(--k) * 26); font-size: max(17px, calc(var(--k) * 21)); font-weight: 700; line-height: 1.25; }
+.apt__text {
+  margin-top: calc(var(--k) * 12); max-width: 26ch;
+  font-size: max(14px, calc(var(--k) * 15)); line-height: 1.55; color: color-mix(in srgb, var(--white) 78%, transparent);
+}
+
+.apt__steps.is-in .apt__num, .apt__steps.is-in .apt__name, .apt__steps.is-in .apt__text { opacity: 1; transform: none; }
+.apt__steps.is-in .apt__rail, .apt__steps.is-in .apt__rail::before { transform: none; }
+
+/* Survol : le numéro s'illumine et monte, le segment se remplit, le texte s'éclaircit. */
+@media (hover: hover) {
+  .apt__step:hover .apt__num { color: var(--white); transform: translateY(-8px); transition-delay: 0s; }
+  .apt__step:hover .apt__rail::after { transform: none; }
+  .apt__step:hover .apt__text { color: var(--white); transition-delay: 0s; }
+}
+
+/* Ordinateur et tablette : tailles en --u. */
+@media (min-width: 721px) {
+  .apt { --u: min(calc(100vw / 1440), calc(100svh / 900)); --k: var(--u); padding: calc(var(--u) * 110) 0; }
+}
+@media (min-width: 721px) and (max-width: 1100px) {
+  .apt { --k: min(calc(100vw / 1100), 1px); }
+  .apt__step { padding-right: 22px; }
+  .apt__rail { margin-right: -22px; }
+}
+
+/* Téléphone : frise verticale, ligne à gauche, étapes à droite. */
+@media (max-width: 720px) {
+  .apt { padding: 80px 0 72px; }
+  .apt__title { font-size: var(--m-h2); line-height: 1.1; letter-spacing: -.02em; }
+  .apt__intro { margin-top: 12px; font-size: var(--m-lead); }
+  .apt__steps { grid-template-columns: 1fr; margin-top: 32px; }
+  .apt__step { position: relative; padding: 0 0 30px 34px; }
+  .apt__step:last-child { padding-bottom: 0; }
+  .apt__rail {
+    position: absolute; left: 0; top: 6px; bottom: -6px; width: 1px; height: auto; margin: 0;
+    transform: scaleY(0); transform-origin: top;
+  }
+  .apt__step:last-child .apt__rail { bottom: 0; }
+  .apt__rail::before { left: 0; top: 0; bottom: auto; width: 13px; height: 1px; transform: scaleX(0); transform-origin: left; }
+  /* Sur téléphone, pas de survol : la ligne se remplit d'elle-même, étape par étape. */
+  .apt__rail::after { inset: 0 -1px; transform: scaleY(0); transform-origin: top; transition: transform .6s cubic-bezier(.22, 1, .36, 1) calc(var(--d) + 700ms); }
+  .apt__steps.is-in .apt__rail::after { transform: none; }
+  .apt__num { font-size: 44px; }
+  .apt__name { margin-top: 10px; font-size: var(--m-title); }
+  .apt__text { margin-top: 6px; max-width: none; font-size: var(--m-body); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apt__head > *, .apt__num, .apt__name, .apt__text { opacity: 1; transform: none; transition: none; }
+  .apt__rail, .apt__rail::before { transform: none; transition: none; }
+}
