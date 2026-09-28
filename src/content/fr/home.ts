@@ -145,6 +145,7 @@ export const home: SiteContent['home'] = {
       {
         icon: 'landmark',
         title: 'Gouvernements et administrations',
+        text: 'Ministères, administrations centrales et collectivités engagés dans la modernisation de l’action publique.',
         image: 'photo-1486406146926-c627a92ad1ab-w2000.jpg',
       },
       {
@@ -162,6 +163,7 @@ export const home: SiteContent['home'] = {
       {
         icon: 'building',
         title: 'Entreprises, multinationales et concessionnaires',
+        text: 'Groupes et opérateurs qui investissent, exploitent des concessions et se développent en Afrique francophone.',
         image: 'photo-1497366216548-37526070297c-w1400.jpg',
       },
       {
@@ -272,6 +274,13 @@ export const home: SiteContent['home'] = {
     introText:
       'Les transformations complexes exigent des expertises multiples. ICES mobilise un réseau d’experts sectoriels, d’ingénieurs, de juristes, d’administrateurs mandataires et de data scientists, en s’appuyant sur des partenariats académiques et technologiques.',
     expertiseLabel: 'Expertise:',
+    teamCard: { label: 'Notre équipe', hint: 'Survolez pour découvrir l’équipe' },
+    partners: {
+      label: 'Nos partenaires',
+      text: 'Partenaires académiques, technologiques et institutionnels.',
+      // [À remplacer] par les logos des partenaires.
+      items: ['Partenaire 1', 'Partenaire 2', 'Partenaire 3', 'Partenaire 4', 'Partenaire 5', 'Partenaire 6'],
+    },
     tabs: [
       {
         label: 'Équipe dirigeante',

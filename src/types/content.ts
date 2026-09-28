@@ -167,6 +167,10 @@ export interface SiteContent {
       introTitle: string
       introText: string
       expertiseLabel: string
+      /** Carte équipe : étiquette et consigne (les portraits défilent au survol). */
+      teamCard: { label: string; hint: string }
+      /** Carte partenaires : les logos défilent en continu. */
+      partners: { label: string; text: string; items: string[] }
       tabs: { label: string; members: TeamMember[] }[]
       presence: { map: string; mapAlt: string; title: string; text: string; places: string[] }
     }

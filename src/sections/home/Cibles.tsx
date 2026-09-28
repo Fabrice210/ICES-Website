@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react'
+import type { CSSProperties, PointerEvent, ReactNode } from 'react'
 import { Icon } from '../../components/icons/Icon'
 import { SmartLink } from '../../components/ui/SmartLink'
 import { useInView } from '../../hooks/useInView'
@@ -35,6 +35,7 @@ function Box({
   d,
   h,
   className,
+  delay,
 }: {
   x: number
   y: number
@@ -43,12 +44,14 @@ function Box({
   d: number
   h: number
   className?: string
+  /** Décalage de l'animation (en pas de 0,3 s). */
+  delay?: number
 }) {
   const top = [pt(x, y, z + h), pt(x + w, y, z + h), pt(x + w, y + d, z + h), pt(x, y + d, z + h)]
   const left = [pt(x, y + d, z + h), pt(x + w, y + d, z + h), pt(x + w, y + d, z), pt(x, y + d, z)]
   const right = [pt(x + w, y, z + h), pt(x + w, y + d, z + h), pt(x + w, y + d, z), pt(x + w, y, z)]
   return (
-    <g className={className}>
+    <g className={className} style={delay === undefined ? undefined : ({ '--d': delay } as CSSProperties)}>
       <polygon points={left.join(' ')} />
       <polygon points={right.join(' ')} />
       <polygon points={top.join(' ')} />
@@ -72,8 +75,8 @@ const ART: ReactNode[] = [
       [1.8, -2.6],
       [-2.6, 1.8],
       [1.8, 1.8],
-    ].map(([cx, cy]) => (
-      <Box key={`${cx}${cy}`} x={cx} y={cy} z={0.5} w={0.8} d={0.8} h={2.8} />
+    ].map(([cx, cy], ci) => (
+      <Box key={`${cx}${cy}`} x={cx} y={cy} z={0.5} w={0.8} d={0.8} h={2.8} className="tgt-art__glow" delay={ci} />
     ))}
     <Box x={-3.4} y={-3.4} z={3.3} w={6.8} d={6.8} h={0.5} />
     <Box x={-2.4} y={-2.4} z={3.8} w={4.8} d={4.8} h={0.5} className="tgt-art__float" />
@@ -85,7 +88,7 @@ const ART: ReactNode[] = [
         gx === -1.1 && gy === -1.1 ? (
           <Ground key="hole" x={gx} y={gy} w={1.8} d={1.8} />
         ) : (
-          <Box key={`${gx}${gy}`} x={gx} y={gy} z={0} w={1.8} d={1.8} h={0.3} />
+          <Box key={`${gx}${gy}`} x={gx} y={gy} z={0} w={1.8} d={1.8} h={0.3} className="tgt-art__wave" delay={(gx + gy + 6.6) / 2.2} />
         )
       )
     )}
@@ -95,16 +98,16 @@ const ART: ReactNode[] = [
   <>
     <Ground x={-3.4} y={-2.6} w={5.6} d={5.6} />
     {[0, 1, 2, 3, 4, 5].map((i) => (
-      <Box key={i} x={-3 + i * 0.4} y={-2.2} z={i * 0.5} w={4.2} d={4.2} h={0.3} />
+      <Box key={i} x={-3 + i * 0.4} y={-2.2} z={i * 0.5} w={4.2} d={4.2} h={0.3} className="tgt-art__glow" delay={i} />
     ))}
     <Box x={-0.2} y={-2.2} z={3.3} w={4.2} d={4.2} h={0.3} className="tgt-art__float" />
   </>,
   // Entreprises, multinationales et concessionnaires : tours de hauteurs différentes.
   <>
     <Ground x={-4} y={-3.6} w={8} d={7.4} />
-    <Box x={-3.2} y={-3} z={0} w={2.2} d={2.2} h={4.6} />
-    <Box x={0.2} y={-3} z={0} w={2.4} d={2.4} h={3} />
-    <Box x={-3.2} y={0.4} z={0} w={2.4} d={2.4} h={2.2} />
+    <Box x={-3.2} y={-3} z={0} w={2.2} d={2.2} h={4.6} className="tgt-art__grow" delay={0} />
+    <Box x={0.2} y={-3} z={0} w={2.4} d={2.4} h={3} className="tgt-art__grow" delay={2} />
+    <Box x={-3.2} y={0.4} z={0} w={2.4} d={2.4} h={2.2} className="tgt-art__grow" delay={4} />
     <Box x={0.4} y={0.6} z={0} w={2} d={2} h={1.2} className="tgt-art__float" />
   </>,
   // Écosystèmes d'innovation : plateforme centrale reliée à des modules.
@@ -112,9 +115,9 @@ const ART: ReactNode[] = [
     <DashLine from={[-4.6, 0, 0.6]} to={[-2, 0, 0.6]} />
     <DashLine from={[0, -4.6, 0.6]} to={[0, -2, 0.6]} />
     <DashLine from={[2, 2, 0.4]} to={[3.3, 3.3, 0.6]} />
-    <Box x={-6} y={-0.7} z={0} w={1.4} d={1.4} h={1.2} />
+    <Box x={-6} y={-0.7} z={0} w={1.4} d={1.4} h={1.2} className="tgt-art__float" delay={3} />
     <Box x={-0.7} y={-6} z={0} w={1.4} d={1.4} h={1.2} className="tgt-art__float" />
-    <Box x={-2} y={-2} z={0} w={4} d={4} h={0.8} />
+    <Box x={-2} y={-2} z={0} w={4} d={4} h={0.8} className="tgt-art__glow" delay={1} />
     <Ground x={2.6} y={2.6} w={1.4} d={1.4} />
     <Ground x={2.6} y={2.6} w={1.4} d={1.4} z={1.2} />
   </>,
@@ -126,6 +129,20 @@ const ART: ReactNode[] = [
  * illustration isométrique au trait, titre et précision. Tablette : lignes (illustration à
  * gauche) ; téléphone : blocs empilés séparés par des lignes horizontales.
  */
+/** Inclinaison de l'illustration selon la position du pointeur dans la colonne. */
+function tilt(event: PointerEvent<HTMLLIElement>) {
+  if (event.pointerType !== 'mouse') return
+  const box = event.currentTarget.getBoundingClientRect()
+  const x = (event.clientX - box.left) / box.width - 0.5
+  const y = (event.clientY - box.top) / box.height - 0.5
+  event.currentTarget.style.setProperty('--tx', x.toFixed(3))
+  event.currentTarget.style.setProperty('--ty', y.toFixed(3))
+}
+function resetTilt(event: PointerEvent<HTMLLIElement>) {
+  event.currentTarget.style.setProperty('--tx', '0')
+  event.currentTarget.style.setProperty('--ty', '0')
+}
+
 export function Cibles() {
   const { targets } = useContent().home
   const { ref: headRef, inView: headIn } = useInView<HTMLDivElement>(0.4)
@@ -148,7 +165,13 @@ export function Cibles() {
 
         <ul ref={gridRef} className={gridIn ? 'tgt__grid is-in' : 'tgt__grid'}>
           {targets.items.map((item, i) => (
-            <li key={item.title} className="tgt__col" style={{ '--i': i } as CSSProperties}>
+            <li
+              key={item.title}
+              className="tgt__col"
+              style={{ '--i': i } as CSSProperties}
+              onPointerMove={tilt}
+              onPointerLeave={resetTilt}
+            >
               <svg className="tgt-art" viewBox="-110 -95 220 150" aria-hidden="true">
                 {ART[i]}
               </svg>

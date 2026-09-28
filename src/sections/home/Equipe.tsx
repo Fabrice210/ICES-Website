@@ -1,67 +1,121 @@
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { image } from '../../assets/images'
 import { FallbackImg } from '../../components/ui/FallbackImg'
+import { useInView } from '../../hooks/useInView'
+import { useInterval } from '../../hooks/useInterval'
+import { useCanHover, useReducedMotion } from '../../hooks/useMediaQuery'
 import { useContent } from '../../i18n/useLanguage'
 
-const PANEL_IDS = ['panel-direction', 'panel-experts']
-
+/**
+ * Équipe & Implantation (maquette Figma « Group 11 ») : texte à gauche (étiquette, titre,
+ * intro), deux cartes aux couleurs ICES à droite.
+ * - Carte équipe : les portraits défilent au survol (sur écran tactile, en continu) ; nom,
+ *   fonction et expertise du membre affiché sous la carte.
+ * - Carte partenaires : bleue, les logos défilent en continu à la verticale.
+ * La carte d'implantation reste dessous.
+ */
 export function Equipe() {
   const { team } = useContent().home
-  const [activeTab, setActiveTab] = useState(0)
+  const members = team.tabs.flatMap((tab) => tab.members)
+  const canHover = useCanHover()
+  const reduceMotion = useReducedMotion()
+  const [hovered, setHovered] = useState(false)
+  const [current, setCurrent] = useState(0)
+  const { ref, inView } = useInView<HTMLDivElement>(0.25)
+
+  // Survol (souris) : défilement rapide ; tactile : défilement continu plus lent.
+  const running = inView && !reduceMotion && (canHover ? hovered : true)
+  useInterval(
+    () => setCurrent((c) => (c + 1) % members.length),
+    running ? (canHover ? 1300 : 3200) : null
+  )
+  const member = members[current]
+  // Deux fois la liste : le défilement en boucle ne montre jamais de vide.
+  const partners = [...team.partners.items, ...team.partners.items]
 
   return (
-    <section className="section section--flush-top" id="equipe" aria-labelledby="team-label">
-      <div className="container">
-        <h2 className="section-label" id="team-label">
-          {team.title}
-        </h2>
-        <div className="team">
-          <div className="team__intro">
-            <h3>{team.introTitle}</h3>
-            <p>{team.introText}</p>
-          </div>
-
-          {team.tabs.map((tab, i) => (
-            <div key={tab.label} className="team-panel" id={PANEL_IDS[i]} role="tabpanel" hidden={i !== activeTab}>
-              {tab.members.map((member) => (
-                <article key={member.photo} className="member" tabIndex={0}>
-                  <div className="member__photo">
-                    <FallbackImg src={image(member.photo)} alt={member.alt} loading="lazy" />
-                    <div className="member__expertise">
-                      <h4>{team.expertiseLabel}</h4>
-                      <ul>
-                        {member.expertise.map((line) => (
-                          <li key={line}>{line}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  <h4 className="member__name">{member.name}</h4>
-                  <p className="member__role">{member.role}</p>
-                </article>
-              ))}
-            </div>
-          ))}
-
-          <div className="team-tabs" role="tablist" aria-label="Équipe">
-            {team.tabs.map((tab, i) => (
-              <button
-                key={tab.label}
-                className="team-tab"
-                role="tab"
-                aria-selected={i === activeTab}
-                aria-controls={PANEL_IDS[i]}
-                onClick={() => setActiveTab(i)}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+    <section className="team3" id="equipe" aria-labelledby="team-label">
+      <div ref={ref} className={inView ? 'container team3__grid is-in' : 'container team3__grid'}>
+        <div className="team3__text">
+          <p className="team3__kicker">{team.title}</p>
+          <h2 className="team3__title" id="team-label">
+            {team.introTitle}
+          </h2>
+          <p className="team3__intro">{team.introText}</p>
         </div>
 
+        <div className="team3__cards">
+          <figure
+            className="team3__card team3__card--team"
+            style={{ '--i': 0 } as CSSProperties}
+            onPointerEnter={() => setHovered(true)}
+            onPointerLeave={() => setHovered(false)}
+          >
+            <div className="team3__frame">
+              <span className="team3__badge">{team.teamCard.label}</span>
+              {members.map((m, i) => (
+                <FallbackImg
+                  key={m.photo}
+                  className={i === current ? 'team3__photo is-active' : 'team3__photo'}
+                  src={image(m.photo)}
+                  alt={i === current ? m.alt : ''}
+                  loading="lazy"
+                />
+              ))}
+              <div className="team3__progress" aria-hidden="true">
+                {members.map((m, i) => (
+                  <span key={m.photo} className={i === current ? 'is-active' : undefined} />
+                ))}
+              </div>
+            </div>
+            <figcaption className="team3__caption" aria-live="polite">
+              <span key={current} className="team3__who">
+                <strong>{member.name}</strong>
+                <span>{member.role}</span>
+              </span>
+              {canHover && <span className="team3__hint">{team.teamCard.hint}</span>}
+            </figcaption>
+          </figure>
+
+          <figure
+            className="team3__card team3__card--partners"
+            style={{ '--i': 1 } as CSSProperties}
+          >
+            <div className="team3__frame team3__frame--blue">
+              <span className="team3__badge team3__badge--light">{team.partners.label}</span>
+              <div className="team3__marquee" aria-hidden="true">
+                <ul>
+                  {partners.map((name, i) => (
+                    <li key={`${name}-${i}`}>{name}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <figcaption className="team3__caption">
+              <span className="team3__who">
+                <strong>{team.partners.label}</strong>
+                <span>{team.partners.text}</span>
+              </span>
+            </figcaption>
+            <ul className="sr-only">
+              {team.partners.items.map((name) => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
+          </figure>
+        </div>
+      </div>
+
+      <div className="container">
         <div className="presence">
           <div className="presence__map">
-            <img src={image(team.presence.map)} alt={team.presence.mapAlt} width={378} height={421} loading="lazy" />
+            <img
+              src={image(team.presence.map)}
+              alt={team.presence.mapAlt}
+              width={378}
+              height={421}
+              loading="lazy"
+            />
           </div>
           <div>
             <h3>{team.presence.title}</h3>

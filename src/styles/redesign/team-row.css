@@ -1,0 +1,109 @@
+/* =========================================================
+   Équipe & Implantation — maquette Figma « Group 11 », remodelée :
+   texte à gauche, deux cartes ICES à droite. Carte équipe : les
+   portraits défilent au survol. Carte partenaires : bleue, logos en
+   défilement vertical continu. Téléphone : texte puis cartes empilées.
+   ========================================================= */
+.team3 { --k: 1px; position: relative; z-index: 8; padding: 100px 0; background: var(--white); color: var(--ink); }
+
+.team3__grid { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: calc(var(--k) * 56); align-items: center; }
+
+/* Texte (aligné à gauche). */
+.team3__kicker { font-size: max(12px, calc(var(--k) * 13)); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); }
+.team3__title { margin-top: calc(var(--k) * 14); max-width: 14ch; font-size: max(30px, calc(var(--k) * 52)); font-weight: 800; line-height: 1.05; letter-spacing: -.025em; }
+.team3__intro { margin-top: calc(var(--k) * 20); max-width: 50ch; font-size: max(14px, calc(var(--k) * 16)); line-height: 1.6; color: var(--text); }
+.team3__text > * {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .8s var(--ease), transform .9s cubic-bezier(.22, 1, .36, 1);
+}
+.team3__text > :nth-child(2) { transition-delay: .1s; }
+.team3__text > :nth-child(3) { transition-delay: .2s; }
+.team3__grid.is-in .team3__text > * { opacity: 1; transform: none; }
+
+/* Deux cartes de même taille. */
+.team3__cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(var(--k) * 24); }
+.team3__card {
+  margin: 0; opacity: 0; transform: translateY(50px);
+  transition: opacity .8s var(--ease) calc(.2s + var(--i, 0) * 140ms), transform 1s cubic-bezier(.22, 1, .36, 1) calc(.2s + var(--i, 0) * 140ms);
+}
+.team3__grid.is-in .team3__card { opacity: 1; transform: none; }
+
+.team3__frame {
+  position: relative; isolation: isolate; overflow: hidden; aspect-ratio: 312 / 397;
+  border-radius: calc(var(--k) * 24); background: var(--gray-200);
+  box-shadow: 0 0 0 1px var(--gray-200);
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.team3__frame--blue { background: var(--blue); box-shadow: none; }
+@media (hover: hover) {
+  .team3__card:hover .team3__frame { transform: translateY(-6px); box-shadow: 0 24px 48px color-mix(in srgb, var(--navy) 16%, transparent); }
+}
+.team3__badge {
+  position: absolute; left: calc(var(--k) * 14); top: calc(var(--k) * 14); z-index: 3;
+  padding: 6px 12px; border-radius: 999px; background: var(--blue); color: var(--white);
+  font-size: max(12px, calc(var(--k) * 12)); font-weight: 700; letter-spacing: .06em;
+}
+.team3__badge--light { background: var(--white); color: var(--blue); }
+
+/* Carte équipe : portraits en fondu + léger zoom, barre de progression. */
+.team3__photo {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transform: scale(1.08); transition: opacity .6s var(--ease), transform 1.2s cubic-bezier(.22, 1, .36, 1);
+}
+.team3__photo.is-active { opacity: 1; transform: scale(1); }
+.team3__progress { position: absolute; left: calc(var(--k) * 14); right: calc(var(--k) * 14); bottom: calc(var(--k) * 14); z-index: 3; display: flex; gap: 6px; }
+.team3__progress span { flex: 1; height: 3px; border-radius: 3px; background: color-mix(in srgb, var(--white) 45%, transparent); transition: background .3s var(--ease); }
+.team3__progress span.is-active { background: var(--white); }
+
+/* Carte partenaires : logos provisoires en défilement vertical continu. */
+.team3__marquee {
+  position: absolute; inset: calc(var(--k) * 56) calc(var(--k) * 18) calc(var(--k) * 18); overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+}
+.team3__marquee ul { margin: 0; padding: 0; list-style: none; animation: team3-marquee 14s linear infinite; }
+.team3__marquee li {
+  display: grid; place-items: center; height: calc(var(--k) * 64); margin-bottom: calc(var(--k) * 10);
+  border-radius: calc(var(--k) * 14); border: 1px solid color-mix(in srgb, var(--white) 35%, transparent);
+  background: color-mix(in srgb, var(--white) 10%, transparent); color: var(--white);
+  font-size: max(13px, calc(var(--k) * 15)); font-weight: 700; letter-spacing: .02em;
+}
+@keyframes team3-marquee { to { transform: translateY(-50%); } }
+@media (hover: hover) { .team3__card--partners:hover .team3__marquee ul { animation-duration: 7s; } }
+
+/* Légende sous chaque carte (nom / fonction, comme la maquette). */
+.team3__caption { min-height: 4.2em; margin-top: calc(var(--k) * 16); }
+.team3__who { display: flex; flex-direction: column; gap: 4px; animation: team3-in .45s var(--ease) both; }
+.team3__who strong { font-size: max(16px, calc(var(--k) * 19)); font-weight: 700; color: var(--ink); }
+.team3__who span { font-size: max(13px, calc(var(--k) * 14)); color: var(--muted); }
+.team3__hint { display: block; margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--blue); }
+@keyframes team3-in { from { opacity: 0; transform: translateY(8px); } }
+
+/* Implantation sous les cartes. */
+.team3 .presence { margin-top: calc(var(--k) * 90); }
+
+/* Ordinateur et tablette : tailles en --u. */
+@media (min-width: 721px) {
+  .team3 { --u: min(calc(100vw / 1440), calc(100svh / 900)); --k: var(--u); padding: calc(var(--u) * 110) 0; }
+}
+@media (min-width: 721px) and (max-width: 1100px) {
+  .team3 { --k: min(calc(100vw / 1100), 1px); }
+  .team3__grid { grid-template-columns: 1fr; }
+}
+/* Téléphone : texte, puis les deux cartes l'une sous l'autre. */
+@media (max-width: 720px) {
+  .team3 { padding: 80px 0 72px; }
+  .team3__grid { grid-template-columns: 1fr; gap: 28px; }
+  .team3__kicker { font-size: var(--m-label); }
+  .team3__title { font-size: var(--m-h2); line-height: 1.1; letter-spacing: -.02em; }
+  .team3__intro { margin-top: 12px; font-size: var(--m-lead); }
+  .team3__cards { grid-template-columns: 1fr; gap: 20px; }
+  .team3__frame { aspect-ratio: 1 / 1; }
+  .team3__who strong { font-size: var(--m-title); }
+  .team3__who span { font-size: var(--m-body); }
+  .team3 .presence { grid-template-columns: 1fr; margin-top: 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .team3__text > *, .team3__card { opacity: 1; transform: none; transition: none; }
+  .team3__marquee ul, .team3__who { animation: none; }
+}

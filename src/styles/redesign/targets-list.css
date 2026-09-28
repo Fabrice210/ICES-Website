@@ -44,10 +44,37 @@
 }
 .tgt-art .tgt-art__dash { fill: none; stroke: color-mix(in srgb, var(--white) 45%, transparent); stroke-width: 1; stroke-dasharray: 3 4; }
 /* L'élément « signature » de chaque illustration flotte doucement, et monte au survol. */
-.tgt-art__float { animation: tgt-float 4.5s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -0.9s); }
-@keyframes tgt-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+/* --- Animations en continu (chaque scène vit en permanence) --- */
+.tgt-art g { transform-box: fill-box; }
+/* Élément « signature » qui flotte. */
+.tgt-art__float { animation: tgt-float 4.2s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -0.9s - var(--d, 0) * .5s); }
+@keyframes tgt-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+/* Vague : les parcelles se soulèvent l'une après l'autre. */
+.tgt-art__wave { animation: tgt-wave 3.2s ease-in-out infinite; animation-delay: calc(var(--d, 0) * .3s); }
+@keyframes tgt-wave { 0%, 60%, 100% { transform: translateY(0); } 25% { transform: translateY(-4px); } }
+/* Éclat : colonnes / plateaux s'illuminent en séquence. */
+.tgt-art__glow polygon { animation: tgt-glow 3.6s ease-in-out infinite; animation-delay: calc(var(--d, 0) * .3s); }
+@keyframes tgt-glow {
+  0%, 55%, 100% { fill: var(--blue); stroke: color-mix(in srgb, var(--white) 85%, transparent); }
+  20% { fill: color-mix(in srgb, var(--white) 26%, var(--blue)); stroke: var(--white); }
+}
+/* Croissance : les tours montent tour à tour depuis le sol. */
+.tgt-art__grow { transform-origin: 50% 100%; animation: tgt-grow 4.8s cubic-bezier(.65, 0, .35, 1) infinite; animation-delay: calc(var(--d, 0) * .3s); }
+@keyframes tgt-grow { 0%, 100% { transform: scaleY(1); } 30% { transform: scaleY(.72); } 60% { transform: scaleY(1.06); } 75% { transform: scaleY(1); } }
+/* Pointillés qui défilent (flux). */
+.tgt-art .tgt-art__dash { animation: tgt-flow 1.6s linear infinite; }
+@keyframes tgt-flow { to { stroke-dashoffset: -14; } }
+
+/* --- Interaction : l'illustration suit le pointeur, s'éclaire et s'accélère au survol --- */
+.tgt-art {
+  transform: perspective(600px) rotateX(calc(var(--ty, 0) * -14deg)) rotateY(calc(var(--tx, 0) * 18deg)) translateY(0);
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1), filter .35s var(--ease);
+}
 @media (hover: hover) {
-  .tgt__col:hover .tgt-art__float { animation-play-state: paused; transform: translateY(-9px); transition: transform .4s var(--ease); }
+  .tgt__col:hover .tgt-art { transform: perspective(600px) rotateX(calc(var(--ty, 0) * -14deg)) rotateY(calc(var(--tx, 0) * 18deg)) translateY(-8px); filter: drop-shadow(0 14px 18px color-mix(in srgb, var(--dark) 30%, transparent)); }
+  .tgt__col:hover .tgt-art polygon { stroke: var(--white); }
+  .tgt__col:hover .tgt-art__float, .tgt__col:hover .tgt-art__wave, .tgt__col:hover .tgt-art__glow polygon, .tgt__col:hover .tgt-art__grow { animation-duration: 1.8s; }
+  .tgt__col:hover .tgt-art .tgt-art__dash { animation-duration: .6s; }
 }
 
 .tgt__body { margin-top: calc(var(--k) * 26); }
@@ -89,5 +116,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .tgt__head > *, .tgt__col { opacity: 1; transform: none; transition: none; }
-  .tgt-art__float { animation: none; }
+  .tgt-art__float, .tgt-art__wave, .tgt-art__glow polygon, .tgt-art__grow, .tgt-art .tgt-art__dash { animation: none; }
+  .tgt-art { transform: none; transition: none; }
 }
