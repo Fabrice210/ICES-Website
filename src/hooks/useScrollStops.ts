@@ -34,6 +34,8 @@ export function useScrollStops() {
     }
 
     const settle = () => {
+      // Défilement lancé par un lien d'ancre (pas par l'utilisateur) : aucun calage.
+      if (Date.now() - lastInput > 1200) return
       const y = window.scrollY
       const vh = window.innerHeight
       let target: number | null = null

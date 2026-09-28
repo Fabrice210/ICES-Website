@@ -10,8 +10,8 @@ import { Vision } from '../sections/home/Vision'
 import { HomeHero } from '../sections/home/HomeHero'
 
 /** Temps de pause entre deux sections : la section d'avant reste figée et entière, la page s'y arrête. */
-function StackPause() {
-  return <div className="stack-pause" aria-hidden="true" />
+function StackPause({ short = false }: { short?: boolean }) {
+  return <div className={short ? 'stack-pause stack-pause--short' : 'stack-pause'} aria-hidden="true" />
 }
 
 export function HomePage() {
@@ -22,7 +22,7 @@ export function HomePage() {
       <Interlocuteurs />
       <StackPause />
       <Vision />
-      <StackPause />
+      <StackPause short />
       <Offres />
       <Cibles />
       <Realisations />

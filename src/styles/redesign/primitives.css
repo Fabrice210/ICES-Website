@@ -61,6 +61,7 @@
 /* Temps de pause entre deux sections (cf. HomePage) : vide, il passe sous la section figée
    d'avant, qui reste donc affichée entière pendant une demi-hauteur d'écran de scroll. */
 .stack-pause { height: 50svh; pointer-events: none; }
+.stack-pause--short { height: 20svh; }
 
 /* Section figée entièrement recouverte par la suivante (cf. useStackPin) : plus peinte,
    ses animations ne coûtent plus rien pendant le scroll. */

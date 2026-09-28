@@ -76,7 +76,13 @@
 
 /* Ordinateur et tablette : tailles en --u. */
 @media (min-width: 721px) {
-  .apt { --u: min(calc(100vw / 1440), calc(100svh / 900)); --k: var(--u); padding: calc(var(--u) * 110) 0; }
+  /* Un écran entier, contenu centré sous le header (comme les autres sections). */
+  .apt {
+    --u: min(calc(100vw / 1440), calc(100svh / 900)); --k: var(--u);
+    min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
+    padding: calc(var(--header-h) + var(--u) * 32) 0 calc(var(--u) * 40);
+  }
+  .apt > .container { width: 100%; }
 }
 @media (min-width: 721px) and (max-width: 1100px) {
   .apt { --k: min(calc(100vw / 1100), 1px); }

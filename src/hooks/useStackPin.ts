@@ -25,7 +25,9 @@ export function useStackPin(ref: RefObject<HTMLElement | null>) {
       let next = el.nextElementSibling
       while (next?.classList.contains('stack-pause')) next = next.nextElementSibling
       const rect = next?.getBoundingClientRect()
-      const covered = !!rect && rect.top <= 0 && rect.bottom >= window.innerHeight
+      // La section figée reste collée jusqu'à la fin de la page : dès que la suivante a
+      // atteint le haut de l'écran, tout ce qui suit la recouvre, on la masque.
+      const covered = !!rect && rect.top <= 0
       el.toggleAttribute('data-covered', covered)
     }
     const onScroll = () => {

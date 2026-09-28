@@ -1,0 +1,128 @@
+/* =========================================================
+   Actualités & Événements — maquette Figma, remodelée : fond blanc
+   après la bande bleue ; titre aligné sur celui de « Notre approche »
+   (même taille) ; deux grandes cartes bordées, photo avec voile bleu,
+   titre, texte, lien et pastilles. Le contenu tourne en fondu.
+   ========================================================= */
+.news {
+  --k: 1px; position: relative; z-index: 8; padding: 100px 0; background: var(--white); color: var(--ink);
+  /* Neutralise l'ancienne grille .news (sections/actualites.css) : la section colle à la précédente. */
+  display: block; margin-top: 0; gap: 0;
+}
+
+.news__title { font-size: max(32px, calc(var(--k) * 64)); font-weight: 800; line-height: 1.02; letter-spacing: -.03em; }
+.news__intro {
+  max-width: 62ch; margin-top: calc(var(--k) * 16);
+  font-size: max(14px, calc(var(--k) * 16)); line-height: 1.6; color: var(--text);
+}
+.news__head > * {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .8s var(--ease), transform .9s cubic-bezier(.22, 1, .36, 1);
+}
+.news__head > :nth-child(2) { transition-delay: .12s; }
+.news__head.is-in > * { opacity: 1; transform: none; }
+
+/* Deux cartes côte à côte. */
+.news__grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(var(--k) * 24);
+  margin-top: calc(var(--k) * 40);
+}
+.ncard {
+  position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: flex-end;
+  min-height: calc(var(--k) * 420); padding: 6px; border-radius: calc(var(--k) * 28);
+  border: 1px solid var(--gray-200); background: var(--white);
+  opacity: 0; transform: translateY(40px);
+  transition: opacity .8s var(--ease) calc(var(--i, 0) * 120ms), transform .9s cubic-bezier(.22, 1, .36, 1) calc(var(--i, 0) * 120ms), box-shadow .4s var(--ease);
+}
+.news__grid.is-in .ncard { opacity: 1; transform: none; }
+/* Apparition plus marquée : la photo se dévoile depuis le bas en zoom arrière, puis le texte monte. */
+.ncard__media { clip-path: inset(100% 0 0 0 round calc(var(--k) * 22)); transition: clip-path 1.1s cubic-bezier(.22, 1, .36, 1) calc(.15s + var(--i, 0) * 160ms); }
+.news__grid.is-in .ncard__media { clip-path: inset(0 0 0 0 round calc(var(--k) * 22)); }
+.ncard__media img.is-active { transform: scale(1.18); }
+.news__grid.is-in .ncard__media img.is-active { transform: scale(1); transition: opacity 1s var(--ease), transform 1.6s cubic-bezier(.22, 1, .36, 1) calc(.15s + var(--i, 0) * 160ms); }
+.ncard__body > * { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .8s cubic-bezier(.22, 1, .36, 1); }
+.ncard__body > :nth-child(1) { transition-delay: calc(.6s + var(--i, 0) * 160ms); }
+.ncard__body > :nth-child(2) { transition-delay: calc(.72s + var(--i, 0) * 160ms); }
+.ncard__body > :nth-child(3) { transition-delay: calc(.84s + var(--i, 0) * 160ms); }
+.news__grid.is-in .ncard__body > * { opacity: 1; transform: none; }
+
+/* Photo dans un cadre intérieur arrondi (la bordure blanche fait le « box »). */
+.ncard__media {
+  position: absolute; inset: 6px; z-index: -1; overflow: hidden; border-radius: calc(var(--k) * 22); background: var(--navy);
+}
+.ncard__media img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transform: scale(1.06); transition: opacity 1s var(--ease), transform 7s linear;
+}
+.ncard__media img.is-active { opacity: 1; transform: scale(1); }
+/* Voile bleu ICES du bas vers le haut, comme la maquette. */
+.ncard__media::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(0deg, color-mix(in srgb, var(--blue) 88%, transparent) 0%, color-mix(in srgb, var(--blue) 55%, transparent) 55%, color-mix(in srgb, var(--navy) 20%, transparent) 100%);
+}
+
+.ncard__body { width: 100%; padding: calc(var(--k) * 28); color: var(--white); }
+.ncard__label { font-size: max(24px, calc(var(--k) * 34)); font-weight: 700; line-height: 1.1; letter-spacing: -.02em; }
+.ncard__text {
+  margin-top: calc(var(--k) * 14); max-width: 46ch;
+  font-size: max(15px, calc(var(--k) * 18)); line-height: 1.45;
+  animation: ncard-in .6s var(--ease) both;
+}
+@keyframes ncard-in { from { opacity: 0; transform: translateY(10px); } }
+.ncard__foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: calc(var(--k) * 22); }
+.ncard__link {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+  font-size: max(13px, calc(var(--k) * 14)); font-weight: 600; color: var(--white);
+}
+.ncard__link .icon { width: 14px; height: 14px; transition: transform .3s var(--ease); }
+.ncard__dots { display: flex; gap: 4px; }
+.ncard__dots button {
+  position: relative; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer;
+}
+.ncard__dots button::before {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 999px;
+  background: color-mix(in srgb, var(--white) 45%, transparent); transition: width .3s var(--ease), margin .3s var(--ease), background .3s var(--ease);
+}
+.ncard__dots button[aria-current='true']::before { width: 20px; margin-left: -10px; background: var(--white); }
+
+@media (hover: hover) {
+  .ncard:hover { box-shadow: 0 24px 48px color-mix(in srgb, var(--navy) 14%, transparent); }
+  .ncard:hover .ncard__media img.is-active { transform: scale(1.04); transition-duration: .9s; }
+  .ncard__link:hover .icon { transform: translate(2px, -2px); }
+}
+.ncard__link:focus-visible, .ncard__dots button:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; border-radius: 6px; }
+
+/* Ordinateur et tablette : un écran entier, contenu centré sous le header. */
+@media (min-width: 721px) {
+  .news {
+    --u: min(calc(100vw / 1440), calc(100svh / 900)); --k: var(--u);
+    min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
+    padding: calc(var(--header-h) + var(--u) * 32) 0 calc(var(--u) * 40);
+  }
+  .news > .container { width: 100%; }
+}
+@media (min-width: 721px) and (max-width: 1100px) and (orientation: portrait) {
+  .news { --k: min(calc(100vw / 1100), 1px); min-height: 0; padding: 100px 0; }
+  .news__grid { grid-template-columns: 1fr; }
+}
+/* Téléphone : cartes empilées, compactes. */
+@media (max-width: 720px) {
+  .news { padding: 80px 0 72px; }
+  .news__title { font-size: var(--m-h2); line-height: 1.1; letter-spacing: -.02em; }
+  .news__intro { margin-top: 12px; font-size: var(--m-lead); }
+  .news__grid { grid-template-columns: 1fr; gap: var(--m-gap); margin-top: 24px; }
+  .ncard { min-height: 340px; border-radius: 24px; }
+  .ncard__media { border-radius: 19px; }
+  .ncard__body { padding: 20px; }
+  .ncard__label { font-size: 22px; }
+  .ncard__text { margin-top: 10px; font-size: var(--m-body); }
+  .ncard__foot { margin-top: 14px; }
+  .ncard__link { font-size: var(--m-body); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .news__head > *, .ncard { opacity: 1; transform: none; transition: none; }
+  .ncard__media img { transition: none; transform: none; }
+  .ncard__text { animation: none; }
+  .ncard__media { clip-path: none; transition: none; }
+  .ncard__body > * { opacity: 1; transform: none; transition: none; }
+}
