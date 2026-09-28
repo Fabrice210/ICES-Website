@@ -9,8 +9,8 @@ const navLinks = [
 ]
 
 export const meta: SiteContent['meta'] = {
-  homeTitle: 'ICES — Façonnons l’Afrique de demain',
-  prestationsTitle: 'Nos expertises — ICES',
+  homeTitle: 'ICES · Façonnons l’Afrique de demain',
+  prestationsTitle: 'Nos expertises · ICES',
 }
 
 export const languages: SiteContent['languages'] = [
