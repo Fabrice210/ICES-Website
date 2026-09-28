@@ -1,101 +1,93 @@
 /* =========================================================
-   Nos cibles — refonte DA (réf. « Benchmark » de motionin.design) :
-   sur le bleu des offres (bande continue). Section figée pendant le
-   scroll ; à droite un tambour de cibles (--off = écart au centre,
-   --d = distance bornée, posés en JS), à gauche titre, intro, grand
-   numéro en dégradé et précision de la cible active.
+   Nos cibles — refonte DA (réf. capture « closeit.fast ») : sur le
+   bleu des offres (bande continue). En-tête (titre mis en valeur,
+   intro, lien), puis une colonne par cible séparée par un filet :
+   illustration isométrique au trait, titre, précision.
    ========================================================= */
-.tgt {
-  --k: 1px; --row: calc(var(--k) * 104);
-  position: relative; z-index: 6; background: var(--blue); color: var(--white);
+.tgt { --k: 1px; position: relative; z-index: 6; padding: 100px 0; background: var(--blue); color: var(--white); }
+
+/* En-tête : titre à gauche, lien « Parlons de votre projet » à droite, sur la même ligne. */
+.tgt__head {
+  display: flex; align-items: center; justify-content: space-between; gap: calc(var(--k) * 32);
+  padding-bottom: calc(var(--k) * 32); border-bottom: 1px solid color-mix(in srgb, var(--white) 22%, transparent);
 }
-.tgt.is-live { height: calc(100svh + (var(--n, 5) - 1) * 42svh); }
-.tgt__pin { padding: 110px 0 100px; }
-.tgt.is-live .tgt__pin {
-  position: sticky; top: 0; height: 100svh; overflow: hidden;
-  display: flex; flex-direction: column; justify-content: center;
+.tgt__title {
+  font-size: max(32px, calc(var(--k) * 64)); font-weight: 800; line-height: 1.05; letter-spacing: -.025em;
+}
+.tgt__link { flex: none; font-size: max(12px, calc(var(--k) * 13)); }
+.tgt__link .round-btn { width: max(44px, calc(var(--k) * 52)); height: max(44px, calc(var(--k) * 52)); }
+.tgt__head > * {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .8s var(--ease), transform .9s cubic-bezier(.22, 1, .36, 1);
+}
+.tgt__head > :nth-child(2) { transition-delay: .12s; }
+.tgt__head.is-in > * { opacity: 1; transform: none; }
+
+/* Colonnes séparées par des filets verticaux. */
+.tgt__grid {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none;
+}
+.tgt__col {
+  display: flex; flex-direction: column; padding: calc(var(--k) * 44) calc(var(--k) * 24) calc(var(--k) * 12);
+  border-left: 1px solid color-mix(in srgb, var(--white) 22%, transparent);
+  opacity: 0; transform: translateY(40px);
+  transition: opacity .8s var(--ease) calc(var(--i, 0) * 100ms), transform .9s cubic-bezier(.22, 1, .36, 1) calc(var(--i, 0) * 100ms);
+}
+.tgt__col:first-child { border-left: 0; padding-left: 0; }
+.tgt__col:last-child { padding-right: 0; }
+.tgt__grid.is-in .tgt__col { opacity: 1; transform: none; }
+
+.tgt-art { display: block; width: 100%; max-width: calc(var(--k) * 250); height: calc(var(--k) * 190); margin-inline: auto; overflow: visible; }
+.tgt-art polygon {
+  fill: var(--blue); stroke: color-mix(in srgb, var(--white) 85%, transparent);
+  stroke-width: 1.1; stroke-linejoin: round; vector-effect: non-scaling-stroke;
+}
+.tgt-art .tgt-art__dash { fill: none; stroke: color-mix(in srgb, var(--white) 45%, transparent); stroke-width: 1; stroke-dasharray: 3 4; }
+/* L'élément « signature » de chaque illustration flotte doucement, et monte au survol. */
+.tgt-art__float { animation: tgt-float 4.5s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -0.9s); }
+@keyframes tgt-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@media (hover: hover) {
+  .tgt__col:hover .tgt-art__float { animation-play-state: paused; transform: translateY(-9px); transition: transform .4s var(--ease); }
 }
 
-.tgt__grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: calc(var(--k) * 56); align-items: center; }
-
-/* Colonne gauche. */
-.tgt__title { font-size: max(32px, calc(var(--k) * 56)); font-weight: 800; line-height: 1.02; letter-spacing: -.03em; }
-.tgt__intro {
-  max-width: 44ch; margin-top: calc(var(--k) * 14);
-  font-size: max(14px, calc(var(--k) * 15)); line-height: 1.6; color: color-mix(in srgb, var(--white) 82%, transparent);
-}
-.tgt__num {
-  margin-top: calc(var(--k) * 18); overflow: hidden;
-  font-size: max(88px, calc(var(--k) * 190)); font-weight: 800; line-height: .95; letter-spacing: -.05em;
-}
-.tgt__num span {
-  display: inline-block;
-  background: linear-gradient(180deg, var(--white) 20%, color-mix(in srgb, var(--white) 30%, var(--blue-light)) 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  animation: tgt-num .6s cubic-bezier(.22, 1, .36, 1) both;
-}
-@keyframes tgt-num { from { opacity: 0; transform: translateY(40%); } }
-.tgt__detail {
-  min-height: 3.2em; margin-top: calc(var(--k) * 10); max-width: 40ch;
-  font-size: max(15px, calc(var(--k) * 17)); font-weight: 500; line-height: 1.5;
-}
-.tgt__detail span { display: inline-flex; gap: 10px; align-items: flex-start; animation: tgt-fade .5s var(--ease) both; }
-.tgt__detail .icon { flex: none; width: 20px; height: 20px; margin-top: 2px; }
-@keyframes tgt-fade { from { opacity: 0; transform: translateY(10px); } }
-.tgt__link { margin-top: calc(var(--k) * 22); }
-
-/* Tambour : la ligne active est au centre, les autres s'éloignent, rétrécissent et s'estompent. */
-.tgt__list {
-  position: relative; height: calc(var(--row) * 5.4); margin: 0; padding: 0; list-style: none;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
-}
-.tgt__item {
-  position: absolute; left: 0; right: 0; top: 50%;
-  display: flex; align-items: center; min-height: var(--row);
-  transform-origin: left center;
-  transform: translateY(calc(-50% + var(--off, 0) * var(--row))) scale(calc(1 - var(--d, 0) * .16));
-  opacity: calc(1 - var(--d, 0) * .3);
-  will-change: transform, opacity;
-}
-.tgt__item h3 {
-  max-width: 22ch; font-size: max(22px, calc(var(--k) * 40)); font-weight: 700; line-height: 1.12; letter-spacing: -.02em;
-  color: color-mix(in srgb, var(--white) 72%, transparent); transition: color .35s var(--ease);
-}
-.tgt__item.is-active h3 { color: var(--white); }
+.tgt__body { margin-top: calc(var(--k) * 26); }
+.tgt__name { font-size: max(17px, calc(var(--k) * 21)); font-weight: 700; line-height: 1.3; letter-spacing: -.01em; }
+.tgt__text { margin-top: calc(var(--k) * 10); font-size: max(14px, calc(var(--k) * 15)); line-height: 1.55; color: color-mix(in srgb, var(--white) 78%, transparent); }
 
 /* Ordinateur et tablette : tailles en --u. */
 @media (min-width: 721px) {
-  .tgt { --u: min(calc(100vw / 1440), calc(100svh / 900)); --k: var(--u); }
-  .tgt.is-live .tgt__pin { padding: calc(var(--header-h) + var(--u) * 24) 0 calc(var(--u) * 24); }
+  .tgt { --u: min(calc(100vw / 1440), calc(100svh / 900)); --k: var(--u); padding: calc(var(--u) * 110) 0; }
 }
-@media (min-width: 721px) and (max-width: 1100px) and (orientation: portrait) {
+/* Tablette : une cible par ligne, illustration à gauche, texte à droite. */
+@media (min-width: 721px) and (max-width: 1100px) {
   .tgt { --k: min(calc(100vw / 1100), 1px); }
-  .tgt__grid { grid-template-columns: 1fr; gap: 28px; }
-  .tgt__list { height: calc(var(--row) * 4.4); }
+  .tgt__grid { grid-template-columns: 1fr; }
+  .tgt__col {
+    flex-direction: row; align-items: center; gap: 32px; padding: 24px 0;
+    border-left: 0; border-top: 1px solid color-mix(in srgb, var(--white) 22%, transparent);
+  }
+  .tgt__col:first-child { border-top: 0; }
+  .tgt-art { flex: 0 0 180px; height: 120px; margin: 0; }
+  .tgt__body { margin-top: 0; }
 }
-/* Téléphone (réf. version mobile) : tout empilé, numéro puis tambour centrés. */
+/* Téléphone (réf. capture mobile) : blocs empilés, illustration centrée, lignes horizontales. */
 @media (max-width: 720px) {
-  .tgt { --row: 76px; }
-  .tgt.is-live .tgt__pin { padding: calc(var(--header-h) + 12px) 0 16px; }
-  .tgt__grid { grid-template-columns: 1fr; gap: 8px; text-align: center; }
-  .tgt__aside { display: flex; flex-direction: column; align-items: center; }
+  .tgt { padding: 80px 0 64px; }
+  .tgt__head { flex-direction: column; align-items: flex-start; gap: 12px; padding-bottom: 24px; }
   .tgt__title { font-size: var(--m-h2); line-height: 1.1; letter-spacing: -.02em; }
-  .tgt__intro { display: none; }
-  .tgt__num { margin-top: 8px; font-size: 76px; }
-  .tgt__detail { min-height: 3em; max-width: 32ch; margin: 4px auto 0; font-size: var(--m-body); }
-  .tgt__detail span { justify-content: center; }
-  .tgt__link { margin-top: 10px; gap: 10px; font-size: var(--m-label); }
+  .tgt__link { gap: 10px; font-size: var(--m-label); }
   .tgt__link .round-btn { width: var(--m-tap); height: var(--m-tap); }
-  .tgt__list { height: calc(var(--row) * 4.6); }
-  .tgt__item { justify-content: center; transform-origin: center; }
-  .tgt__item h3 { max-width: 24ch; margin-inline: auto; font-size: 18px; line-height: 1.2; }
+  .tgt__grid { grid-template-columns: 1fr; }
+  .tgt__col {
+    padding: 20px 0; border-left: 0; border-top: 1px solid color-mix(in srgb, var(--white) 22%, transparent);
+  }
+  .tgt__col:first-child { border-top: 0; }
+  .tgt-art { max-width: 150px; height: 96px; }
+  .tgt__body { margin-top: 12px; }
+  .tgt__name { font-size: var(--m-title); }
+  .tgt__text { font-size: var(--m-body); }
 }
-
-/* Sans animation : liste simple, tout visible. */
-.tgt:not(.is-live) .tgt__list { height: auto; -webkit-mask-image: none; mask-image: none; }
-.tgt:not(.is-live) .tgt__item { position: static; transform: none; opacity: 1; min-height: 0; padding: 8px 0; }
-.tgt:not(.is-live) .tgt__item h3 { color: var(--white); }
 @media (prefers-reduced-motion: reduce) {
-  .tgt__num span, .tgt__detail span { animation: none; }
+  .tgt__head > *, .tgt__col { opacity: 1; transform: none; transition: none; }
+  .tgt-art__float { animation: none; }
 }
