@@ -5,6 +5,7 @@ import { useInView } from '../../hooks/useInView'
 import { useInterval } from '../../hooks/useInterval'
 import { useCanHover, useReducedMotion } from '../../hooks/useMediaQuery'
 import { useContent } from '../../i18n/useLanguage'
+import { PresenceGlobe } from './PresenceGlobe'
 
 /**
  * Équipe & Implantation (maquette Figma « Group 11 ») : texte à gauche (étiquette, titre,
@@ -115,30 +116,12 @@ export function Equipe() {
         </div>
       </div>
 
-      <div className="container">
-        <div className="presence">
-          <div className="presence__map">
-            <img
-              src={image(team.presence.map)}
-              alt={team.presence.mapAlt}
-              width={378}
-              height={421}
-              loading="lazy"
-            />
-          </div>
-          <div>
-            <h3>{team.presence.title}</h3>
-            <p>{team.presence.text}</p>
-            <p className="presence__places">
-              {team.presence.places.map((place, i) => (
-                <span key={place}>
-                  {i > 0 && <br />}
-                  {place}
-                </span>
-              ))}
-            </p>
-          </div>
+      <div className="container presence2">
+        <div className="presence2__head">
+          <h3 className="presence2__title">{team.presence.title}</h3>
+          <p className="presence2__text">{team.presence.text}</p>
         </div>
+        <PresenceGlobe countries={team.presence.countries} hint={team.presence.globeHint} />
       </div>
     </section>
   )

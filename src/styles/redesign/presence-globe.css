@@ -1,0 +1,74 @@
+/* =========================================================
+   Implantation — globe interactif (réf. visuel « globe blanc ») :
+   texte aligné à gauche, globe centré et proportionnel à l'écran.
+   Pays ICES en bleu ; pics qui se dressent puis pulsent en continu.
+   ========================================================= */
+.presence2 { --k: 1px; margin-top: calc(var(--k) * 100); }
+.presence2__head { max-width: 58ch; }
+.presence2__title { font-size: max(24px, calc(var(--k) * 40)); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; color: var(--ink); }
+.presence2__text { margin-top: calc(var(--k) * 14); font-size: max(14px, calc(var(--k) * 16)); line-height: 1.6; color: var(--text); }
+
+/* Globe : largeur proportionnelle, centré. */
+.globe {
+  position: relative; width: min(620px, 82vw, 72svh); margin: calc(var(--k) * 24) auto 0;
+  opacity: 0; transform: translateY(40px) scale(.94);
+  transition: opacity 1s var(--ease), transform 1.2s cubic-bezier(.22, 1, .36, 1);
+}
+.globe.is-in { opacity: 1; transform: none; }
+/* Ombre portée douce sous le globe (réf.). */
+.globe::after {
+  content: ""; position: absolute; left: 14%; right: 14%; bottom: -3%; height: 8%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--navy) 22%, transparent), transparent);
+}
+.globe__svg { display: block; width: 100%; height: auto; overflow: visible; cursor: grab; touch-action: pan-y; user-select: none; }
+.globe__svg:active { cursor: grabbing; }
+
+.globe__sphere { stroke: color-mix(in srgb, var(--blue) 18%, transparent); stroke-width: 1; }
+.globe__grid { fill: none; stroke: color-mix(in srgb, var(--blue) 10%, transparent); stroke-width: .6; }
+.globe__land {
+  fill: var(--white); stroke: color-mix(in srgb, var(--navy) 22%, transparent); stroke-width: .6;
+  filter: drop-shadow(0 1.5px 1.5px color-mix(in srgb, var(--navy) 18%, transparent));
+}
+.globe__land.is-marked { fill: var(--blue); stroke: var(--white); stroke-width: .8; }
+.globe__shine { pointer-events: none; }
+
+/* Pics : la tige monte puis l'étiquette apparaît, l'un après l'autre ; ensuite pulsation continue. */
+.globe__stem { transform: scaleY(0); transform-origin: 0 0; transform-box: view-box; }
+.globe__stem line { stroke: var(--navy); stroke-width: 2; stroke-linecap: round; }
+.globe__stem circle { fill: var(--blue); stroke: var(--white); stroke-width: 2; }
+.globe__label { opacity: 0; }
+.globe.is-in .globe__stem { animation: globe-rise .8s cubic-bezier(.22, 1, .36, 1) both, globe-bob 3.2s ease-in-out infinite; animation-delay: calc(.6s + var(--i, 0) * .25s), calc(1.4s + var(--i, 0) * .25s); }
+.globe.is-in .globe__label { animation: globe-fade .6s var(--ease) both; animation-delay: calc(1s + var(--i, 0) * .25s); }
+@keyframes globe-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes globe-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -4px; } }
+@keyframes globe-fade { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+.globe__pulse { fill: var(--blue); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.globe.is-in .globe__pulse { animation: globe-pulse 2.2s ease-out infinite; animation-delay: calc(1s + var(--i, 0) * .4s); }
+@keyframes globe-pulse { 0% { transform: scale(.6); opacity: .7; } 100% { transform: scale(3.4); opacity: 0; } }
+
+.globe__name, .globe__role { text-anchor: middle; paint-order: stroke; stroke: var(--white); stroke-width: 4px; stroke-linejoin: round; }
+.globe__name { font-size: 20px; font-weight: 800; fill: var(--ink); }
+.globe__role { font-size: 13px; font-weight: 700; letter-spacing: .08em; fill: var(--blue); text-transform: uppercase; }
+.globe__pin.is-soon .globe__stem circle { fill: var(--white); stroke: var(--blue); }
+.globe__pin.is-soon .globe__role { fill: var(--muted); }
+
+.globe__hint { margin-top: 10px; text-align: center; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+@media (min-width: 721px) {
+  .presence2 { --k: var(--u, 1px); }
+}
+/* Téléphone : texte plus petit, étiquettes lisibles malgré la mise à l'échelle. */
+@media (max-width: 720px) {
+  .presence2 { margin-top: 64px; }
+  .presence2__title { font-size: 22px; }
+  .presence2__text { font-size: var(--m-lead); }
+  .globe { width: min(92vw, 420px); }
+  .globe__name { font-size: 26px; }
+  .globe__role { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .globe { opacity: 1; transform: none; transition: none; }
+  .globe__stem { transform: none; }
+  .globe__label { opacity: 1; }
+  .globe.is-in .globe__stem, .globe.is-in .globe__label, .globe.is-in .globe__pulse { animation: none; }
+}

@@ -177,7 +177,18 @@ export interface SiteContent {
         items: { name: string; kind: string; logo?: string }[]
       }
       tabs: { label: string; members: TeamMember[] }[]
-      presence: { map: string; mapAlt: string; title: string; text: string; places: string[] }
+      presence: {
+        map: string
+        mapAlt: string
+        title: string
+        text: string
+        places: string[]
+        /** Pays marqués sur le globe (id numérique ISO 3166 de world-atlas). */
+        /** lift : hauteur du pic (px de la vue 600) pour que les étiquettes voisines ne se chevauchent pas. */
+        countries: { id: string; name: string; role: string; lift: number }[]
+        /** Consigne d'interaction sous le globe. */
+        globeHint: string
+      }
     }
   }
   prestations: {
