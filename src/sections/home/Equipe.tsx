@@ -116,12 +116,8 @@ export function Equipe() {
         </div>
       </div>
 
-      <div className="container presence2">
-        <div className="presence2__head">
-          <h3 className="presence2__title">{team.presence.title}</h3>
-          <p className="presence2__text">{team.presence.text}</p>
-        </div>
-        <PresenceGlobe countries={team.presence.countries} hint={team.presence.globeHint} />
+      <div className="container">
+        <PresenceGlobe presence={team.presence} />
       </div>
     </section>
   )

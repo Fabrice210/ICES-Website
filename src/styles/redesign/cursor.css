@@ -1,0 +1,44 @@
+/* =========================================================
+   Curseur ICES (souris uniquement) : point + anneau qui suit en
+   douceur ; grossit sur les liens, « Glisser » sur les zones à faire
+   glisser, se contracte au clic ; blanc sur les bandes bleues.
+   Tout changement de taille passe par transform (fluide). Voir CustomCursor.tsx.
+   ========================================================= */
+.has-custom-cursor, .has-custom-cursor * { cursor: none !important; }
+/* Champs de saisie : curseur texte natif conservé. */
+.has-custom-cursor input, .has-custom-cursor textarea, .has-custom-cursor [contenteditable="true"] { cursor: text !important; }
+
+.cursor-dot, .cursor-ring {
+  --c: var(--blue); --on: var(--white);
+  position: fixed; left: 0; top: 0; z-index: 10000; pointer-events: none; will-change: transform;
+  opacity: 0; transition: opacity .25s var(--ease);
+}
+.cursor-dot.is-on-blue, .cursor-ring.is-on-blue { --c: var(--white); --on: var(--blue); }
+.cursor-dot.is-visible, .cursor-ring.is-visible { opacity: 1; }
+.cursor-dot.is-hidden, .cursor-ring.is-hidden { opacity: 0; }
+
+.cursor-dot::before {
+  content: ""; position: absolute; left: -4px; top: -4px; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--c); transition: background .25s var(--ease);
+}
+
+/* Anneau : taille de base 76 px, réduite par scale (idle ≈ 34 px, lien ≈ 58 px, glisser 76 px). */
+.cursor-ring { --scale: .447; }
+.cursor-ring::before {
+  content: ""; position: absolute; left: -38px; top: -38px; width: 76px; height: 76px; border-radius: 50%;
+  border: 3px solid color-mix(in srgb, var(--c) 75%, transparent); background: transparent;
+  transform: scale(var(--scale)); will-change: transform;
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1), background .3s var(--ease), border-color .3s var(--ease);
+}
+.cursor-ring.is-link { --scale: .763; }
+.cursor-ring.is-link::before { background: color-mix(in srgb, var(--c) 14%, transparent); border-color: var(--c); }
+.cursor-ring.is-drag { --scale: 1; }
+.cursor-ring.is-drag::before { background: var(--c); border-color: var(--c); }
+.cursor-ring.is-down::before { transform: scale(calc(var(--scale) * .8)); }
+
+.cursor-ring__label {
+  position: absolute; left: 0; top: 0; transform: translate(-50%, -50%) scale(.6); opacity: 0;
+  font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--on); white-space: nowrap;
+  transition: opacity .25s var(--ease), transform .3s var(--ease);
+}
+.cursor-ring.is-drag .cursor-ring__label { opacity: 1; transform: translate(-50%, -50%) scale(1); }

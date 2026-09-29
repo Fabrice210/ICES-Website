@@ -1,74 +1,111 @@
 /* =========================================================
-   Implantation — globe interactif (réf. visuel « globe blanc ») :
-   texte aligné à gauche, globe centré et proportionnel à l'écran.
-   Pays ICES en bleu ; pics qui se dressent puis pulsent en continu.
+   Implantation — disposition de l'ancienne section (globe à gauche,
+   texte à droite, aligné à gauche). Globe blanc mat en relief (réf.
+   photo) avec continents épaissis et halo bleu fluo ; épingles 3D
+   bleues ; pays du paragraphe en bleu, remplacé au même endroit.
    ========================================================= */
-.presence2 { --k: 1px; margin-top: calc(var(--k) * 100); }
-.presence2__head { max-width: 58ch; }
-.presence2__title { font-size: max(24px, calc(var(--k) * 40)); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; color: var(--ink); }
-.presence2__text { margin-top: calc(var(--k) * 14); font-size: max(14px, calc(var(--k) * 16)); line-height: 1.6; color: var(--text); }
+.presence3 {
+  --k: 1px; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  gap: calc(var(--k) * 56); align-items: center; margin-top: calc(var(--k) * 100);
+}
 
-/* Globe : largeur proportionnelle, centré. */
+/* --- Globe --- */
 .globe {
-  position: relative; width: min(620px, 82vw, 72svh); margin: calc(var(--k) * 24) auto 0;
-  opacity: 0; transform: translateY(40px) scale(.94);
-  transition: opacity 1s var(--ease), transform 1.2s cubic-bezier(.22, 1, .36, 1);
+  position: relative; width: min(100%, 600px, 72svh); justify-self: center;
+  opacity: 0; transform: translateY(40px) scale(.92);
+  transition: opacity 1s var(--ease), transform 1.3s cubic-bezier(.22, 1, .36, 1);
 }
-.globe.is-in { opacity: 1; transform: none; }
-/* Ombre portée douce sous le globe (réf.). */
+.presence3.is-in .globe { opacity: 1; transform: none; }
 .globe::after {
-  content: ""; position: absolute; left: 14%; right: 14%; bottom: -3%; height: 8%; z-index: -1; border-radius: 50%;
-  background: radial-gradient(closest-side, color-mix(in srgb, var(--navy) 22%, transparent), transparent);
+  content: ""; position: absolute; left: 16%; right: 16%; bottom: 2%; height: 7%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--navy) 20%, transparent), transparent);
 }
-.globe__svg { display: block; width: 100%; height: auto; overflow: visible; cursor: grab; touch-action: pan-y; user-select: none; }
+/* Globe sur canevas ; épingles en SVG superposé (même repère 600 × 600). */
+.globe__canvas { display: block; width: 100%; aspect-ratio: 1; }
+.globe__svg { position: absolute; inset: 0; display: block; width: 100%; height: auto; aspect-ratio: 1; overflow: visible; cursor: grab; touch-action: pan-y; user-select: none; }
 .globe__svg:active { cursor: grabbing; }
 
-.globe__sphere { stroke: color-mix(in srgb, var(--blue) 18%, transparent); stroke-width: 1; }
-.globe__grid { fill: none; stroke: color-mix(in srgb, var(--blue) 10%, transparent); stroke-width: .6; }
-.globe__land {
-  fill: var(--white); stroke: color-mix(in srgb, var(--navy) 22%, transparent); stroke-width: .6;
-  filter: drop-shadow(0 1.5px 1.5px color-mix(in srgb, var(--navy) 18%, transparent));
-}
-.globe__land.is-marked { fill: var(--blue); stroke: var(--white); stroke-width: .8; }
-.globe__shine { pointer-events: none; }
 
-/* Pics : la tige monte puis l'étiquette apparaît, l'un après l'autre ; ensuite pulsation continue. */
-.globe__stem { transform: scaleY(0); transform-origin: 0 0; transform-box: view-box; }
-.globe__stem line { stroke: var(--navy); stroke-width: 2; stroke-linecap: round; }
-.globe__stem circle { fill: var(--blue); stroke: var(--white); stroke-width: 2; }
-.globe__label { opacity: 0; }
-.globe.is-in .globe__stem { animation: globe-rise .8s cubic-bezier(.22, 1, .36, 1) both, globe-bob 3.2s ease-in-out infinite; animation-delay: calc(.6s + var(--i, 0) * .25s), calc(1.4s + var(--i, 0) * .25s); }
-.globe.is-in .globe__label { animation: globe-fade .6s var(--ease) both; animation-delay: calc(1s + var(--i, 0) * .25s); }
-@keyframes globe-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-@keyframes globe-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -4px; } }
-@keyframes globe-fade { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+/* Épingles : chute à l'apparition, puis flottement ; ombre et anneau au sol. */
+.globe__pin-body { transform-box: view-box; }
+.presence3.is-in .globe__pin-body { animation: pin-drop .9s cubic-bezier(.34, 1.56, .64, 1) both, pin-bob 3s ease-in-out infinite; animation-delay: calc(.7s + var(--i, 0) * .2s), calc(1.6s + var(--i, 0) * .3s); }
+@keyframes pin-drop { from { translate: 0 -70px; opacity: 0; } 60% { opacity: 1; } to { translate: 0 0; opacity: 1; } }
+@keyframes pin-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.globe__pin-body { opacity: 0; }
+.presence3.is-in .globe__pin-body { opacity: 1; }
+.globe__pin { transition: opacity .4s var(--ease); }
+.globe__pin:not(.is-active) .globe__pin-body > path { opacity: .75; }
+.globe__pin.is-active .globe__pin-body > path, .globe__pin.is-active .globe__pin-body > circle, .globe__pin.is-active .globe__pin-gloss { scale: 1.18; transform-origin: 0 0; transition: scale .4s cubic-bezier(.34, 1.56, .64, 1); }
+.globe__pin-gloss { fill: var(--white); opacity: .45; }
+.globe__pin-shadow { fill: color-mix(in srgb, var(--navy) 30%, transparent); }
 .globe__pulse { fill: var(--blue); opacity: 0; transform-box: fill-box; transform-origin: center; }
-.globe.is-in .globe__pulse { animation: globe-pulse 2.2s ease-out infinite; animation-delay: calc(1s + var(--i, 0) * .4s); }
-@keyframes globe-pulse { 0% { transform: scale(.6); opacity: .7; } 100% { transform: scale(3.4); opacity: 0; } }
+.presence3.is-in .globe__pin.is-active .globe__pulse { animation: globe-pulse 1.8s ease-out infinite; }
+@keyframes globe-pulse { 0% { transform: scale(.5); opacity: .6; } 100% { transform: scale(3.6); opacity: 0; } }
 
-.globe__name, .globe__role { text-anchor: middle; paint-order: stroke; stroke: var(--white); stroke-width: 4px; stroke-linejoin: round; }
-.globe__name { font-size: 20px; font-weight: 800; fill: var(--ink); }
-.globe__role { font-size: 13px; font-weight: 700; letter-spacing: .08em; fill: var(--blue); text-transform: uppercase; }
-.globe__pin.is-soon .globe__stem circle { fill: var(--white); stroke: var(--blue); }
-.globe__pin.is-soon .globe__role { fill: var(--muted); }
+.globe__label { animation: globe-label .5s var(--ease) both; }
+@keyframes globe-label { from { opacity: 0; translate: 0 8px; } }
+.globe__name, .globe__role { text-anchor: middle; paint-order: stroke; stroke: var(--white); stroke-width: 5px; stroke-linejoin: round; }
+.globe__name { font-size: 22px; font-weight: 800; fill: var(--ink); }
+.globe__role { font-size: 13px; font-weight: 700; letter-spacing: .1em; fill: var(--blue); text-transform: uppercase; }
 
-.globe__hint { margin-top: 10px; text-align: center; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.globe__hint { margin-top: 6px; text-align: center; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+/* --- Texte (aligné à gauche) --- */
+.presence3__title { max-width: 18ch; font-size: max(26px, calc(var(--k) * 44)); font-weight: 800; line-height: 1.08; letter-spacing: -.025em; color: var(--ink); }
+.presence3__lead { margin-top: calc(var(--k) * 20); max-width: 52ch; font-size: max(15px, calc(var(--k) * 18)); line-height: 1.65; color: var(--text); }
+/* Pays en bleu (DA de « l'Afrique » du hero) : remplacé au même endroit, mot qui monte. */
+/* Pas d'overflow : la ligne de base reste celle du texte ; le masque fait monter le mot. */
+.presence3__country { display: inline-block; clip-path: inset(-0.1em -0.2em -0.25em -0.1em); }
+.presence3__swap {
+  display: inline-block; font-weight: 800; color: var(--blue);
+  animation: presence-swap .75s cubic-bezier(.22, 1, .36, 1) both; will-change: transform, opacity;
+}
+@keyframes presence-swap { from { transform: translateY(105%); opacity: 0; } 40% { opacity: 1; } to { transform: none; opacity: 1; } }
+.presence3__list-label {
+  margin-top: calc(var(--k) * 30); font-size: max(12px, calc(var(--k) * 12)); font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--blue);
+}
+.presence3__list { margin: calc(var(--k) * 12) 0 0; padding: 0; list-style: none; border-top: 1px solid var(--gray-200); }
+.presence3__list li { border-bottom: 1px solid var(--gray-200); }
+.presence3__place {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; width: 100%; min-height: 56px;
+  padding: 12px 4px; border: 0; background: none; cursor: pointer; text-align: left; font: inherit; color: var(--ink);
+}
+.presence3__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gray-300); transition: background .3s var(--ease), box-shadow .3s var(--ease); }
+.presence3__place-name { font-size: max(16px, calc(var(--k) * 18)); font-weight: 700; transition: color .3s var(--ease); }
+.presence3__place-meta { font-size: max(13px, calc(var(--k) * 14)); color: var(--muted); }
+.presence3__place.is-active .presence3__dot { background: var(--blue); box-shadow: 0 0 0 5px color-mix(in srgb, var(--blue) 18%, transparent); }
+.presence3__place.is-active .presence3__place-name { color: var(--blue); }
+@media (hover: hover) { .presence3__place:hover .presence3__place-name { color: var(--blue); } }
+.presence3__place:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
+
+/* Apparition du texte. */
+.presence3__text > * {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .8s var(--ease), transform .9s cubic-bezier(.22, 1, .36, 1);
+}
+.presence3__text > :nth-child(2) { transition-delay: .12s; }
+.presence3__text > :nth-child(3) { transition-delay: .24s; }
+.presence3__text > :nth-child(4) { transition-delay: .32s; }
+.presence3.is-in .presence3__text > * { opacity: 1; transform: none; }
 
 @media (min-width: 721px) {
-  .presence2 { --k: var(--u, 1px); }
+  .presence3 { --k: var(--u, 1px); }
 }
-/* Téléphone : texte plus petit, étiquettes lisibles malgré la mise à l'échelle. */
+@media (min-width: 721px) and (max-width: 1100px) and (orientation: portrait) {
+  .presence3 { grid-template-columns: 1fr; gap: 32px; }
+}
+/* Téléphone : globe puis texte. */
 @media (max-width: 720px) {
-  .presence2 { margin-top: 64px; }
-  .presence2__title { font-size: 22px; }
-  .presence2__text { font-size: var(--m-lead); }
+  .presence3 { grid-template-columns: 1fr; gap: 24px; margin-top: 64px; }
   .globe { width: min(92vw, 420px); }
-  .globe__name { font-size: 26px; }
-  .globe__role { font-size: 17px; }
+  .globe__name { font-size: 30px; }
+  .globe__role { font-size: 19px; }
+  .presence3__title { font-size: 24px; }
+  .presence3__lead { font-size: var(--m-lead); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .globe { opacity: 1; transform: none; transition: none; }
-  .globe__stem { transform: none; }
-  .globe__label { opacity: 1; }
-  .globe.is-in .globe__stem, .globe.is-in .globe__label, .globe.is-in .globe__pulse { animation: none; }
+  .globe, .presence3__text > * { opacity: 1; transform: none; transition: none; }
+  .globe__pin-body { opacity: 1; }
+  .presence3.is-in .globe__pin-body, .presence3.is-in .globe__pin.is-active .globe__pulse, .globe__label, .presence3__swap { animation: none; }
 }

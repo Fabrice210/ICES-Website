@@ -337,11 +337,17 @@ export const home: SiteContent['home'] = {
       title: 'Ancrés localement. Connectés à l’Afrique francophone.',
       text: 'Notre connaissance des contextes locaux nourrit notre capacité à accompagner des transformations à l’échelle régionale.',
       places: ['Siège — Bénin', 'Bureau — Guinée'],
+      lead: {
+        before: 'Implantés',
+        after:
+          ', nous travaillons au plus près des institutions, des entreprises et des territoires. Cette connaissance fine des contextes locaux, des acteurs et des réalités de terrain nourrit notre capacité à concevoir et à déployer des transformations durables à l’échelle de l’Afrique francophone.',
+      },
+      listLabel: 'Nos implantations',
       // Pays de l'ancienne carte Figma (le Congo y est marqué « Bientôt »).
       countries: [
-        { id: '204', name: 'Bénin', role: 'Siège', lift: 40 },
-        { id: '324', name: 'Guinée', role: 'Bureau', lift: 100 },
-        { id: '178', name: 'Congo', role: 'Bientôt', lift: 30 },
+        { id: '204', name: 'Bénin', prep: 'au', role: 'Siège', place: 'Cotonou' },
+        { id: '324', name: 'Guinée', prep: 'en', role: 'Bureau', place: 'Conakry' },
+        { id: '178', name: 'Congo', prep: 'au', role: 'Bientôt', place: 'Prochaine implantation' },
       ],
       globeHint: 'Faites tourner le globe',
     },

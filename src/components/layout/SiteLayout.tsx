@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { Contact } from '../../sections/shared/Contact'
 import { PartnerModal } from '../partner/PartnerModal'
 import { PartnerModalContext } from '../partner/PartnerModalContext'
+import { CustomCursor } from '../ui/CustomCursor'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { ScrollManager } from './ScrollManager'
@@ -23,6 +24,7 @@ export function SiteLayout() {
       </main>
       <Footer />
       <PartnerModal dialogRef={dialogRef} />
+      <CustomCursor dragLabel="Glisser" />
     </PartnerModalContext.Provider>
   )
 }

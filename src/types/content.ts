@@ -183,9 +183,15 @@ export interface SiteContent {
         title: string
         text: string
         places: string[]
-        /** Pays marqués sur le globe (id numérique ISO 3166 de world-atlas). */
-        /** lift : hauteur du pic (px de la vue 600) pour que les étiquettes voisines ne se chevauchent pas. */
-        countries: { id: string; name: string; role: string; lift: number }[]
+        /** Paragraphe : {country} est remplacé par le pays actif (animé, en bleu). */
+        lead: { before: string; after: string }
+        /** Titre de la liste des implantations. */
+        listLabel: string
+        /**
+         * Pays marqués sur le globe (id numérique ISO 3166 de world-atlas) ; prep : « au » / « en »
+         * devant le nom dans le paragraphe ; place : ville ou précision.
+         */
+        countries: { id: string; name: string; prep: string; role: string; place: string }[]
         /** Consigne d'interaction sous le globe. */
         globeHint: string
       }
