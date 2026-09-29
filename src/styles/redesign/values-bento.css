@@ -122,7 +122,7 @@
 .va-line { width: 100%; max-width: calc(var(--k) * 220); }
 .va-line__track { position: relative; height: 4px; border-radius: 4px; background: var(--gray-300); }
 .va-line__fill {
-  position: absolute; inset: 0 auto 0 0; width: 0; border-radius: 4px; background: currentColor;
+  position: absolute; inset: 0 auto 0 0; width: 100%; transform-origin: left; border-radius: 4px; background: currentColor;
   animation: va-fill 4s var(--ease) infinite;
 }
 .va-line__dot {
@@ -135,7 +135,7 @@
   display: flex; justify-content: space-between; margin-top: calc(var(--k) * 14);
   font-size: max(12px, calc(var(--k) * 11)); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
 }
-@keyframes va-fill { 0% { width: 0; } 80%, 100% { width: 100%; } }
+@keyframes va-fill { 0% { transform: scaleX(0); } 80%, 100% { transform: scaleX(1); } }
 @keyframes va-dot { 0%, 20% { background: var(--white); border-color: var(--gray-300); } 30%, 100% { background: currentColor; border-color: currentColor; } }
 
 /* Excellence : anneau qui se remplit puis coche. */
@@ -229,6 +229,6 @@
   .vbento__tile, .vbento-head__title, .vbento-head__intro { opacity: 1; transform: none; transition: none; }
   .vbento-head__title::after { transform: none; transition: none; }
   .va-scan__frame, .va-line__fill, .va-line__dot, .va-ring__fg, .va-ring__check, .va-bulb > .icon, .va-bulb__spark, .va-bars span { animation: none; }
-  .va-line__fill { width: 100%; }
+  .va-line__fill { transform: none; }
   .va-ring__fg { stroke-dashoffset: 0; }
 }

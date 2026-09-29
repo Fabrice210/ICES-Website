@@ -54,10 +54,7 @@
 @keyframes tgt-wave { 0%, 60%, 100% { transform: translateY(0); } 25% { transform: translateY(-4px); } }
 /* Éclat : colonnes / plateaux s'illuminent en séquence. */
 .tgt-art__glow polygon { animation: tgt-glow 3.6s ease-in-out infinite; animation-delay: calc(var(--d, 0) * .3s); }
-@keyframes tgt-glow {
-  0%, 55%, 100% { fill: var(--blue); stroke: color-mix(in srgb, var(--white) 85%, transparent); }
-  20% { fill: color-mix(in srgb, var(--white) 26%, var(--blue)); stroke: var(--white); }
-}
+@keyframes tgt-glow { 0%, 55%, 100% { opacity: 1; } 20% { opacity: .55; } }
 /* Croissance : les tours montent tour à tour depuis le sol. */
 .tgt-art__grow { transform-origin: 50% 100%; animation: tgt-grow 4.8s cubic-bezier(.65, 0, .35, 1) infinite; animation-delay: calc(var(--d, 0) * .3s); }
 @keyframes tgt-grow { 0%, 100% { transform: scaleY(1); } 30% { transform: scaleY(.72); } 60% { transform: scaleY(1.06); } 75% { transform: scaleY(1); } }

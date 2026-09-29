@@ -83,10 +83,19 @@ export function CustomCursor({ dragLabel }: { dragLabel: string }) {
         lag.x += dx * k
         lag.y += dy * k
         ring.style.transform = `translate3d(${lag.x.toFixed(2)}px, ${lag.y.toFixed(2)}px, 0)`
+        frame = requestAnimationFrame(tick)
+      } else {
+        // Anneau arrivé : la boucle s'arrête jusqu'au prochain mouvement de souris.
+        frame = 0
       }
-      frame = requestAnimationFrame(tick)
     }
-    frame = requestAnimationFrame(tick)
+    const wake = () => {
+      if (!frame) {
+        last = performance.now()
+        frame = requestAnimationFrame(tick)
+      }
+    }
+    window.addEventListener('pointermove', wake, { passive: true })
 
     window.addEventListener('pointermove', onMove, { passive: true })
     window.addEventListener('pointerdown', onDown)
@@ -95,6 +104,7 @@ export function CustomCursor({ dragLabel }: { dragLabel: string }) {
     return () => {
       cancelAnimationFrame(frame)
       window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointermove', wake)
       window.removeEventListener('pointerdown', onDown)
       window.removeEventListener('pointerup', onUp)
       document.documentElement.removeEventListener('mouseleave', onLeave)

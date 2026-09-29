@@ -46,6 +46,8 @@ export function PresenceGlobe({ presence }: { presence: Presence }) {
   const target = useRef<[number, number]>(AFRICA)
   const drag = useRef<{ x: number; y: number; rot: [number, number] } | null>(null)
   const released = useRef(0)
+  /** Relance la boucle de dessin (posée par l'effet de rendu). */
+  const wake = useRef<() => void>(() => {})
 
   // Contours des pays, chargés à part (fichier JSON servi par Vite).
   useEffect(() => {
@@ -78,6 +80,7 @@ export function PresenceGlobe({ presence }: { presence: Presence }) {
     if (!f) return
     const [lon, lat] = geoCentroid(f as GeoPermissibleObjects)
     target.current = [-lon + 6, -lat + 8]
+    wake.current()
   }, [land, active, countries])
 
   // Pays actif lu par la boucle de dessin (sans la relancer).
@@ -205,22 +208,41 @@ export function PresenceGlobe({ presence }: { presence: Presence }) {
 
     draw()
     let frame = 0
-    const start = performance.now()
+    // Fluidité : on ne redessine que pendant une rotation (changement de pays, glisser) ;
+    // une fois le globe posé sur le pays, la boucle s'arrête jusqu'au prochain mouvement.
+    let visible = false
     const tick = (now: number) => {
+      let moving = !!drag.current
       if (!drag.current) {
-        const t = (now - start) / 1000
         const [tl, tp] = target.current
-        const goal: [number, number] = [tl + Math.sin(t * 0.5) * 3, tp + Math.sin(t * 0.37) * 1.5]
         // Retour doux après un glisser ; sinon glissement amorti vers le pays actif.
-        const ease = now - released.current < 1500 ? 0.03 : 0.05
+        const ease = now - released.current < 1500 ? 0.03 : 0.06
         const [l, p] = rotation.current
-        rotation.current = [l + (goal[0] - l) * ease, p + (goal[1] - p) * ease]
+        const dl = tl - l
+        const dp = tp - p
+        moving = Math.abs(dl) > 0.02 || Math.abs(dp) > 0.02
+        rotation.current = moving ? [l + dl * ease, p + dp * ease] : [tl, tp]
       }
       draw()
-      frame = requestAnimationFrame(tick)
+      frame = moving && visible ? requestAnimationFrame(tick) : 0
     }
-    frame = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frame)
+    wake.current = () => {
+      if (visible && !frame) frame = requestAnimationFrame(tick)
+    }
+    // Fluidité : la boucle ne tourne que lorsque le globe est à l'écran.
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting
+      if (entry.isIntersecting && !frame) frame = requestAnimationFrame(tick)
+      if (!entry.isIntersecting && frame) {
+        cancelAnimationFrame(frame)
+        frame = 0
+      }
+    })
+    observer.observe(svg)
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(frame)
+    }
   }, [land, countries, inView, reduceMotion])
 
   const select = (i: number) => {
@@ -238,10 +260,12 @@ export function PresenceGlobe({ presence }: { presence: Presence }) {
     const dy = event.clientY - drag.current.y
     const lat = Math.max(-60, Math.min(60, drag.current.rot[1] - dy * k))
     rotation.current = [drag.current.rot[0] + dx * k, lat]
+    wake.current()
   }
   const onUp = () => {
     drag.current = null
     released.current = performance.now()
+    wake.current()
   }
 
   const current = countries[active]
