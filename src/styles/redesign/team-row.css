@@ -109,8 +109,8 @@
   .team3__subtitle { margin-top: 10px; font-size: 19px; }
   .team3__intro { margin-top: 12px; font-size: var(--m-lead); }
   .team3__cards { grid-template-columns: 1fr; gap: 20px; }
-  /* Carte « Partenaires & clients » retirée sur téléphone (demande client). */
-  .team3__card--partners { display: none; }
+  /* Téléphone : la carte partenaires reste, sa légende dessous est retirée (demande client). */
+  .team3__card--partners .team3__caption { display: none; }
   .team3__frame { aspect-ratio: 1 / 1; }
   .team3__who strong { font-size: var(--m-title); }
   .team3__who span { font-size: var(--m-body); }
