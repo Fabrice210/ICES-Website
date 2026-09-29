@@ -185,7 +185,7 @@
   .vbento-head__title { font-size: var(--m-h2); padding-bottom: 12px; }
   .vbento-head__title::after { width: 48px; height: 4px; }
   .vbento-head__intro { font-size: var(--m-lead); }
-  .vbento { grid-template-columns: 1fr; grid-template-areas: "v1" "v2" "v3" "v4" "v5"; gap: var(--m-gap); }
+  .vbento { grid-template-columns: 1fr; grid-template-areas: "v1" "v2" "v3" "v4" "v5"; gap: 20px; }
   .vbento__tile {
     display: grid; grid-template-columns: 76px 1fr; grid-template-areas: "art foot" "art text";
     column-gap: 14px; align-items: start; min-height: 0; padding: 14px; border-radius: 20px;
@@ -197,16 +197,34 @@
   .vbento__foot { grid-area: foot; margin-top: 0; padding-top: 2px; }
   .vbento__num { font-size: var(--m-label); }
   .vbento__foot h4 { margin-top: 2px; font-size: var(--m-title); }
-  .vbento__text { grid-area: text; }
   .va-line { width: 80%; }
   .va-line__labels { display: none; }
+
+  /* Téléphone, souris ou tactile : la description est toujours lisible sous le titre
+     (plus de remplissage au survol qui la cachait) ; carte blanche bordée. */
+  .vbento__tile {
+    grid-template-areas: "art foot" "text text"; row-gap: 12px; align-items: center;
+    padding: 16px 16px 18px; border: 1px solid var(--gray-200);
+    background: var(--white); box-shadow: 0 1px 0 var(--gray-200), 0 10px 24px color-mix(in srgb, var(--navy) 6%, transparent);
+  }
+  .vbento__tile::before { display: none; }
+  .vbento__art { width: 64px; height: 64px; background: color-mix(in srgb, var(--tone, var(--blue)) 10%, var(--white)); }
+  .vbento__text {
+    grid-area: text; position: static; margin: 0; opacity: 1; transform: none;
+    font-size: var(--m-body); line-height: 1.55; color: var(--text);
+  }
+  .vbento-wrap.is-in .vbento__tile:hover, .vbento-wrap.is-in .vbento__tile:focus-visible {
+    transform: none; color: var(--tone, var(--blue)); box-shadow: 0 1px 0 var(--gray-200), 0 10px 24px color-mix(in srgb, var(--navy) 6%, transparent);
+  }
+  .vbento__tile:hover .vbento__art, .vbento__tile:focus-visible .vbento__art { opacity: 1; transform: none; }
+  .vbento__tile:hover .vbento__foot h4, .vbento__tile:focus-visible .vbento__foot h4 { color: var(--ink); }
+  .vbento__tile:hover .vbento__text, .vbento__tile:focus-visible .vbento__text { color: var(--text); transition-delay: 0s; }
 }
 /* Sans survol (tactile) : la description est affichée sous l'illustration. */
 @media (hover: none) {
   .vbento__text { position: static; margin-top: 12px; opacity: 1; transform: none; color: var(--text); font-size: 14px; }
   .vbento__tile:hover .vbento__art { opacity: 1; transform: none; }
 }
-@media (hover: none) and (max-width: 720px) { .vbento__text { margin-top: 4px; font-size: var(--m-body); line-height: 1.5; } }
 @media (prefers-reduced-motion: reduce) {
   .vbento__tile, .vbento-head__title, .vbento-head__intro { opacity: 1; transform: none; transition: none; }
   .vbento-head__title::after { transform: none; transition: none; }
