@@ -41,7 +41,7 @@ export function Header({ variant }: { variant: HeaderVariant }) {
     >
       <div className="container">
         <Logo />
-        <nav className="main-nav" id="main-nav" aria-label="Navigation principale">
+        <nav className="main-nav" id="main-nav" aria-label={lang === 'en' ? 'Main navigation' : 'Navigation principale'}>
           <ul>
             {config.dropdown && (
               <li className={`has-dropdown${dropdownOpen ? ' is-open' : ''}`}>
@@ -120,7 +120,7 @@ export function Header({ variant }: { variant: HeaderVariant }) {
           <button
             className="burger"
             type="button"
-            aria-label="Ouvrir le menu"
+            aria-label={lang === 'en' ? 'Open menu' : 'Ouvrir le menu'}
             aria-expanded={navOpen}
             aria-controls="main-nav"
             onClick={() => setNavOpen((open) => !open)}

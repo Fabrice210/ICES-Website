@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { Icon } from '../../components/icons/Icon'
 import { useInView } from '../../hooks/useInView'
+import { useLanguage } from '../../i18n/useLanguage'
 import type { Tone } from '../../types/content'
 
 interface Value {
@@ -12,7 +13,7 @@ interface Value {
 /* Mini-illustrations animées (inspirées de la grille « bento » de référence), une par valeur,
    dans l'ordre de la plaquette : Souveraineté, Anticipation, Excellence, Innovation, Impact.
    Elles utilisent `currentColor` = la teinte de la valeur (blanc au survol). */
-const ART: ReactNode[] = [
+const art = (today: string): ReactNode[] => [
   // Souveraineté : grille de territoires, un cadre « scanne » et en sécurise un.
   <div className="va-scan" key="scan">
     {Array.from({ length: 6 }, (_, i) => (
@@ -33,7 +34,7 @@ const ART: ReactNode[] = [
       ))}
     </div>
     <div className="va-line__labels">
-      <span>Aujourd’hui</span>
+      <span>{today}</span>
       <span>2045</span>
     </div>
   </div>,
@@ -85,6 +86,8 @@ export function ValuesBento({
   values: Value[]
 }) {
   const { ref, inView } = useInView<HTMLDivElement>(0.2)
+  const { lang } = useLanguage()
+  const ART = art(lang === 'en' ? 'Today' : 'Aujourd’hui')
 
   return (
     <div ref={ref} className={inView ? 'vbento-wrap is-in' : 'vbento-wrap'}>
