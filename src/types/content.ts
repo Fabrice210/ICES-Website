@@ -90,6 +90,8 @@ export interface SiteContent {
     socials: { label: string; icon: IconName; href: string }[]
     copyright: string
     legal: LinkItem[]
+    /** Bouton de retour en haut de page. */
+    backToTop: string
   }
   home: {
     /** Titre découpé autour de la pilule d'images : « lead [pilule] tail / end ». */
@@ -211,12 +213,24 @@ export interface SiteContent {
   }
   contact: {
     title: string
+    /** Grand titre sur la photo et phrase d'accroche. */
+    headline: string
+    intro: string
     image: string
     offices: Office[]
+    socialsLabel: string
     form: {
-      name: string
+      title: string
+      subtitle: string
+      firstName: string
+      lastName: string
+      country: string
+      phone: string
       email: string
+      typeLabel: string
+      types: string[]
       message: string
+      consent: string
       submit: string
       success: string
     }

@@ -81,6 +81,7 @@ export const footer: SiteContent['footer'] = {
     { label: 'Twitter / X', icon: 'twitter', href: PENDING_LINK },
   ],
   copyright: '© 2025 ICES. Tous droits réservés.',
+  backToTop: 'Haut de page',
   legal: [
     { label: 'Mentions légales', to: PENDING_LINK },
     { label: 'Politique de confidentialité', to: PENDING_LINK },

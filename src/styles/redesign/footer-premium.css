@@ -1,0 +1,102 @@
+/* =========================================================
+   Pied de page — refonte DA : bleu nuit, collé sous la carte Contact.
+   Apparition : filet qui se dessine, colonnes en décalé, grand « ICES »
+   en contour dont les lettres montent puis se remplissent de lumière.
+   ========================================================= */
+.foot { position: relative; z-index: 8; overflow: hidden; background: var(--dark); color: color-mix(in srgb, var(--white) 72%, transparent); }
+.foot__inner { padding-top: 72px; }
+
+.foot__grid {
+  display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, .8fr)) minmax(0, 1.3fr);
+  gap: 40px; padding-bottom: 48px;
+}
+.foot__grid > * {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .8s var(--ease) calc(.15s + var(--i, 0) * 90ms), transform .9s cubic-bezier(.22, 1, .36, 1) calc(.15s + var(--i, 0) * 90ms);
+}
+.foot__inner.is-in .foot__grid > * { opacity: 1; transform: none; }
+
+.foot__brand .logo { color: var(--white); }
+.foot__brand .logo svg { height: 40px; width: auto; }
+.foot__brand p { max-width: 38ch; margin-top: 18px; font-size: 14px; line-height: 1.6; }
+.foot__socials { display: flex; gap: 10px; margin-top: 22px; }
+.foot__socials a {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--white) 22%, transparent); color: var(--white);
+  transition: background .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
+}
+.foot__socials a:hover { background: var(--blue); border-color: var(--blue); }
+.foot__socials .icon { width: 17px; height: 17px; }
+
+.foot__col h4 { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--white); }
+.foot__col ul { display: flex; flex-direction: column; gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; }
+.foot__col a { position: relative; font-size: 14px; color: inherit; transition: color .25s var(--ease); }
+/* Soulignement qui se dessine au survol. */
+.foot__col a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+}
+.foot__col a:hover { color: var(--white); }
+.foot__col a:hover::after { transform: none; }
+.foot__places li { display: flex; flex-direction: column; gap: 2px; }
+.foot__places strong { font-size: 14px; font-weight: 600; color: var(--white); }
+
+/* Barre légale : le filet du haut se dessine de gauche à droite. */
+.foot__bar {
+  position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding: 22px 0;
+  font-size: 13px;
+}
+.foot__bar::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: color-mix(in srgb, var(--white) 16%, transparent);
+  transform: scaleX(0); transform-origin: left; transition: transform 1.2s cubic-bezier(.22, 1, .36, 1) .1s;
+}
+.foot__inner.is-in .foot__bar::before { transform: none; }
+.foot__bar p { margin-right: auto; }
+.foot__legal { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.foot__legal a { color: inherit; transition: color .25s var(--ease); }
+.foot__legal a:hover { color: var(--white); }
+.foot__lang { display: flex; align-items: center; gap: 6px; }
+.foot__lang button { min-height: 32px; padding: 0 4px; border: 0; background: none; font: inherit; font-weight: 700; color: inherit; cursor: pointer; }
+.foot__lang button.is-active { color: var(--white); }
+.foot__top {
+  display: inline-flex; align-items: center; gap: 12px; border: 0; background: none; font: inherit; font-weight: 600; color: var(--white); cursor: pointer;
+}
+.foot__top-btn {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--blue);
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1), background .3s var(--ease);
+}
+.foot__top-btn .icon { width: 16px; height: 16px; transform: rotate(-45deg); }
+.foot__top:hover .foot__top-btn { transform: translateY(-4px); background: var(--blue-light); }
+
+/* Grand mot-marque en contour : lettres qui montent, puis se remplissent. */
+.foot__word {
+  display: flex; justify-content: center; margin: 8px 0 0; line-height: .78; user-select: none;
+  font-size: clamp(120px, 26vw, 420px); font-weight: 800; letter-spacing: -.04em;
+  overflow: hidden; padding-bottom: .02em;
+}
+.foot__word span {
+  display: inline-block; color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--white) 22%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--blue-light) 55%, transparent), transparent 85%);
+  -webkit-background-clip: text; background-clip: text;
+  transform: translateY(105%);
+  transition: transform 1.1s cubic-bezier(.22, 1, .36, 1) calc(.45s + var(--i, 0) * 110ms);
+}
+.foot__inner.is-in .foot__word span { transform: none; }
+
+@media (max-width: 1100px) {
+  .foot__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .foot__brand { grid-column: 1 / -1; }
+}
+@media (max-width: 720px) {
+  .foot__inner { padding-top: 56px; }
+  .foot__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; padding-bottom: 36px; }
+  .foot__places { grid-column: 1 / -1; }
+  .foot__bar { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .foot__bar p { margin-right: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .foot__grid > *, .foot__word span { opacity: 1; transform: none; transition: none; }
+  .foot__bar::before { transform: none; transition: none; }
+}

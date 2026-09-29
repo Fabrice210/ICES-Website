@@ -2,6 +2,9 @@ import type { SiteContent } from '../../types/content'
 
 export const contact: SiteContent['contact'] = {
   title: 'Contact',
+  headline: 'Vous avez des questions, nous avons des réponses',
+  intro:
+    'Un projet de transformation, un besoin d’accompagnement ou une idée de partenariat : nos équipes au Bénin et en Guinée vous répondent sous 48 heures ouvrées.',
   image: 'contact-office.jpg',
   offices: [
     {
@@ -19,10 +22,19 @@ export const contact: SiteContent['contact'] = {
       address: ['Adresse : Conakry, Guinée'],
     },
   ],
+  socialsLabel: 'Réseaux sociaux',
   form: {
-    name: 'Votre nom*',
+    title: 'Parlons de votre besoin',
+    subtitle: 'Notre équipe vous accompagne, du premier échange à la mise en œuvre.',
+    firstName: 'Prénom*',
+    lastName: 'Nom*',
+    country: 'Pays',
+    phone: 'Téléphone',
     email: 'Adresse email*',
+    typeLabel: 'Type de demande',
+    types: ['Conseil', 'Devis', 'Partenariat', 'Formation', 'Autre'],
     message: 'Votre message*',
+    consent: 'J’accepte que mes informations soient utilisées par ICES pour traiter ma demande.',
     submit: 'Envoyer',
     success: 'Message envoyé. Nous revenons vers vous sous 48 heures ouvrées.',
   },

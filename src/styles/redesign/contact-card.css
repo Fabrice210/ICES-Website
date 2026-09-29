@@ -1,0 +1,104 @@
+/* =========================================================
+   Contact — refonte DA (réf. « You Have Questions, We Have Answers ») :
+   carte photo (building) + formulaire blanc. --grow (0 → 1, posé en JS)
+   fait passer la carte d'un encart arrondi au plein écran à mesure que
+   la section approche du centre de l'écran.
+   ========================================================= */
+.ctc { --grow: 0; position: relative; z-index: 8; background: var(--white); }
+
+.ctc__card {
+  position: relative; isolation: isolate; overflow: hidden;
+  /* Pleine largeur et hauteur fixes (aucun recalcul de mise en page pendant le scroll) : la
+     découpe (clip-path) part d'un encart à grands arrondis et s'ouvre jusqu'au plein écran. */
+  --inset-x: 28px; --inset-y: 40px; --radius: 44px;
+  min-height: 100svh;
+  clip-path: inset(calc((1 - var(--grow)) * var(--inset-y)) calc((1 - var(--grow)) * var(--inset-x)) round calc((1 - var(--grow)) * var(--radius)));
+  will-change: clip-path;
+  display: flex; align-items: center; color: var(--white); background: var(--navy);
+}
+.ctc__bg {
+  position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover;
+  transform: scale(calc(1.08 - var(--grow) * .08)); will-change: transform;
+}
+/* Voile bleu nuit pour la lisibilité du texte blanc. */
+.ctc__card::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(100deg, color-mix(in srgb, var(--navy) 88%, transparent) 0%, color-mix(in srgb, var(--navy) 60%, transparent) 55%, color-mix(in srgb, var(--navy) 35%, transparent) 100%);
+}
+
+.ctc__inner {
+  width: 100%; max-width: calc(var(--container) + var(--gutter) * 2); margin-inline: auto;
+  padding: calc(var(--header-h) + 28px) var(--gutter) 32px;
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 48px; align-items: center;
+}
+
+/* Colonne gauche : titre et coordonnées, alignés à gauche. */
+.ctc__kicker { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: color-mix(in srgb, var(--white) 75%, transparent); }
+.ctc__title { margin-top: 12px; max-width: 16ch; font-size: clamp(32px, 3.6vw, 52px); font-weight: 700; line-height: 1.08; letter-spacing: -.02em; }
+.ctc__intro { margin-top: 16px; max-width: 46ch; font-size: 15px; line-height: 1.6; color: color-mix(in srgb, var(--white) 85%, transparent); }
+.ctc__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 32px; margin-top: 40px; }
+.ctc__block h3 { font-size: 17px; font-weight: 600; }
+.ctc__block p { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; font-size: 14px; line-height: 1.5; color: color-mix(in srgb, var(--white) 82%, transparent); }
+.ctc__block a { color: inherit; transition: color .2s var(--ease); }
+.ctc__block a:hover { color: var(--white); text-decoration: underline; }
+
+/* Colonne droite : formulaire sur carte blanche. */
+.ctc__form {
+  width: 100%; max-width: 500px; justify-self: end;
+  padding: 22px 24px; border-radius: 22px; background: var(--white); color: var(--ink);
+  box-shadow: 0 30px 60px color-mix(in srgb, var(--dark) 25%, transparent);
+}
+.ctc__form-title { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+.ctc__form-sub { margin-top: 4px; font-size: 13px; color: var(--muted); }
+.ctc__fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+.ctc__fields .is-wide { grid-column: 1 / -1; }
+.ctc__form input[type='text'], .ctc__form input[type='tel'], .ctc__form input[type='email'], .ctc__form textarea {
+  width: 100%; min-height: 42px; padding: 10px 16px; border: 1px solid var(--gray-300); border-radius: 999px;
+  font: inherit; font-size: 14px; color: var(--ink); background: var(--white); transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.ctc__form textarea { display: block; margin-top: 10px; border-radius: 18px; resize: vertical; }
+.ctc__form input:focus, .ctc__form textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 18%, transparent); }
+
+.ctc__types { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; border: 0; }
+.ctc__types legend { width: 100%; margin-bottom: 8px; font-size: 13px; color: var(--muted); }
+.ctc__types label {
+  position: relative; display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px;
+  border: 1px solid var(--gray-300); font-size: 13px; font-weight: 600; color: var(--text); cursor: pointer;
+  transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.ctc__types input { position: absolute; opacity: 0; pointer-events: none; }
+.ctc__types label.is-active { background: var(--blue); border-color: var(--blue); color: var(--white); }
+.ctc__types label:has(input:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.ctc__consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 10px; font-size: 12.5px; line-height: 1.45; color: var(--muted); cursor: pointer; }
+.ctc__consent input { margin-top: 2px; accent-color: var(--blue); }
+.ctc__submit {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 46px; margin-top: 14px;
+  border: 0; border-radius: 999px; background: var(--blue); color: var(--white); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+  transition: background .2s var(--ease);
+}
+.ctc__submit:hover { background: var(--blue-dark); }
+.ctc__submit .icon { width: 14px; height: 14px; }
+.ctc .form-note { margin-top: 10px; font-size: 13px; color: var(--blue); }
+
+/* Tablette : formulaire sous le texte. */
+@media (max-width: 1100px) {
+  .ctc__inner { grid-template-columns: 1fr; }
+}
+/* Téléphone : carte pleine largeur, sans effet d'agrandissement. */
+@media (max-width: 720px) {
+  .ctc__card { min-height: 0; clip-path: none; }
+  .ctc__bg { transform: none; }
+  .ctc__inner { padding: 64px var(--gutter) 40px; gap: 32px; }
+  .ctc__title { font-size: var(--m-h2); }
+  .ctc__intro { font-size: var(--m-lead); }
+  .ctc__grid { gap: 22px 18px; margin-top: 28px; }
+  .ctc__block h3 { font-size: 15px; }
+  .ctc__block p { font-size: 13px; }
+  .ctc__form { padding: 22px 18px; }
+  .ctc__fields { grid-template-columns: 1fr; }
+  .ctc__form input, .ctc__form textarea { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ctc__bg { transform: none; }
+}
