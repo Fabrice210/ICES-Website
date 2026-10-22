@@ -6,6 +6,10 @@
    filet : illustration isométrique au trait, titre, précision.
    ========================================================= */
 .tgt { --k: 1px; position: relative; z-index: 3; padding: 100px 0; background: var(--blue); color: var(--white); }
+/* Figée sur le hero (mode empilé) : au moins un écran de haut, sinon le bas du hero figé
+   reste visible sous elle sur les écrans larges ; le contenu est centré. */
+.tgt.curve-top { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+.tgt.curve-top > .container { width: 100%; }
 
 /* En-tête : titre à gauche, lien « Parlons de votre projet » à droite, sur la même ligne. */
 .tgt__head {
