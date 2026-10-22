@@ -1,9 +1,10 @@
 /* =========================================================
-   Interlocuteurs — refonte DA : bande --blue au bord supérieur
-   en dôme (monte par-dessus le hero figé), titre blanc à la
-   taille du hero, cartes à double face (HoverTransition).
+   Interlocuteurs — refonte DA : bande --blue qui prolonge celle
+   des offres (au-dessus d'elles, sous Approche et Réalisations),
+   titre blanc à la taille du hero, cartes à double face
+   (HoverTransition). Dôme seulement en mode empilé (curve-top).
    ========================================================= */
-.aud { z-index: 3; padding: 140px 0 120px; background: var(--blue); color: var(--white); }
+.aud { position: relative; z-index: 6; padding: 140px 0 120px; background: var(--blue); color: var(--white); }
 
 .aud__head { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .aud__title {

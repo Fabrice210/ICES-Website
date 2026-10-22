@@ -11,7 +11,9 @@ import { HomeHero } from '../sections/home/HomeHero'
 
 /** Temps de pause entre deux sections : la section d'avant reste figée et entière, la page s'y arrête. */
 function StackPause({ short = false }: { short?: boolean }) {
-  return <div className={short ? 'stack-pause stack-pause--short' : 'stack-pause'} aria-hidden="true" />
+  return (
+    <div className={short ? 'stack-pause stack-pause--short' : 'stack-pause'} aria-hidden="true" />
+  )
 }
 
 export function HomePage() {
@@ -19,14 +21,14 @@ export function HomePage() {
   return (
     <div data-page="home">
       <HomeHero />
-      <Interlocuteurs />
+      <Cibles stacked />
       <StackPause />
       <Vision />
       <StackPause short />
       <Offres />
-      <Cibles />
-      <Realisations />
+      <Interlocuteurs />
       <Approche />
+      <Realisations />
       <Actualites />
       <Equipe />
     </div>

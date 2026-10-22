@@ -1,10 +1,11 @@
 /* =========================================================
-   Nos cibles — refonte DA (réf. capture « closeit.fast ») : sur le
-   bleu des offres (bande continue). En-tête (titre mis en valeur,
-   intro, lien), puis une colonne par cible séparée par un filet :
-   illustration isométrique au trait, titre, précision.
+   Nos cibles — refonte DA (réf. capture « closeit.fast ») : 2e
+   section, bande bleue en dôme sur le hero figé (au-dessus de lui,
+   sous la Vision qui monte par-dessus). En-tête (titre mis en
+   valeur, intro, lien), puis une colonne par cible séparée par un
+   filet : illustration isométrique au trait, titre, précision.
    ========================================================= */
-.tgt { --k: 1px; position: relative; z-index: 6; padding: 100px 0; background: var(--blue); color: var(--white); }
+.tgt { --k: 1px; position: relative; z-index: 3; padding: 100px 0; background: var(--blue); color: var(--white); }
 
 /* En-tête : titre à gauche, lien « Parlons de votre projet » à droite, sur la même ligne. */
 .tgt__head {

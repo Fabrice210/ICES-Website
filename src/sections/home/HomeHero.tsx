@@ -171,7 +171,7 @@ export function HomeHero() {
                 ))}
               </ul>
             </div>
-            <SmartLink className="link-round home-hero__scroll" to="#interlocuteurs">
+            <SmartLink className="link-round home-hero__scroll" to="#cibles">
               <span className="home-hero__scroll-label">{hero.scrollLabel}</span>
               <span className="round-btn">
                 <Icon name="down" />

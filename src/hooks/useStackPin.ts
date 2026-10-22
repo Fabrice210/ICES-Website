@@ -9,11 +9,13 @@ import { useEffect, type RefObject } from 'react'
  * Performance : une fois entièrement recouverte (la section suivante couvre tout l'écran),
  * la section reçoit `data-covered` et n'est plus peinte (cf. primitives.css) ; sinon toutes
  * les sections figées restent dessinées et animées les unes sous les autres, et le scroll saccade.
+ *
+ * `enabled` à faux : rien n'est fait (section qui, à sa position, n'est pas recouverte par un dôme).
  */
-export function useStackPin(ref: RefObject<HTMLElement | null>) {
+export function useStackPin(ref: RefObject<HTMLElement | null>, enabled = true) {
   useEffect(() => {
     const el = ref.current
-    if (!el) return
+    if (!enabled || !el) return
     let frame = 0
 
     const apply = () => {
@@ -49,5 +51,5 @@ export function useStackPin(ref: RefObject<HTMLElement | null>) {
       el.style.top = ''
       el.removeAttribute('data-covered')
     }
-  }, [ref])
+  }, [ref, enabled])
 }

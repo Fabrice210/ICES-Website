@@ -38,11 +38,13 @@ function Face({
 }
 
 /**
- * Interlocuteurs : bande bleue qui monte avec un bord incurvé (aplani au défilement),
- * grand titre blanc révélé mot par mot, cartes à double face (survol en balayage).
- * Sur mobile, les cartes défilent au doigt avec des pastilles.
+ * Interlocuteurs : bande bleue, grand titre blanc révélé mot par mot, cartes à double face
+ * (survol en balayage). Sur mobile, les cartes défilent au doigt avec des pastilles.
+ * `stacked` : la bande monte avec un dôme sur la section figée d'avant et reste figée à son
+ * tour (à n'activer que si la section suivante monte par-dessus). Sans, elle prolonge le bleu
+ * des offres.
  */
-export function Interlocuteurs() {
+export function Interlocuteurs({ stacked = false }: { stacked?: boolean }) {
   const { home, header } = useContent()
   const { audiences } = home
   const openPartner = useOpenPartnerModal()
@@ -52,8 +54,8 @@ export function Interlocuteurs() {
   const { ref: listRef, inView: cardsIn } = useInView<HTMLDivElement>(0.2)
   const [active, setActive] = useState(0)
 
-  // Figée à la fin, pendant que la bande blanche de « Notre ambition » monte par-dessus.
-  useStackPin(sectionRef)
+  // En mode empilé : figée à la fin, pendant que la section suivante monte par-dessus.
+  useStackPin(sectionRef, stacked)
 
   const onListScroll = () => {
     const list = listRef.current
@@ -65,7 +67,7 @@ export function Interlocuteurs() {
   return (
     <section
       ref={sectionRef}
-      className="aud curve-top"
+      className={stacked ? 'aud curve-top' : 'aud'}
       id="interlocuteurs"
       aria-labelledby="aud-title"
     >

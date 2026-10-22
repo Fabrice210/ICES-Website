@@ -1,7 +1,8 @@
-import type { CSSProperties, PointerEvent, ReactNode } from 'react'
+import { useRef, type CSSProperties, type PointerEvent, type ReactNode } from 'react'
 import { Icon } from '../../components/icons/Icon'
 import { SmartLink } from '../../components/ui/SmartLink'
 import { useInView } from '../../hooks/useInView'
+import { useStackPin } from '../../hooks/useStackPin'
 import { useContent } from '../../i18n/useLanguage'
 
 /* --- Illustrations isométriques au trait (réf. capture « closeit.fast ») ---------------- */
@@ -51,7 +52,10 @@ function Box({
   const left = [pt(x, y + d, z + h), pt(x + w, y + d, z + h), pt(x + w, y + d, z), pt(x, y + d, z)]
   const right = [pt(x + w, y, z + h), pt(x + w, y + d, z + h), pt(x + w, y + d, z), pt(x + w, y, z)]
   return (
-    <g className={className} style={delay === undefined ? undefined : ({ '--d': delay } as CSSProperties)}>
+    <g
+      className={className}
+      style={delay === undefined ? undefined : ({ '--d': delay } as CSSProperties)}
+    >
       <polygon points={left.join(' ')} />
       <polygon points={right.join(' ')} />
       <polygon points={top.join(' ')} />
@@ -76,7 +80,17 @@ const ART: ReactNode[] = [
       [-2.6, 1.8],
       [1.8, 1.8],
     ].map(([cx, cy], ci) => (
-      <Box key={`${cx}${cy}`} x={cx} y={cy} z={0.5} w={0.8} d={0.8} h={2.8} className="tgt-art__glow" delay={ci} />
+      <Box
+        key={`${cx}${cy}`}
+        x={cx}
+        y={cy}
+        z={0.5}
+        w={0.8}
+        d={0.8}
+        h={2.8}
+        className="tgt-art__glow"
+        delay={ci}
+      />
     ))}
     <Box x={-3.4} y={-3.4} z={3.3} w={6.8} d={6.8} h={0.5} />
     <Box x={-2.4} y={-2.4} z={3.8} w={4.8} d={4.8} h={0.5} className="tgt-art__float" />
@@ -88,7 +102,17 @@ const ART: ReactNode[] = [
         gx === -1.1 && gy === -1.1 ? (
           <Ground key="hole" x={gx} y={gy} w={1.8} d={1.8} />
         ) : (
-          <Box key={`${gx}${gy}`} x={gx} y={gy} z={0} w={1.8} d={1.8} h={0.3} className="tgt-art__wave" delay={(gx + gy + 6.6) / 2.2} />
+          <Box
+            key={`${gx}${gy}`}
+            x={gx}
+            y={gy}
+            z={0}
+            w={1.8}
+            d={1.8}
+            h={0.3}
+            className="tgt-art__wave"
+            delay={(gx + gy + 6.6) / 2.2}
+          />
         )
       )
     )}
@@ -98,7 +122,17 @@ const ART: ReactNode[] = [
   <>
     <Ground x={-3.4} y={-2.6} w={5.6} d={5.6} />
     {[0, 1, 2, 3, 4, 5].map((i) => (
-      <Box key={i} x={-3 + i * 0.4} y={-2.2} z={i * 0.5} w={4.2} d={4.2} h={0.3} className="tgt-art__glow" delay={i} />
+      <Box
+        key={i}
+        x={-3 + i * 0.4}
+        y={-2.2}
+        z={i * 0.5}
+        w={4.2}
+        d={4.2}
+        h={0.3}
+        className="tgt-art__glow"
+        delay={i}
+      />
     ))}
     <Box x={-0.2} y={-2.2} z={3.3} w={4.2} d={4.2} h={0.3} className="tgt-art__float" />
   </>,
@@ -124,8 +158,9 @@ const ART: ReactNode[] = [
 ]
 
 /**
- * Nos cibles (réf. capture « closeit.fast ») : sur le bleu des offres (bande continue).
- * En-tête (titre mis en valeur, intro, lien), puis une colonne par cible séparée par un filet :
+ * Nos cibles (réf. capture « closeit.fast ») : bande bleue. `stacked` : elle monte avec un
+ * dôme sur la section figée d'avant (le hero) et reste figée pendant que la Vision blanche
+ * monte par-dessus. En-tête (titre mis en valeur, intro, lien), puis une colonne par cible séparée par un filet :
  * illustration isométrique au trait, titre et précision. Tablette : lignes (illustration à
  * gauche) ; téléphone : blocs empilés séparés par des lignes horizontales.
  */
@@ -143,13 +178,22 @@ function resetTilt(event: PointerEvent<HTMLLIElement>) {
   event.currentTarget.style.setProperty('--ty', '0')
 }
 
-export function Cibles() {
+export function Cibles({ stacked = false }: { stacked?: boolean }) {
   const { targets } = useContent().home
+  const sectionRef = useRef<HTMLElement>(null)
   const { ref: headRef, inView: headIn } = useInView<HTMLDivElement>(0.4)
   const { ref: gridRef, inView: gridIn } = useInView<HTMLUListElement>(0.2)
 
+  // En mode empilé : figée à la fin, pendant que la section suivante monte par-dessus.
+  useStackPin(sectionRef, stacked)
+
   return (
-    <section className="tgt" id="cibles" aria-labelledby="targets-title">
+    <section
+      ref={sectionRef}
+      className={stacked ? 'tgt curve-top' : 'tgt'}
+      id="cibles"
+      aria-labelledby="targets-title"
+    >
       <div className="container">
         <div ref={headRef} className={headIn ? 'tgt__head is-in' : 'tgt__head'}>
           <h2 className="tgt__title" id="targets-title">
