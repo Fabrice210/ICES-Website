@@ -181,12 +181,8 @@ export const home: SiteContent['home'] = {
     cardCta: 'Voir la mission',
     intro:
       'Derrière chaque mission, une problématique, des parties prenantes et un objectif de transformation. Découvrez comment nos expertises, nos offres et nos solutions se traduisent en interventions concrètes au service des organisations et des territoires.',
-    works: [
-      { image: 'photo-1486325212027-8081e485255e-w900.jpg', label: 'Réalisation 1' },
-      { image: 'photo-1479839672679-a46483c0e7c8-w900.jpg', label: 'Réalisation 2' },
-      { image: 'photo-1464938050520-ef2270bb8ce8-w900.jpg', label: 'Réalisation 3' },
-    ],
-    link: { label: 'Voir toutes nos réalisations', to: PENDING_LINK },
+    count: 3,
+    link: { label: 'Voir toutes nos réalisations', to: '/realisations' },
   },
 
   approach: {

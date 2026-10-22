@@ -10,7 +10,7 @@ import { Footer } from './Footer'
 import { Header } from './Header'
 import { ScrollManager } from './ScrollManager'
 
-/** Structure commune aux deux pages ; la section Contact est partagée comme dans l'original. */
+/** Structure commune à toutes les pages ; la section Contact est partagée comme dans l'original. */
 export function SiteLayout() {
   const { pathname } = useLocation()
   const { lang } = useLanguage()
@@ -21,7 +21,8 @@ export function SiteLayout() {
   return (
     <PartnerModalContext.Provider value={openPartner}>
       <ScrollManager />
-      <Header variant={pathname === '/prestations' ? 'prestations' : 'home'} />
+      {/* Accueil : en-tête sur fond clair ; autres pages : en-tête sur la photo du hero. */}
+      <Header variant={pathname === '/' ? 'home' : 'prestations'} />
       <main>
         <Outlet />
         <Contact />

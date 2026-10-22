@@ -61,10 +61,13 @@
 .real2-card__link--solid { background: var(--white); color: var(--ink); }
 
 .real2-card__num { font-size: max(12px, calc(var(--k) * 13)); font-weight: 700; letter-spacing: .14em; opacity: .8; }
+/* Titres réels des missions (longs) : taille réduite et 4 lignes au plus. */
 .real2-card__title {
-  margin-top: calc(var(--k) * 8); max-width: 14ch;
-  font-size: max(20px, calc(var(--k) * 28)); font-weight: 700; line-height: 1.15; letter-spacing: -.015em;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden;
+  margin-top: calc(var(--k) * 8); max-width: 18ch;
+  font-size: max(19px, calc(var(--k) * 24)); font-weight: 700; line-height: 1.2; letter-spacing: -.015em;
 }
+.real2-card__link--solid .real2-card__title { max-width: 14ch; font-size: max(20px, calc(var(--k) * 28)); }
 .real2-card__link--solid .real2-card__title { color: var(--navy); }
 .real2-card__foot {
   display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto;
@@ -123,7 +126,7 @@
   .real2-card { height: 380px; }
   .real2-card__link { padding: 20px; border-radius: 22px; }
   .real2-card__num { font-size: var(--m-label); }
-  .real2-card__title { font-size: 20px; }
+  .real2-card__title { font-size: var(--m-title); }
   .real2-card__foot { font-size: var(--m-body); }
   .real2-card__btn { width: var(--m-tap); height: var(--m-tap); }
 }

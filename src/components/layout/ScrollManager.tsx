@@ -31,7 +31,11 @@ export function ScrollManager() {
   const { meta } = useContent()
 
   useEffect(() => {
-    document.title = pathname === '/prestations' ? meta.prestationsTitle : meta.homeTitle
+    document.title = pathname.startsWith('/realisations')
+      ? meta.realisationsTitle
+      : pathname === '/prestations'
+        ? meta.prestationsTitle
+        : meta.homeTitle
   }, [pathname, meta])
 
   useEffect(() => {

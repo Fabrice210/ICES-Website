@@ -3,7 +3,7 @@
  * doit exister telle quelle dans l'original figé (entités HTML décodées).
  * Ignore les identifiants techniques (noms de fichiers, liens, codes).
  */
-import { readFileSync, readdirSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
 const decode = (s) =>
@@ -15,7 +15,11 @@ const decode = (s) =>
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
 
-const original = decode(readFileSync('baseline/original/index.html', 'utf8'))
+// Original figé, plus la maquette des nouvelles pages (refonte V2) quand elle est présente.
+const MOCKUP = 'ices-site-complet_1.html'
+const original =
+  decode(readFileSync('baseline/original/index.html', 'utf8'))
+  + (existsSync(MOCKUP) ? decode(readFileSync(MOCKUP, 'utf8')) : '')
 // Textes nouveaux, demandés explicitement par le client (hors original).
 const approved = JSON.parse(readFileSync('scripts/approved-texts.json', 'utf8')).map((t) => t.text)
 const dir = 'src/content/fr'

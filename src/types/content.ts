@@ -78,8 +78,33 @@ export interface Stat {
   label: string
 }
 
+/** Offres qui classent les réalisations (filtres de la page Réalisations). */
+export type OfferKey =
+  'tech' | 'expertise' | 'projets' | 'gouvernance' | 'concessions' | 'innovation'
+
+/** Une mission menée par ICES : carte de la liste et page `/realisations/:slug`. */
+export interface Realisation {
+  /** Identique en FR et en EN : c'est l'adresse de la page. */
+  slug: string
+  offer: OfferKey
+  title: string
+  client: string
+  country: string
+  year: string
+  duration: string
+  image: string
+  excerpt: string
+  context: string
+  challenges: string[]
+  actions: string[]
+  /** `✓` comme valeur : résultat qualitatif, affiché avec une coche. */
+  results: Stat[]
+  resultsNote?: string
+  quote?: { text: string; cite: string }
+}
+
 export interface SiteContent {
-  meta: { homeTitle: string; prestationsTitle: string }
+  meta: { homeTitle: string; prestationsTitle: string; realisationsTitle: string }
   languages: { code: 'fr' | 'en'; label: string }[]
   header: { home: HeaderVariant; prestations: HeaderVariant; partnerLabel: string }
   footer: {
@@ -148,7 +173,8 @@ export interface SiteContent {
       intro: string
       /** Libellé en bas de chaque carte de réalisation. */
       cardCta: string
-      works: { image: string; label: string }[]
+      /** Nombre de réalisations (les premières de `realisations.items`) montrées en cartes. */
+      count: number
       link: LinkItem
     }
     approach: {
@@ -210,6 +236,44 @@ export interface SiteContent {
       cta: LinkItem
       stats: Stat[]
     }
+  }
+  realisations: {
+    hero: { image: string; title: string; text: string; cta: LinkItem }
+    list: {
+      label: string
+      title: string
+      intro: string
+      filtersLabel: string
+      all: string
+      /** {n} est remplacé par le nombre de réalisations affichées. */
+      count: { one: string; many: string }
+      empty: string
+    }
+    band: { label: string; title: string; text: string; cta: LinkItem; stats: Stat[] }
+    offers: Record<OfferKey, string>
+    cardCta: string
+    detail: {
+      back: LinkItem
+      context: string
+      challenges: string
+      actions: string
+      results: string
+      facts: {
+        title: string
+        client: string
+        country: string
+        offer: string
+        year: string
+        duration: string
+      }
+      similar: { title: string; text: string; cta: LinkItem }
+      pagerLabel: string
+      prev: string
+      next: string
+      others: string
+      allLink: LinkItem
+    }
+    items: Realisation[]
   }
   contact: {
     title: string

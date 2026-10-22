@@ -181,12 +181,8 @@ export const home: SiteContent['home'] = {
     cardCta: 'View the mission',
     intro:
       'Behind every mission lies a challenge, stakeholders and a transformation goal. See how our expertise, offers and solutions turn into concrete interventions serving organisations and territories.',
-    works: [
-      { image: 'photo-1486325212027-8081e485255e-w900.jpg', label: 'Project 1' },
-      { image: 'photo-1479839672679-a46483c0e7c8-w900.jpg', label: 'Project 2' },
-      { image: 'photo-1464938050520-ef2270bb8ce8-w900.jpg', label: 'Project 3' },
-    ],
-    link: { label: 'See all our projects', to: PENDING_LINK },
+    count: 3,
+    link: { label: 'See all our projects', to: '/realisations' },
   },
 
   approach: {

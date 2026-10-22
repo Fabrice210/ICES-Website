@@ -10,5 +10,11 @@
     "page": "prestations — titre de la section #domaines",
     "remplace": "10 domaines d’expertise pour des impacts concrets.",
     "demande": "2026-09-23, direction ICES (formulation proposée, à valider)"
+  },
+  {
+    "text": "Réalisations · ICES",
+    "page": "titre de l’onglet de la page /realisations",
+    "remplace": "(nouvelle page, même forme que « Nos expertises · ICES »)",
+    "demande": "2026-10-22, pages de la maquette V2 validées par l’utilisateur"
   }
 ]

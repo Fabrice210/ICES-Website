@@ -43,4 +43,6 @@
 @import './redesign/targets-list.css';
 @import './redesign/realisations-row.css';
 @import './redesign/approach-timeline.css';
+/* Nouvelles pages (refonte V2). */
+@import './pages/realisations.css';
 @import './touch.css';

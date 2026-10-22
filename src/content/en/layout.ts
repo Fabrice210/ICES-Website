@@ -4,13 +4,14 @@ import { PENDING_LINK } from '../links'
 const navLinks = [
   { label: 'Our offers', to: '/#offres' },
   { label: 'Incubation', to: '/#offres' },
-  { label: 'Projects', to: '/#realisations' },
+  { label: 'Projects', to: '/realisations' },
   { label: 'Training', to: '/#actualites' },
 ]
 
 export const meta: SiteContent['meta'] = {
   homeTitle: 'ICES · Shaping Africa’s future',
   prestationsTitle: 'Our expertise · ICES',
+  realisationsTitle: 'Projects · ICES',
 }
 
 export const languages: SiteContent['languages'] = [
@@ -55,7 +56,7 @@ export const footer: SiteContent['footer'] = {
     {
       title: 'RESOURCES',
       links: [
-        { label: 'Projects', to: '/#realisations' },
+        { label: 'Projects', to: '/realisations' },
         { label: 'Training', to: '/#actualites' },
         { label: 'Publications', to: '/#actualites' },
       ],

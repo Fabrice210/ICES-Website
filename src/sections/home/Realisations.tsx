@@ -11,12 +11,15 @@ import { useContent } from '../../i18n/useLanguage'
 /**
  * Missions & Réalisations (réf. « Everything your diagnosis needs, under one roof » de la
  * vidéo) : suite de la bande bleue des offres, titre à gauche, étiquette + intro à droite, puis une rangée
- * de grandes cartes numérotées (photos des missions, puis une carte pleine vers toutes les
- * réalisations). Ordinateur / tablette paysage : la section se fige et la rangée défile à
+ * de grandes cartes numérotées (les premières missions de la page Réalisations, chacune vers
+ * sa page, puis une carte pleine vers toutes les réalisations). Ordinateur / tablette paysage : la section se fige et la rangée défile à
  * l'horizontale avec le scroll. En dessous : rangée qu'on fait glisser.
  */
 export function Realisations() {
-  const { realisations } = useContent().home
+  const content = useContent()
+  const { realisations } = content.home
+  // Les premières missions de la page Réalisations, chacune vers sa page.
+  const works = content.realisations.items.slice(0, realisations.count)
   const sectionRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLUListElement>(null)
   const wide = useMediaQuery('(min-width: 1024px) and (min-height: 560px)')
@@ -25,7 +28,7 @@ export function Realisations() {
   useHorizontalScroll(sectionRef, trackRef, scrolly)
   const { ref: headRef, inView: headIn } = useInView<HTMLDivElement>(0.4)
   const { ref: rowRef, inView: rowIn } = useInView<HTMLDivElement>(0.2)
-  const total = realisations.works.length + 1
+  const total = works.length + 1
 
   return (
     <section
@@ -50,11 +53,11 @@ export function Realisations() {
 
         <div ref={rowRef} className={rowIn ? 'container real2__row is-in' : 'container real2__row'}>
           <ul ref={trackRef} className="real2__track">
-            {realisations.works.map((work, i) => (
-              <li key={work.label} className="real2-card" style={{ '--i': i } as CSSProperties}>
+            {works.map((work, i) => (
+              <li key={work.slug} className="real2-card" style={{ '--i': i } as CSSProperties}>
                 <SmartLink
                   className="real2-card__link real2-card__link--photo"
-                  to={realisations.link.to}
+                  to={`/realisations/${work.slug}`}
                 >
                   <FallbackImg
                     className="real2-card__img"
@@ -63,7 +66,7 @@ export function Realisations() {
                     loading="lazy"
                   />
                   <span className="real2-card__num">{String(i + 1).padStart(2, '0')}</span>
-                  <h3 className="real2-card__title">{work.label}</h3>
+                  <h3 className="real2-card__title">{work.title}</h3>
                   <span className="real2-card__foot">
                     {realisations.cardCta}
                     <span className="real2-card__btn" aria-hidden="true">

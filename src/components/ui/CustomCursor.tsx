@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 
 /** Éléments sur lesquels l'anneau grossit (liens, boutons, cartes cliquables). */
-const INTERACTIVE = 'a, button, [role="button"], label, summary, select, .ncard, .real2-card__link'
+const INTERACTIVE = 'a, button, [role="button"], label, summary, select, .ncard, .real2-card__link, .rcard__link'
 /** Zones qu'on fait glisser : l'anneau devient une pastille « Glisser ». */
 const DRAGGABLE = '.globe__svg, .offr__track, .real2:not(.is-scrolly) .real2__track'
 /** Sections sur fond bleu : curseur en blanc. */
-const ON_BLUE = '.aud, .offr, .tgt, .real2, .apt, .team3__frame--blue, .home-hero__pill'
+const ON_BLUE = '.aud, .offr, .tgt, .real2, .apt, .team3__frame--blue, .home-hero__pill, .rband, .rresult, .rdetail__card--blue'
 /** Surfaces blanches posées sur le bleu : curseur bleu à nouveau. */
 const ON_WHITE = '.real2-card__link--solid, .offr-card__panel, .offr__brochure'
 /** Champs de saisie : on garde le curseur texte natif, sans curseur maison. */
