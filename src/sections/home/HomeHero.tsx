@@ -50,7 +50,7 @@ export function HomeHero() {
   const compact = useMediaQuery('(max-width: 720px)')
 
   useHeroExpand(sectionRef, stageRef, pillRef, compact ? 'compact' : 'wide')
-  // Le plein écran reste figé pendant que la bande bleue d'Interlocuteurs monte par-dessus.
+  // Le plein écran reste figé pendant que la bande bleue de Nos cibles monte par-dessus.
   useStackPin(sectionRef)
   // Les pôles défilent toutes les 6 s (rythme de 5-6 s demandé en réunion).
   useInterval(

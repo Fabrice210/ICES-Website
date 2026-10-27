@@ -3,7 +3,6 @@ import { Actualites } from '../sections/home/Actualites'
 import { Approche } from '../sections/home/Approche'
 import { Equipe } from '../sections/home/Equipe'
 import { Cibles } from '../sections/home/Cibles'
-import { Interlocuteurs } from '../sections/home/Interlocuteurs'
 import { Offres } from '../sections/home/Offres'
 import { Realisations } from '../sections/home/Realisations'
 import { Vision } from '../sections/home/Vision'
@@ -26,7 +25,6 @@ export function HomePage() {
       <Vision />
       <StackPause short />
       <Offres />
-      <Interlocuteurs />
       <Approche />
       <Realisations />
       <Actualites />
