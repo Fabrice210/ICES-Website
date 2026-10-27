@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "typecheck": "tsc -b --noEmit",
+    "favicons": "node scripts/build-favicons.mjs",
     "baseline:assets": "node scripts/fetch-assets.mjs",
     "baseline:fonts": "node scripts/fetch-fonts.mjs",
     "baseline:capture": "node scripts/capture-baseline.mjs",
