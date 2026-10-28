@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { scrollToY } from '../../hooks/useSmoothScroll'
 import { useContent } from '../../i18n/useLanguage'
 
 /**
@@ -40,14 +41,14 @@ export function ScrollManager() {
 
   useEffect(() => {
     if (!hash) {
-      window.scrollTo(0, 0)
+      scrollToY(0, true)
       return
     }
     const id = decodeURIComponent(hash.slice(1))
     const frame = requestAnimationFrame(() => {
       const el = document.getElementById(id)
       if (!el) return
-      window.scrollTo({ top: sectionTop(el), behavior: 'smooth' })
+      scrollToY(sectionTop(el))
     })
     return () => cancelAnimationFrame(frame)
   }, [pathname, hash, key])

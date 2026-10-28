@@ -5,7 +5,7 @@
    ========================================================= */
 /* La section fournit la distance de défilement ; la scène reste figée pendant l'agrandissement. */
 .home-hero {
-  position: relative; height: 280vh;
+  position: relative; height: 205vh;
   background: linear-gradient(180deg, var(--white) 0%, var(--white) 55%, var(--gray-100) 100%);
   color: var(--ink);
 }
@@ -244,7 +244,7 @@ body:not(.nav-open) .site-header--on-light:not(.is-scrolled) .burger { border-co
 @media (max-width: 720px) {
   .home-hero__band-inner { height: 72px; gap: 16px; }
   .home-hero__scroll-label { display: none; }
-  .home-hero { height: 240vh; }
+  .home-hero { height: 185vh; }
   .home-hero__overlay { padding-bottom: 28px; }
   .home-hero__foot { flex-direction: column; align-items: stretch; margin-top: 28px; }
   .home-hero__progress { max-width: none; }

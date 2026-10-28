@@ -41,11 +41,13 @@ export function useHeroExpand(
       const rect = section.getBoundingClientRect()
       const distance = rect.height - window.innerHeight
       const progress = reduce.matches || distance <= 0 ? 0 : clamp(-rect.top / distance)
-      section.style.setProperty('--e', easeInOut(clamp(progress / 0.45)).toFixed(4))
-      section.style.setProperty('--fade', (1 - clamp(progress / 0.1)).toFixed(3))
-      section.style.setProperty('--reveal', clamp((progress - 0.38) / 0.12).toFixed(3))
+      // L'animation occupe presque toute la course : pas de défilement « dans le vide » une fois
+      // le contenu révélé, juste un court temps de lecture avant la section suivante.
+      section.style.setProperty('--e', easeInOut(clamp(progress / 0.76)).toFixed(4))
+      section.style.setProperty('--fade', (1 - clamp(progress / 0.17)).toFixed(3))
+      section.style.setProperty('--reveal', clamp((progress - 0.64) / 0.2).toFixed(3))
       section.classList.toggle('is-expanding', progress > 0)
-      section.classList.toggle('is-expanded', progress > 0.4)
+      section.classList.toggle('is-expanded', progress > 0.68)
     }
 
     const schedule = () => {

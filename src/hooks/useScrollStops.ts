@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { holdWheel, isSmoothWheel, scrollToY, setWheelGate, smoothTail } from './useSmoothScroll'
 
 /** Distances (en hauteur d'écran) : glisser jusqu'à un arrêt proche devant, revenir sur un arrêt à peine dépassé. */
 const AHEAD = 0.35
@@ -27,6 +28,8 @@ export function useScrollStops() {
     // Dernière action de l'utilisateur (molette, doigt, clavier) : les défilements lancés par
     // un lien d'ancre ou par ce hook ne déclenchent pas d'arrêt franc.
     let lastInput = 0
+    // Dernier geste au doigt ou au clavier : avec Lenis, la molette passe par la barrière.
+    let lastNative = 0
 
     const stopOf = (el: HTMLElement, y: number, vh: number) => {
       const end = el.classList.contains('stack-pause') || el.dataset.align === 'end'
@@ -35,7 +38,7 @@ export function useScrollStops() {
 
     const settle = () => {
       // Défilement lancé par un lien d'ancre (pas par l'utilisateur) : aucun calage.
-      if (Date.now() - lastInput > 1200) return
+      if (Date.now() - lastInput > 1200 + smoothTail()) return
       const y = window.scrollY
       const vh = window.innerHeight
       let target: number | null = null
@@ -56,8 +59,11 @@ export function useScrollStops() {
       settledAt = target ?? y
       if (target === null) return
       // Glissé jusqu'à une pause : même retenue qu'un arrêt franc (glissé compris).
-      if (targetIsPause) holdUntil = Date.now() + HOLD_MS + 300
-      window.scrollTo({ top: target, behavior: reduce ? 'auto' : 'smooth' })
+      if (targetIsPause) {
+        holdUntil = Date.now() + HOLD_MS + 300
+        holdWheel(HOLD_MS + 300)
+      }
+      scrollToY(target, reduce)
     }
 
     const onScroll = () => {
@@ -65,7 +71,8 @@ export function useScrollStops() {
       if (y !== last) dir = y > last ? 1 : -1
       last = y
       // Arrêt franc : une pause franchie pendant ce geste → on s'y cale et on retient le scroll.
-      if (Date.now() > holdUntil && Date.now() - lastInput < 400) {
+      const recent = Date.now() - (isSmoothWheel() ? lastNative : lastInput) < 400
+      if (Date.now() > holdUntil && recent) {
         const vh = window.innerHeight
         for (const el of document.querySelectorAll<HTMLElement>('.stack-pause')) {
           const stop = stopOf(el, y, vh)
@@ -74,7 +81,8 @@ export function useScrollStops() {
             settledAt = stop
             last = stop
             holdUntil = Date.now() + HOLD_MS
-            window.scrollTo({ top: stop, behavior: 'instant' })
+            holdWheel(HOLD_MS)
+            scrollToY(stop, true)
             break
           }
         }
@@ -86,17 +94,41 @@ export function useScrollStops() {
     // Pendant la retenue, la molette et le glissé du doigt n'ont pas d'effet.
     const hold = (event: Event) => {
       lastInput = Date.now()
+      if (event.type === 'touchmove') lastNative = lastInput
       if (lastInput < holdUntil) event.preventDefault()
     }
     const onKey = () => {
       lastInput = Date.now()
+      lastNative = lastInput
     }
+
+    // Molette lissée (Lenis) : l'arrêt franc se décide au cran, avant le défilement. Un cran
+    // qui ferait franchir une pause est absorbé et la page glisse jusqu'à elle.
+    setWheelGate((target, delta) => {
+      if (Date.now() < holdUntil) return false
+      const next = target + delta
+      const vh = window.innerHeight
+      for (const el of document.querySelectorAll<HTMLElement>('.stack-pause')) {
+        const stop = stopOf(el, window.scrollY, vh)
+        // Tolérance : Lenis s'arrête parfois à un pixel de la pause, qui n'est alors plus à franchir.
+        const crossed = delta > 0 ? target < stop - 3 && stop <= next : next <= stop && stop < target - 3
+        if (crossed) {
+          settledAt = stop
+          holdUntil = Date.now() + HOLD_MS
+          holdWheel(HOLD_MS)
+          scrollToY(stop)
+          return false
+        }
+      }
+      return true
+    })
 
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('wheel', hold, { passive: false })
     window.addEventListener('touchmove', hold, { passive: false })
     window.addEventListener('keydown', onKey)
     return () => {
+      setWheelGate(null)
       window.clearTimeout(timer)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('wheel', hold)

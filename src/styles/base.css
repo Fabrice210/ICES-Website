@@ -1,6 +1,10 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+/* Lenis lisse déjà le défilement : le lissage natif le ferait patiner. */
+html.lenis, html.lenis body { height: auto; }
+html.lenis { scroll-behavior: auto; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
 
 body {
   margin: 0;

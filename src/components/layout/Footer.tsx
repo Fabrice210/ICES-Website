@@ -1,5 +1,6 @@
 import { Fragment, type CSSProperties } from 'react'
 import { useInView } from '../../hooks/useInView'
+import { scrollToY } from '../../hooks/useSmoothScroll'
 import { useContent, useLanguage } from '../../i18n/useLanguage'
 import { Icon } from '../icons/Icon'
 import { Logo } from '../ui/Logo'
@@ -99,7 +100,7 @@ export function Footer() {
             <button
               type="button"
               className="foot__top"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => scrollToY(0)}
             >
               {footer.backToTop}
               <span className="foot__top-btn" aria-hidden="true">

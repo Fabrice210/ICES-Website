@@ -16,7 +16,7 @@ export function SiteLayout() {
   const { pathname } = useLocation()
   const { lang } = useLanguage()
   usePauseOffscreen()
-  useSmoothScroll(pathname !== '/')
+  useSmoothScroll()
   const dialogRef = useRef<HTMLDialogElement>(null)
   const openPartner = useCallback(() => dialogRef.current?.showModal(), [])
 
