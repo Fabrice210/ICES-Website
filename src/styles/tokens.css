@@ -29,3 +29,22 @@
 @media (min-width: 1441px) {
   :root { --container: max(1240px, min(86.1vw, 137.8svh)); }
 }
+
+/* Grands écrans : les sections à tailles fixes (en-tête, hero d'accueil, sous-pages, contact,
+   pied de page) grandissent par paliers avec un zoom sur leur conteneur, dont la largeur est
+   compensée. Les sections déjà dimensionnées en vw (Cibles, Vision, Offres, Approche,
+   Réalisations, Actualités, Équipe) sont exclues. Rien ne change jusqu'à 1679 px. */
+@media (min-width: 1680px) and (min-height: 900px) { :root { --z: 1.15; } }
+@media (min-width: 1920px) and (min-height: 1000px) { :root { --z: 1.3; } }
+@media (min-width: 2400px) and (min-height: 1250px) { :root { --z: 1.6; } }
+@media (min-width: 2880px) and (min-height: 1500px) { :root { --z: 1.95; } }
+@media (min-width: 3600px) and (min-height: 1900px) { :root { --z: 2.35; } }
+@media (min-width: 1680px) and (min-height: 900px) {
+  .site-header > .container,
+  .home-hero__stage > .container,
+  main section:not(.tgt, .amb, .offr, .apt, .real2, .news, .team3, .aud) > .container,
+  footer .container {
+    zoom: var(--z, 1);
+    max-width: calc((var(--container) + var(--gutter) * 2) / var(--z, 1));
+  }
+}
