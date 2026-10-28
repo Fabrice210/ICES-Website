@@ -22,3 +22,10 @@
   --header-h: 84px;
   --ease: cubic-bezier(.22, .61, .36, 1);
 }
+
+/* Grands écrans (iMac, 4K) : au-delà de 1440 px, le conteneur grandit à la même échelle que les
+   sections dimensionnées en vw (--u = min(100vw / 1440, 100svh / 900)), sinon leurs titres
+   agrandis s'entassent dans 1240 px. 1240 / 1440 = 86,1 vw ; 1240 / 900 = 137,8 svh. */
+@media (min-width: 1441px) {
+  :root { --container: max(1240px, min(86.1vw, 137.8svh)); }
+}
