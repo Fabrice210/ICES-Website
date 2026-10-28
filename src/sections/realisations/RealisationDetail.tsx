@@ -1,134 +1,46 @@
 import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
-import { image } from '../../assets/images'
 import { Icon } from '../../components/icons/Icon'
-import { FallbackImg } from '../../components/ui/FallbackImg'
-import { MaskedWords } from '../../components/ui/MaskedWords'
 import { SmartLink } from '../../components/ui/SmartLink'
 import { useInView } from '../../hooks/useInView'
 import { useContent } from '../../i18n/useLanguage'
 import type { Realisation } from '../../types/content'
+import {
+  ArticleBand,
+  ArticleCta,
+  ArticleHero,
+  ArticleList,
+  ArticleSplit,
+  ArticleStatement,
+  ArticleTag,
+} from '../article/Article'
 import { RealisationCard } from './RealisationCard'
 
 const order = (i: number) => ({ '--i': i }) as CSSProperties
 
-/** En-tête d'une mission : même hero que les autres pages (photo qui dézoome, titre mot par mot). */
-function DetailHero({ item }: { item: Realisation }) {
-  const { offers, detail } = useContent().realisations
+/** Résultats : cartes bleues (chiffre ou coche), citation et note facultatives. */
+function DetailResults({ item }: { item: Realisation }) {
+  const { detail } = useContent().realisations
+  const { ref, inView } = useInView<HTMLDivElement>(0.25)
   return (
-    <section className="hero hero--detail">
-      <div className="hero__bg media">
-        <FallbackImg src={image(item.image)} alt="" fetchPriority="high" />
-      </div>
+    <section className="aresults">
       <div className="container">
-        <Link className="rdetail__back" to={detail.back.to}>
-          <Icon name="left" />
-          {detail.back.label}
-        </Link>
-        <span className="rdetail__tag">{offers[item.offer]}</span>
-        <h1>
-          <MaskedWords text={item.title} />
-        </h1>
-        <p className="rdetail__meta">
-          <span>
-            <Icon name="building" />
-            {item.client}
-          </span>
-          <span>
-            <Icon name="pin" />
-            {item.country} · {item.year}
-          </span>
-        </p>
-      </div>
-    </section>
-  )
-}
-
-/** Corps : récit de la mission à gauche, fiche et appel au contact dans une colonne collante. */
-function DetailBody({ item }: { item: Realisation }) {
-  const { offers, detail } = useContent().realisations
-  const { ref, inView } = useInView<HTMLDivElement>(0.03)
-  const { ref: resultsRef, inView: resultsIn } = useInView<HTMLDivElement>(0.3)
-  const facts: [string, string][] = [
-    [detail.facts.client, item.client],
-    [detail.facts.country, item.country],
-    [detail.facts.offer, offers[item.offer]],
-    [detail.facts.year, item.year],
-    [detail.facts.duration, item.duration],
-  ]
-
-  return (
-    <section className="rdetail">
-      <div className="container rdetail__grid">
-        <article
-          ref={ref}
-          className={
-            inView ? 'rdetail__prose reveal is-revealing' : 'rdetail__prose reveal is-hidden'
-          }
-        >
-          <p className="rdetail__lead reveal-item" style={order(0)}>
-            {item.excerpt}
-          </p>
-          <h2 className="reveal-item" style={order(1)}>
-            {detail.context}
-          </h2>
-          <p className="reveal-item" style={order(2)}>
-            {item.context}
-          </p>
-          <h2 className="reveal-item" style={order(3)}>
-            {detail.challenges}
-          </h2>
-          <ul className="reveal-item" style={order(4)}>
-            {item.challenges.map((text) => (
-              <li key={text}>{text}</li>
-            ))}
-          </ul>
-          <h2 className="reveal-item" style={order(5)}>
-            {detail.actions}
-          </h2>
-          <ul className="reveal-item" style={order(6)}>
-            {item.actions.map((text) => (
-              <li key={text}>{text}</li>
-            ))}
-          </ul>
-          {item.quote && (
-            <blockquote className="reveal-item" style={order(7)}>
-              <p>{item.quote.text}</p>
-              <cite>{item.quote.cite}</cite>
-            </blockquote>
-          )}
-          <h2>{detail.results}</h2>
-          <div ref={resultsRef} className={resultsIn ? 'rresults is-in' : 'rresults'}>
-            {item.results.map((result, i) => (
-              <div key={result.label} className="rresult" style={order(i)}>
-                <strong>{result.value === '✓' ? <Icon name="check" /> : result.value}</strong>
-                <span>{result.label}</span>
-              </div>
-            ))}
-          </div>
-          {item.resultsNote && <p className="rdetail__note">{item.resultsNote}</p>}
-        </article>
-
-        <aside className="rdetail__aside">
-          <div className="rdetail__card">
-            <h3>{detail.facts.title}</h3>
-            <dl className="rdetail__facts">
-              {facts.map(([label, value]) => (
-                <div key={label}>
-                  <dt>{label}</dt>
-                  <dd>{value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-          <div className="rdetail__card rdetail__card--blue">
-            <h3>{detail.similar.title}</h3>
-            <p>{detail.similar.text}</p>
-            <SmartLink className="btn btn--white btn--pill" to={detail.similar.cta.to}>
-              {detail.similar.cta.label} <Icon name="arrow" />
-            </SmartLink>
-          </div>
-        </aside>
+        <ArticleTag>{detail.results}</ArticleTag>
+        {item.quote && (
+          <blockquote className="aresults__quote">
+            <p>{item.quote.text}</p>
+            <cite>{item.quote.cite}</cite>
+          </blockquote>
+        )}
+        <div ref={ref} className={inView ? 'rresults is-in' : 'rresults'}>
+          {item.results.map((result, i) => (
+            <div key={result.label} className="rresult" style={order(i)}>
+              <strong>{result.value === '✓' ? <Icon name="check" /> : result.value}</strong>
+              <span>{result.label}</span>
+            </div>
+          ))}
+        </div>
+        {item.resultsNote && <p className="rdetail__note">{item.resultsNote}</p>}
       </div>
     </section>
   )
@@ -189,11 +101,76 @@ function DetailMore({ item }: { item: Realisation }) {
   )
 }
 
+/**
+ * Page d'une mission sur le gabarit « page article » : hero sombre, contexte en déclaration
+ * (avec la fiche mission), enjeux + photo, intervention en liste numérotée, résultats,
+ * bandeau géant, appel au contact, puis les autres missions.
+ */
 export function RealisationDetail({ item }: { item: Realisation }) {
+  const { offers, detail } = useContent().realisations
+  const facts: [string, string][] = [
+    [detail.facts.client, item.client],
+    [detail.facts.country, item.country],
+    [detail.facts.year, item.year],
+    [detail.facts.duration, item.duration],
+  ]
   return (
     <>
-      <DetailHero item={item} />
-      <DetailBody item={item} />
+      <ArticleHero
+        back={detail.back}
+        tag={offers[item.offer]}
+        title={item.title}
+        text={item.excerpt}
+        image={item.image}
+        meta={
+          <>
+            <span>
+              <Icon name="building" />
+              {item.client}
+            </span>
+            <span>
+              <Icon name="pin" />
+              {item.country} · {item.year}
+            </span>
+          </>
+        }
+      />
+      <ArticleStatement
+        tag={detail.context}
+        text={item.context}
+        aside={{
+          text: (
+            <dl className="afacts">
+              <dt className="afacts__title">{detail.facts.title}</dt>
+              {facts.map(([label, value]) => (
+                <div key={label}>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
+          ),
+        }}
+      />
+      <ArticleSplit title={detail.challenges} images={[item.image]}>
+        <ul>
+          {item.challenges.map((text) => (
+            <li key={text}>{text}</li>
+          ))}
+        </ul>
+      </ArticleSplit>
+      <ArticleList
+        tag={detail.actions}
+        title={item.excerpt}
+        items={item.actions.map((text) => ({ title: text }))}
+      />
+      <DetailResults item={item} />
+      <ArticleBand text={offers[item.offer]} />
+      <ArticleCta
+        title={detail.similar.title}
+        text={detail.similar.text}
+        cta={detail.similar.cta}
+      />
       <DetailMore item={item} />
     </>
   )

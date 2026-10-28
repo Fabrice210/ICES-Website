@@ -45,4 +45,5 @@
 @import './redesign/approach-timeline.css';
 /* Nouvelles pages (refonte V2). */
 @import './pages/realisations.css';
+@import './pages/article.css';
 @import './touch.css';

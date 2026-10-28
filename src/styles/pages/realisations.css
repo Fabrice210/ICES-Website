@@ -6,31 +6,6 @@
    défilement horizontal) : alternance blanc / bleu / gris clair.
    ========================================================= */
 
-/* ---------- Hero du détail : plus court que celui des pages ---------- */
-.hero--detail { height: 78vh; min-height: 560px; max-height: 760px; align-items: flex-end; }
-.hero--detail .container { padding-bottom: 72px; }
-.hero--detail h1 { max-width: 22ch; font-size: clamp(32px, 4vw, 54px); }
-.rdetail__back {
-  display: inline-flex; align-items: center; gap: 8px; margin-bottom: 28px;
-  font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-  color: color-mix(in srgb, var(--white) 80%, transparent);
-  animation: hero-fade .8s var(--ease) .2s backwards;
-}
-.rdetail__back .icon { width: 14px; height: 14px; transition: transform .3s var(--ease); }
-.rdetail__back:hover { color: var(--white); }
-.rdetail__back:hover .icon { transform: translateX(-3px); }
-.rdetail__tag {
-  display: table; margin-bottom: 18px; padding: 7px 14px; border-radius: 999px;
-  background: var(--blue); color: var(--white); font-size: 12px; font-weight: 600;
-  animation: hero-fade .8s var(--ease) .3s backwards;
-}
-.hero .container > .rdetail__meta {
-  display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 28px; max-width: none;
-  font-size: 15px; color: color-mix(in srgb, var(--white) 86%, transparent);
-}
-.rdetail__meta span { display: inline-flex; align-items: center; gap: 8px; }
-.rdetail__meta .icon { width: 16px; height: 16px; color: var(--blue-light); }
-
 /* ---------- Liste ---------- */
 .rlist { --k: 1px; position: relative; padding: 120px 0 110px; background: var(--white); color: var(--ink); }
 .rlist__head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 20px 64px; align-items: end; }
@@ -269,8 +244,6 @@
 }
 /* ---------- Téléphone ---------- */
 @media (max-width: 720px) {
-  .hero--detail { height: auto; min-height: 88svh; }
-  .hero--detail .container { padding-bottom: 48px; }
   .rlist, .rband, .rdetail { padding: 80px 0; }
   .rmore { padding: 72px 0 88px; }
   .rlist__head { grid-template-columns: 1fr; gap: 14px; }

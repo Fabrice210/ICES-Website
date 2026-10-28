@@ -1,6 +1,7 @@
 import { useCallback, useRef } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { usePauseOffscreen } from '../../hooks/usePauseOffscreen'
+import { useSmoothScroll } from '../../hooks/useSmoothScroll'
 import { useLanguage } from '../../i18n/useLanguage'
 import { Contact } from '../../sections/shared/Contact'
 import { PartnerModal } from '../partner/PartnerModal'
@@ -15,6 +16,7 @@ export function SiteLayout() {
   const { pathname } = useLocation()
   const { lang } = useLanguage()
   usePauseOffscreen()
+  useSmoothScroll(pathname !== '/')
   const dialogRef = useRef<HTMLDialogElement>(null)
   const openPartner = useCallback(() => dialogRef.current?.showModal(), [])
 
