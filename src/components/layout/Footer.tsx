@@ -6,13 +6,11 @@ import { Logo } from '../ui/Logo'
 import { SmartLink } from '../ui/SmartLink'
 
 const toLabel = (title: string) => title.charAt(0) + title.slice(1).toLowerCase()
-const WORDMARK = 'ICES'
 
 /**
  * Pied de page (refonte DA) : bleu nuit, collé sous la carte Contact. Marque + colonnes de
- * liens + implantations + réseaux, puis barre légale avec retour en haut, et un grand
- * « ICES » en contour. Apparition : le filet se dessine, les colonnes montent en décalé,
- * puis les lettres du grand mot montent une à une et se remplissent de lumière.
+ * liens + implantations + réseaux, puis barre légale avec retour en haut.
+ * Apparition : le filet se dessine, les colonnes montent en décalé.
  */
 export function Footer() {
   const { footer, languages } = useContent()
@@ -110,14 +108,6 @@ export function Footer() {
             </button>
           </div>
         </div>
-
-        <p className="foot__word" aria-hidden="true">
-          {WORDMARK.split('').map((ch, i) => (
-            <span key={i} style={{ '--i': i } as CSSProperties}>
-              {ch}
-            </span>
-          ))}
-        </p>
       </div>
     </footer>
   )
