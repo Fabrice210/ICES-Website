@@ -226,7 +226,7 @@ export interface SiteContent {
     }
   }
   prestations: {
-    hero: { image: string; title: string; text: string; cta: LinkItem }
+    hero: { tag: string; image: string; title: string; text: string; cta: LinkItem }
     domains: { label: string; title: string; intro: string[]; cards: IconCard[] }
     positioning: {
       image: string
@@ -238,7 +238,7 @@ export interface SiteContent {
     }
   }
   realisations: {
-    hero: { image: string; title: string; text: string; cta: LinkItem }
+    hero: { tag: string; image: string; title: string; text: string; cta: LinkItem }
     list: {
       label: string
       title: string

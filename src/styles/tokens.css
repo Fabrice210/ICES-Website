@@ -47,3 +47,24 @@
     max-width: calc((var(--container) + var(--gutter) * 2) / var(--z, 1));
   }
 }
+/* Grands écrans, suite : la barre d'en-tête suit son contenu agrandi, la carte Contact et le
+   globe d'implantation grandissent aussi. */
+@media (min-width: 1680px) and (min-height: 900px) {
+  /* La barre grandit avec son contenu ; les sections calées sous elle suivent. Dans les blocs
+     zoomés, la valeur d'origine est rétablie : le zoom l'agrandit déjà. */
+  :root { --header-h: calc(84px * var(--z, 1)); }
+  .site-header > .container,
+  main section:not(.tgt, .amb, .offr, .apt, .real2, .news, .team3, .aud) > .container,
+  footer .container,
+  .ctc__inner,
+  .home-hero__aside, .home-hero__actions, .home-hero__band-inner { --header-h: 84px; }
+  .ctc__inner {
+    zoom: var(--z, 1);
+    max-width: calc((var(--container) + var(--gutter) * 2) / var(--z, 1));
+  }
+  html .globe { width: min(100%, calc(600px * var(--z, 1)), 72svh); }
+}
+/* Hero des sous-pages : son bloc est zoomé, la hauteur plein écran est donc ramenée à l'écran. */
+@media (min-width: 1680px) and (min-height: 900px) {
+  html .ahero__inner { min-height: calc(100svh / var(--z, 1)); }
+}

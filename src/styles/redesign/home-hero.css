@@ -364,7 +364,7 @@ body:not(.nav-open) .site-header--on-light:not(.is-scrolled) .burger { border-co
   .home-hero__inner {
     column-gap: 4vw; row-gap: 3.2vh;
     grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr) minmax(0, .75fr);
-    padding-top: calc(var(--header-h) * var(--z, 1) + 3vh); padding-bottom: 3vh;
+    padding-top: calc(var(--header-h) + 3vh); padding-bottom: 3vh;
   }
   .home-hero__title { font-size: 5.4vw; }
   .home-hero__pill { height: 62vh; }

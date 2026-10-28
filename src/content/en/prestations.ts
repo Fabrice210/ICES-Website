@@ -2,6 +2,7 @@ import type { SiteContent } from '../../types/content'
 
 export const prestations: SiteContent['prestations'] = {
   hero: {
+    tag: 'Services',
     image: 'photo-1480714378408-67cf0d13bc1b-w2000.jpg',
     title: 'Concrete solutions to turn your challenges into results.',
     text: 'ICES supports governments, institutions and organisations with services tailored to their strategic, operational and technological challenges, from design to delivery.',

@@ -2,6 +2,7 @@ import type { SiteContent } from '../../types/content'
 
 export const prestations: SiteContent['prestations'] = {
   hero: {
+    tag: 'Prestations',
     image: 'photo-1480714378408-67cf0d13bc1b-w2000.jpg',
     title: 'Des solutions concrètes pour transformer vos enjeux en résultats.',
     text: 'ICES accompagne les États, institutions et organisations à travers des prestations adaptées à leurs enjeux stratégiques, opérationnels et technologiques, de la conception à la mise en œuvre.',

@@ -7,6 +7,7 @@ import type { SiteContent } from '../../types/content'
  */
 export const realisations: SiteContent['realisations'] = {
   hero: {
+    tag: 'Réalisations',
     image: 'photo-1487958449943-2429e8be8625-w2000.jpg',
     title: 'Des missions concrètes, des transformations mesurables.',
     text: 'Derrière chaque mission, une problématique, des parties prenantes et un objectif de transformation. Découvrez comment nos expertises se traduisent en interventions sur le terrain.',
