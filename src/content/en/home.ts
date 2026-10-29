@@ -51,20 +51,7 @@ export const home: SiteContent['home'] = {
   vision: {
     label: 'Our ambition',
     title: 'Complexity is becoming the norm. We choose to make it a lever.',
-    paragraphs: [
-      'French-speaking Africa stands at a critical crossroads. Accelerating technology, the energy transition, geo-economic realignment and new societal expectations are reshaping the balance.',
-      'ICES supports this transformation by combining strategic consulting, project engineering, governance, technology and territorial intelligence.',
-    ],
-    ambition: {
-      label: 'Our ambition',
-      text: 'Turning complex challenges into sustainable trajectories, measurable impact and lasting capabilities for our clients and their ecosystems.',
-    },
-    image: 'photo-1552664730-d307ca884978-w1400.jpg',
-    readMore: 'Read more',
-    readLess: 'Show less',
-    valuesLabel: 'Our values',
-    valuesIntro:
-      'Five principles that guide every mission, from diagnosis to delegated management.',
+    lead: 'Turning complex challenges into sustainable trajectories, measurable impact and lasting capabilities, by combining strategic consulting, project engineering, governance, technology and territorial intelligence.',
     values: [
       {
         label: 'Sovereignty',

@@ -1,0 +1,205 @@
+<title>Passation ICES</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Mise en page : bandeau bleu nuit ICES, puis journal de session et fiches d'état en alternance bleu / blanc. */
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --line: #dcdfe5;
+  --ink: #13284a;
+  --text: #3c4352;
+  --muted: #6b7280;
+  --blue: #0a74bf;
+  --navy: #13284a;
+  --on-navy: #ffffff;
+  --on-navy-soft: #c9d8ec;
+  --accent-on-navy: #4aa3e6;
+  --warn: #9a5b00;
+  --warn-soft: #fff1d6;
+  --font: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1424; --surface: #111e34; --line: #22324f; --ink: #eef3fa; --text: #c5cfdf; --muted: #8d99ae;
+    --blue: #4aa3e6; --navy: #0e1a2b; --on-navy: #ffffff; --on-navy-soft: #b9c9e0; --accent-on-navy: #4aa3e6;
+    --warn: #f0b44c; --warn-soft: #2b2210; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1424; --surface: #111e34; --line: #22324f; --ink: #eef3fa; --text: #c5cfdf; --muted: #8d99ae;
+  --blue: #4aa3e6; --navy: #0e1a2b; --on-navy: #ffffff; --on-navy-soft: #b9c9e0; --accent-on-navy: #4aa3e6;
+  --warn: #f0b44c; --warn-soft: #2b2210; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 56px; -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 16px; }
+h1, h2, h3 { margin: 0; color: var(--ink); text-wrap: balance; }
+p { margin: 0; }
+code { font-family: var(--mono); font-size: .85em; overflow-wrap: anywhere; }
+.label { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+.hero {
+  background: var(--navy); color: var(--on-navy); border-radius: 26px; padding: clamp(22px, 4vw, 44px);
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 28px; align-items: end;
+}
+.hero-main { display: grid; gap: 14px; min-width: 0; }
+.hero h1 { color: var(--on-navy); font-size: clamp(40px, 7vw, 76px); font-weight: 800; line-height: .98; letter-spacing: -.03em; }
+.hero h1 span { color: var(--accent-on-navy); }
+.hero .label { color: var(--on-navy-soft); }
+.hero-side { display: grid; gap: 12px; color: var(--on-navy-soft); min-width: 0; }
+.chip { display: inline-flex; align-items: center; gap: 8px; border: 1px solid color-mix(in srgb, var(--on-navy) 25%, transparent); border-radius: 999px; padding: 4px 12px; font-size: 12px; font-weight: 600; color: var(--on-navy); width: fit-content; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-on-navy); }
+.figures { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.figure { background: color-mix(in srgb, var(--on-navy) 8%, transparent); border-radius: 14px; padding: 10px 12px; display: grid; }
+.figure b { color: var(--on-navy); font-size: 26px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(18px, 3vw, 28px); display: grid; gap: 16px; min-width: 0; align-content: start; }
+.panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.panel h2 { font-size: 24px; font-weight: 800; letter-spacing: -.01em; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+
+.entry { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 18px; padding-block: 16px; border-top: 1px solid var(--line); }
+.entry:first-child { border-top: 0; padding-top: 0; }
+.entry-meta { display: grid; gap: 4px; align-content: start; }
+.entry-num { font-size: 34px; font-weight: 800; line-height: 1; color: var(--blue); font-variant-numeric: tabular-nums; }
+.entry h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.quote { border-left: 2px solid var(--blue); padding-left: 12px; color: var(--muted); font-style: italic; margin-bottom: 4px; }
+.entry ul { margin: 6px 0 0; padding-left: 18px; }
+.entry li + li { margin-top: 4px; }
+
+.kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 18px; margin: 0; }
+.kv dt { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.kv dd { margin: 0; min-width: 0; }
+.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.checklist li { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 10px; }
+.box { width: 14px; height: 14px; border: 1.5px solid var(--muted); border-radius: 4px; margin-top: 5px; }
+.alerts { display: grid; gap: 10px; }
+.alert { background: var(--warn-soft); color: var(--warn); border-radius: 14px; padding: 12px 14px; display: grid; gap: 2px; }
+.alert strong { color: var(--ink); }
+
+.next { background: var(--blue); color: var(--on-navy); border-radius: 20px; padding: clamp(18px, 3vw, 28px); display: grid; gap: 12px; }
+.next h2 { color: var(--on-navy); font-size: 24px; font-weight: 800; }
+.next .label { color: color-mix(in srgb, var(--on-navy) 80%, transparent); }
+.next ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+
+.empty { color: var(--muted); }
+footer { color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 860px) { .hero, .grid-2 { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 520px) {
+  .entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .kv { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .kv dd { margin-bottom: 8px; }
+}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-main">
+      <span class="label">Site ICES · ices-consulting.com</span>
+      <h1>Passation <span>du site</span></h1>
+    </div>
+    <div class="hero-side">
+      <span class="chip"><span class="dot"></span><span id="updated">Chargement…</span></span>
+      <p id="status">Le point de reprise du site, tenu à jour à chaque session.</p>
+      <div class="figures">
+        <div class="figure"><span class="label">Entrées</span><b id="f-entries">–</b></div>
+        <div class="figure"><span class="label">Commits</span><b id="f-commits">–</b></div>
+        <div class="figure"><span class="label">À confirmer</span><b id="f-todo">–</b></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="journal">
+    <div class="panel-head"><h2 id="journal">Journal de session</h2><span class="label">Du plus récent au plus ancien</span></div>
+    <div id="log"><p class="empty">Le journal apparaît ici dès que la première entrée est enregistrée.</p></div>
+  </section>
+
+  <div class="grid-2">
+    <section class="panel" aria-labelledby="etat">
+      <div class="panel-head"><h2 id="etat">État du projet</h2></div>
+      <dl class="kv" id="state"><dt>État</dt><dd class="empty">En attente des données.</dd></dl>
+    </section>
+    <section class="panel" aria-labelledby="confirmer">
+      <div class="panel-head"><h2 id="confirmer">À confirmer</h2><span class="label">Par toi</span></div>
+      <ul class="checklist" id="todo"><li class="empty">Rien pour l'instant.</li></ul>
+      <div class="alerts" id="attention"></div>
+    </section>
+  </div>
+
+  <section class="next" aria-labelledby="suite">
+    <p class="label">Prochaines étapes</p>
+    <h2 id="suite">Reprendre ici</h2>
+    <ol id="next"><li>Les prochaines étapes apparaissent ici.</li></ol>
+  </section>
+
+  <footer>
+    <span>Source de la page : <code>docs/passation.html</code></span>
+    <span>Dépôt : github.com/Fabrice210/ICES-Website</span>
+  </footer>
+</div>
+
+<script>
+const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+
+function renderEntries(docs) {
+  document.getElementById('f-entries').textContent = docs.length;
+  if (!docs.length) return;
+  const log = document.getElementById('log');
+  log.replaceChildren();
+  docs.forEach((d) => {
+    const e = d.data() || {};
+    const art = el('article', 'entry');
+    const meta = el('div', 'entry-meta');
+    meta.append(el('span', 'entry-num', String(e.n ?? '').padStart(2, '0')), el('span', 'label', [e.date, e.tag].filter(Boolean).join(' · ')));
+    const body = el('div');
+    body.append(el('h3', null, e.title || ''));
+    if (e.quote) body.append(el('p', 'quote', '« ' + e.quote + ' »'));
+    const ul = el('ul');
+    (e.items || []).forEach((t) => ul.append(el('li', null, t)));
+    body.append(ul);
+    art.append(meta, body);
+    log.append(art);
+  });
+}
+
+function renderState(s) {
+  if (!s) return;
+  document.getElementById('updated').textContent = s.updated || 'À jour';
+  if (s.status) document.getElementById('status').textContent = s.status;
+  document.getElementById('f-commits').textContent = s.commits ?? '–';
+  const kv = document.getElementById('state');
+  kv.replaceChildren();
+  (s.facts || []).forEach((f) => kv.append(el('dt', null, f.k), el('dd', null, f.v)));
+  const todo = document.getElementById('todo');
+  todo.replaceChildren();
+  (s.todo || []).forEach((t) => { const li = el('li'); li.append(el('span', 'box'), el('span', null, t)); todo.append(li); });
+  if (!(s.todo || []).length) todo.append(el('li', 'empty', "Rien pour l'instant."));
+  document.getElementById('f-todo').textContent = (s.todo || []).length;
+  const att = document.getElementById('attention');
+  att.replaceChildren();
+  (s.attention || []).forEach((a) => { const box = el('div', 'alert'); box.append(el('strong', null, a.title), el('span', null, a.text)); att.append(box); });
+  const next = document.getElementById('next');
+  next.replaceChildren();
+  (s.next || []).forEach((t) => next.append(el('li', null, t)));
+}
+
+(async () => {
+  const db = await window.claude?.use?.('db');
+  if (!db) {
+    document.getElementById('updated').textContent = 'Base indisponible';
+    document.getElementById('log').replaceChildren(el('p', 'empty', 'Ouvre la page connecté à ton compte claude.ai pour voir le journal.'));
+    return;
+  }
+  db.collection('entries').orderBy('n', 'desc').onSnapshot((snap) => renderEntries(snap.docs), () => {});
+  db.doc('state/main').onSnapshot((snap) => renderState(snap.exists ? snap.data() : null), () => {});
+})();
+</script>

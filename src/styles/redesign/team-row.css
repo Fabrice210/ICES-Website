@@ -120,3 +120,15 @@
   .team3__text > *, .team3__card { opacity: 1; transform: none; transition: none; }
   .team3__marquee ul, .team3__who { animation: none; }
 }
+/* Carte du dirigeant : fond bleu, nom et fonction en bas à gauche. */
+.team3__plate {
+  position: absolute; left: calc(var(--k) * 24); right: calc(var(--k) * 24); bottom: calc(var(--k) * 24); z-index: 3;
+  display: flex; flex-direction: column; gap: calc(var(--k) * 6); color: var(--white);
+}
+.team3__plate strong { font-size: max(22px, calc(var(--k) * 30)); font-weight: 800; line-height: 1.1; letter-spacing: -.02em; }
+.team3__plate span { font-size: max(14px, calc(var(--k) * 16)); color: color-mix(in srgb, var(--white) 85%, transparent); }
+@media (max-width: 720px) {
+  .team3__plate { left: 18px; right: 18px; bottom: 18px; }
+  .team3__plate strong { font-size: 24px; }
+  .team3__plate span { font-size: var(--m-body); }
+}

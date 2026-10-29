@@ -232,3 +232,16 @@
   .va-line__fill { transform: none; }
   .va-ring__fg { stroke-dashoffset: 0; }
 }
+/* À côté d'un texte (sans titre, cf. Vision) : deux colonnes, Souveraineté haute. */
+@media (min-width: 721px) {
+  .vbento-wrap--side .vbento {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "v1 v2" "v1 v3" "v4 v5";
+    gap: calc(var(--k) * 12); max-width: calc(var(--k) * 520); margin-left: auto;
+  }
+  .vbento-wrap--side .vbento__tile { min-height: calc(var(--k) * 132); padding: calc(var(--k) * 18); border-radius: calc(var(--k) * 22); }
+  .vbento-wrap--side .vbento__foot h4 { font-size: max(15px, calc(var(--k) * 18)); }
+  .vbento-wrap--side .vbento__text { font-size: max(12px, calc(var(--k) * 13)); }
+}
+@media (min-width: 721px) and (max-width: 1100px) and (orientation: portrait) {
+  .vbento-wrap--side .vbento { max-width: none; margin-left: 0; }
+}

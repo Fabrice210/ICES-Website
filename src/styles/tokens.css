@@ -68,3 +68,9 @@
 @media (min-width: 1680px) and (min-height: 900px) {
   html .ahero__inner { min-height: calc(100svh / var(--z, 1)); }
 }
+/* Grands écrans : les boutons des sections dimensionnées en vw (exclues du zoom des conteneurs)
+   et le curseur personnalisé suivent la même échelle que le reste. */
+@media (min-width: 1680px) and (min-height: 900px) {
+  main section:is(.tgt, .amb, .offr, .apt, .real2, .news, .team3, .aud) :is(.btn, .link-round):not(.tgt__link) { zoom: var(--z, 1); }
+  .cursor-dot::before, .cursor-ring::before, .cursor-ring__label { zoom: var(--z, 1); }
+}

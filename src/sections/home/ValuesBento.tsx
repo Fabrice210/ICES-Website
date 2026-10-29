@@ -72,7 +72,8 @@ const art = (today: string): ReactNode[] => [
 ]
 
 /**
- * « Nos valeurs » : grand titre noir mis en valeur au-dessus, puis une grille bento ;
+ * « Nos valeurs » : grille bento, avec en option un grand titre noir au-dessus (sans titre,
+ * elle se range en deux colonnes à côté d'un texte) ;
  * chaque valeur a sa teinte (palette de l'ancien design), une mini-animation, et sa
  * description au survol.
  */
@@ -81,8 +82,8 @@ export function ValuesBento({
   intro,
   values,
 }: {
-  title: string
-  intro: string
+  title?: string
+  intro?: string
   values: Value[]
 }) {
   const { ref, inView } = useInView<HTMLDivElement>(0.2)
@@ -90,11 +91,16 @@ export function ValuesBento({
   const ART = art(lang === 'en' ? 'Today' : 'Aujourd’hui')
 
   return (
-    <div ref={ref} className={inView ? 'vbento-wrap is-in' : 'vbento-wrap'}>
-      <div className="vbento-head">
-        <h3 className="vbento-head__title">{title}</h3>
-        <p className="vbento-head__intro">{intro}</p>
-      </div>
+    <div
+      ref={ref}
+      className={['vbento-wrap', title ? '' : 'vbento-wrap--side', inView ? 'is-in' : ''].filter(Boolean).join(' ')}
+    >
+      {title && (
+        <div className="vbento-head">
+          <h3 className="vbento-head__title">{title}</h3>
+          {intro && <p className="vbento-head__intro">{intro}</p>}
+        </div>
+      )}
       <div className="vbento">
         {values.map((value, i) => (
           <article

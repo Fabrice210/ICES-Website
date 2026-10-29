@@ -1,7 +1,5 @@
-import { useRef, useState, type CSSProperties } from 'react'
-import { image } from '../../assets/images'
+import { useRef, type CSSProperties } from 'react'
 import { Icon } from '../../components/icons/Icon'
-import { FallbackImg } from '../../components/ui/FallbackImg'
 import { MaskedWords } from '../../components/ui/MaskedWords'
 import { ValuesBento } from './ValuesBento'
 import { SmartLink } from '../../components/ui/SmartLink'
@@ -10,25 +8,21 @@ import { useStackPin } from '../../hooks/useStackPin'
 import { useContent } from '../../i18n/useLanguage'
 
 /**
- * Notre ambition (ex-« Notre vision ») : bande blanche qui monte en arc sur le bleu.
- * Écran 1 : titre, texte et lien à gauche, photo en arche avec la carte « Notre
- * ambition » flottante à droite. Écran 2 : les valeurs en grille bento (ValuesBento).
+ * Notre ambition et nos valeurs, en un seul écran : bande blanche qui monte en arc sur le bleu.
+ * À gauche le titre, l'ambition mise en valeur en sous-texte et le lien ; à droite les cinq
+ * valeurs en grille bento.
  */
 export function Vision() {
   const { vision } = useContent().home
   const sectionRef = useRef<HTMLElement>(null)
-  // Figée à la fin : le dôme bleu de « Nos offres » monte par-dessus les valeurs.
+  // Figée à la fin : le dôme bleu de « Nos offres » monte par-dessus.
   useStackPin(sectionRef)
   const { ref: headRef, inView: headIn } = useInView<HTMLDivElement>(0.3)
-  const { ref: blocksRef, inView: blocksIn } = useInView<HTMLDivElement>(0.25)
-  const [expanded, setExpanded] = useState(false)
 
   return (
     <section ref={sectionRef} className="amb curve-top" id="vision" aria-labelledby="vision-title">
-      {/* Point d'arrêt doux : Ambition posée en haut de l'écran. */}
+      {/* Point d'arrêt doux : la section posée en haut de l'écran. */}
       <span className="snap-point amb__snap-top" aria-hidden="true" />
-      {/* Écran 1 : titre + texte + lien à gauche ; photo en arche + carte « Notre ambition »
-          flottante à droite. Centré sous le header. */}
       <div className="container amb__screen">
         <div className="amb__split">
           <div
@@ -38,24 +32,9 @@ export function Vision() {
             <h2 className="amb__title" id="vision-title">
               <MaskedWords text={vision.title} />
             </h2>
-            <p
-              className={expanded ? 'amb__lead reveal-item' : 'amb__lead is-clamped reveal-item'}
-              style={{ '--i': 3 } as CSSProperties}
-            >
-              {vision.paragraphs.join(' ')}
-            </p>
-            {/* Mobile : texte coupé à 3 lignes, dépliable ; carte « Notre ambition » compacte. */}
-            <button
-              type="button"
-              className="amb__more"
-              aria-expanded={expanded}
-              onClick={() => setExpanded((v) => !v)}
-            >
-              {expanded ? vision.readLess : vision.readMore}
-            </button>
-            <div className="amb__card amb__card--inline">
-              <p className="amb__card-label">{vision.ambition.label}</p>
-              <p className="amb__card-text">{vision.ambition.text}</p>
+            <div className="amb__lead reveal-item" style={{ '--i': 3 } as CSSProperties}>
+              <p className="amb__label">{vision.label}</p>
+              <p className="amb__lead-text">{vision.lead}</p>
             </div>
             <SmartLink
               className="link-round reveal-item"
@@ -69,21 +48,8 @@ export function Vision() {
             </SmartLink>
           </div>
 
-          <div ref={blocksRef} className={blocksIn ? 'amb__visual is-in' : 'amb__visual'}>
-            <div className="amb__arch">
-              <FallbackImg src={image(vision.image)} alt="" loading="lazy" />
-            </div>
-            <div className="amb__card">
-              <p className="amb__card-label">{vision.ambition.label}</p>
-              <p className="amb__card-text">{vision.ambition.text}</p>
-            </div>
-          </div>
+          <ValuesBento values={vision.values} />
         </div>
-      </div>
-
-      {/* Écran 2 : les valeurs en grille bento (le titre est une tuile), centrées sous le header. */}
-      <div className="container amb__screen">
-        <ValuesBento title={vision.valuesLabel} intro={vision.valuesIntro} values={vision.values} />
       </div>
     </section>
   )

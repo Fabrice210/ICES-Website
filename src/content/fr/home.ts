@@ -51,20 +51,7 @@ export const home: SiteContent['home'] = {
   vision: {
     label: 'Notre ambition',
     title: 'La complexité devient la norme. Nous choisissons d’en faire un levier.',
-    paragraphs: [
-      'L’Afrique francophone se trouve à un carrefour critique. Accélération technologique, transition énergétique, recomposition géoéconomique et nouvelles attentes sociétales redessinent les équilibres.',
-      'ICES accompagne cette transformation en combinant conseil stratégique, ingénierie de projets, gouvernance, technologies et intelligence des territoires.',
-    ],
-    ambition: {
-      label: 'Notre ambition',
-      text: 'Transformer les défis complexes en trajectoires durables, en impacts mesurables et en capacités pérennes pour nos clients et leurs écosystèmes.',
-    },
-    image: 'photo-1552664730-d307ca884978-w1400.jpg',
-    readMore: 'Lire la suite',
-    readLess: 'Réduire',
-    valuesLabel: 'Nos valeurs',
-    valuesIntro:
-      'Cinq principes qui guident chacune de nos missions, du diagnostic à la gestion déléguée.',
+    lead: 'Transformer les défis complexes en trajectoires durables, en impacts mesurables et en capacités pérennes, en combinant conseil stratégique, ingénierie de projets, gouvernance, technologies et intelligence des territoires.',
     values: [
       {
         label: 'Souveraineté',

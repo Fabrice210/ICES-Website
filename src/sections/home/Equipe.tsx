@@ -1,36 +1,22 @@
-import { useState, type CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
 import { image } from '../../assets/images'
 import { FallbackImg } from '../../components/ui/FallbackImg'
 import { useInView } from '../../hooks/useInView'
-import { useInterval } from '../../hooks/useInterval'
-import { useCanHover, useReducedMotion } from '../../hooks/useMediaQuery'
 import { useContent } from '../../i18n/useLanguage'
 import { PresenceGlobe } from './PresenceGlobe'
 
 /**
  * Équipe & Implantation (maquette Figma « Group 11 ») : texte à gauche (étiquette, titre,
  * intro), deux cartes aux couleurs ICES à droite.
- * - Carte équipe : les portraits défilent au survol (sur écran tactile, en continu) ; nom,
- *   fonction et expertise du membre affiché sous la carte.
+ * - Carte équipe : fond bleu avec le nom et la fonction du dirigeant (sans photo pour l'instant).
  * - Carte partenaires : bleue, les logos défilent en continu à la verticale.
  * La carte d'implantation reste dessous.
  */
 export function Equipe() {
   const { team } = useContent().home
-  const members = team.tabs.flatMap((tab) => tab.members)
-  const canHover = useCanHover()
-  const reduceMotion = useReducedMotion()
-  const [hovered, setHovered] = useState(false)
-  const [current, setCurrent] = useState(0)
+  // Le dirigeant : premier membre de l'équipe dirigeante.
+  const manager = team.tabs[0].members[0]
   const { ref, inView } = useInView<HTMLDivElement>(0.25)
-
-  // Survol (souris) : défilement rapide ; tactile : défilement continu plus lent.
-  const running = inView && !reduceMotion && (canHover ? hovered : true)
-  useInterval(
-    () => setCurrent((c) => (c + 1) % members.length),
-    running ? (canHover ? 1300 : 3200) : null
-  )
-  const member = members[current]
   // Liste répétée (la boucle défile d'une moitié) : le cadre n'est jamais vide, même avec peu de logos.
   const partners = Array.from({ length: 4 }, () => team.partners.items).flat()
 
@@ -46,36 +32,14 @@ export function Equipe() {
         </div>
 
         <div className="team3__cards">
-          <figure
-            className="team3__card team3__card--team"
-            style={{ '--i': 0 } as CSSProperties}
-            onPointerEnter={() => setHovered(true)}
-            onPointerLeave={() => setHovered(false)}
-          >
-            <div className="team3__frame">
-              <span className="team3__badge">{team.teamCard.label}</span>
-              {members.map((m, i) => (
-                <FallbackImg
-                  key={m.photo}
-                  className={i === current ? 'team3__photo is-active' : 'team3__photo'}
-                  src={image(m.photo)}
-                  alt={i === current ? m.alt : ''}
-                  loading="lazy"
-                />
-              ))}
-              <div className="team3__progress" aria-hidden="true">
-                {members.map((m, i) => (
-                  <span key={m.photo} className={i === current ? 'is-active' : undefined} />
-                ))}
-              </div>
+          <figure className="team3__card team3__card--team" style={{ '--i': 0 } as CSSProperties}>
+            <div className="team3__frame team3__frame--blue">
+              <span className="team3__badge team3__badge--light">{team.teamCard.label}</span>
+              <figcaption className="team3__plate">
+                <strong>{manager.name}</strong>
+                <span>{manager.role}</span>
+              </figcaption>
             </div>
-            <figcaption className="team3__caption" aria-live="polite">
-              <span key={current} className="team3__who">
-                <strong>{member.name}</strong>
-                <span>{member.role}</span>
-              </span>
-              {canHover && <span className="team3__hint">{team.teamCard.hint}</span>}
-            </figcaption>
           </figure>
 
           <figure
