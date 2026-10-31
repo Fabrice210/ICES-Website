@@ -1,0 +1,185 @@
+/* =========================================================
+   ICES — thème « DA du site » pour les e-mails et leurs versions desktop.
+   Chargé en dernier. Couleurs et typographie strictement issues de
+   ICES-Website/src/styles/tokens.css ; formes reprises de primitives.css,
+   pages/article.css et redesign/footer-premium.css. Textes alignés à gauche.
+   ========================================================= */
+
+:root {
+  --blue: #0A74BF;
+  --blue-dark: #075C99;
+  --blue-light: #1E8FD9;
+  --navy: #13284A;
+  --ink: #1B1B1B;
+  --text: #3C3C3C;
+  --muted: #6B6B6B;
+  --gray-100: #F4F5F7;
+  --gray-200: #ECECEC;
+  --gray-300: #DCDCDC;
+  --white: #FFFFFF;
+  --dark: #0E1A2B;
+  --font: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+
+  /* Variables du gabarit e-mail ramenées sur les tokens du site */
+  --cyan: var(--blue);
+  --line: var(--gray-300);
+  --canvas: var(--gray-100);
+  --soft: var(--gray-100);
+  --footer-text: color-mix(in srgb, var(--white) 72%, transparent);
+  --footer-accent: var(--white);
+}
+
+/* Montserrat partout */
+.email,
+.ff-arimo, .ff-mont, .ff-roboto, .ff-inter,
+.logo p { font-family: var(--font); font-variation-settings: normal; }
+
+body, .canvas { background: var(--gray-100); }
+.is-desktop, .is-desktop .canvas { background: var(--white); }
+
+/* Textes alignés à gauche, comme sur le site */
+.email .justify,
+.promise,
+.difference p { text-align: left; }
+
+/* Filets */
+.rule-top { background: var(--blue); }
+.rule-bottom { background: var(--blue); }
+.separator { background: var(--gray-300); }
+.mark { background: var(--blue); }
+
+/* En-tête : photo sous dégradé sombre (hero des sous-pages) */
+.hero__bg::after,
+.hero:has(.promise--cyan) .hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, var(--dark) 0%, color-mix(in srgb, var(--dark) 82%, transparent) 38%, color-mix(in srgb, var(--dark) 15%, transparent) 72%, color-mix(in srgb, var(--dark) 35%, transparent) 100%);
+}
+.is-desktop .hero__bg::after,
+.is-desktop .hero:has(.promise--cyan) .hero__bg::after {
+  background:
+    linear-gradient(90deg, var(--dark) 0%, color-mix(in srgb, var(--dark) 84%, transparent) 36%, color-mix(in srgb, var(--dark) 30%, transparent) 58%, transparent 74%),
+    linear-gradient(0deg, color-mix(in srgb, var(--dark) 55%, transparent) 0%, transparent 30%);
+}
+/* Logo aux couleurs du logo du site (Logo.tsx) : sur fond sombre, lettres et deux traits
+   en blanc ; les traits #232F50 et le point #00AED2 gardent leur couleur. */
+.hero .logo img[src*="logo-lettrage"],
+.hero .logo img[src*="logo-symbole-3"],
+.hero .logo img[src*="logo-symbole-4"] { filter: brightness(0) invert(1); }
+.hero__sep { background: color-mix(in srgb, var(--white) 22%, transparent); }
+.promise,
+.promise--cyan { color: var(--white); }
+.promise__title { font-weight: 700; letter-spacing: -.03em; }
+.promise__title span { color: inherit !important; }
+.promise__lead { font-weight: 500; letter-spacing: -.01em; color: color-mix(in srgb, var(--white) 86%, transparent); }
+
+/* Lettre d’ouverture */
+.p--greet { color: var(--navy); }
+.p--body, .text { color: var(--text); }
+.navy { color: var(--navy); }
+.conviction { border-left-color: var(--blue); }
+.conviction p { font-weight: 600; letter-spacing: -.02em; color: var(--navy); }
+
+/* Titres de section */
+.section-title h2 { font-weight: 600; letter-spacing: -.02em; color: var(--navy); }
+
+/* Services : liste à tirets bleus (sous-pages du site) */
+.service { position: relative; padding-left: 20px; color: var(--text); }
+.service.b, .service b, .service .b { color: var(--navy); }
+.service::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 10px;
+  height: 2px;
+  background: var(--blue);
+}
+/* Desktop : cartes arrondies sur fond gris */
+.is-desktop .service {
+  padding: 44px 28px 32px;
+  border-top: 0;
+  border-radius: 22px;
+  background: var(--white);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.is-desktop .service::before { left: 28px; top: 28px; width: 24px; }
+.is-desktop .service:hover { transform: translateY(-4px); box-shadow: 0 18px 40px color-mix(in srgb, var(--navy) 10%, transparent); }
+
+/* Notre différence : bande bleue (alternance bleu / blanc) */
+.difference { background: var(--blue); }
+.difference .mark { background: var(--white); }
+.difference p { font-weight: 600; letter-spacing: -.02em; color: var(--white); }
+
+/* Appel à l’action : bouton pilule */
+.cta__button {
+  border-radius: 999px;
+  padding: 0 1.9em;
+  background: var(--blue);
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color .25s var(--ease);
+}
+.cta__button:hover { background: var(--blue-dark); }
+.cta__note { color: var(--muted); }
+.signature__team { color: var(--navy); }
+.signature__name { color: var(--muted); }
+
+/* Pied de page : bleu nuit, textes clairs */
+.footer { background: var(--dark); }
+.footer .footer__bg,
+.footer .footer__bar,
+.footer .footer__fb-glyph { display: none; }
+.footer .footer__logo { width: auto; }
+.footer .footer__divider-v,
+.footer .footer__divider-h { filter: brightness(0) invert(1); opacity: .16; }
+.footer__tagline,
+.footer__legal { color: var(--footer-text); }
+.footer__city { color: var(--white); font-weight: 600; }
+.footer__phone,
+.footer__mail,
+.footer__web { color: var(--footer-text); }
+.footer__social span,
+.footer__social .footer__linkedin {
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--white) 22%, transparent);
+  border-radius: 50%;
+  background: transparent;
+}
+.footer__social span img,
+.footer__social .footer__linkedin img {
+  position: static;
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+.is-desktop .footer__social { gap: 10px; }
+.is-desktop .footer__social span { width: 44px; height: 44px; }
+.is-desktop .footer__social span img,
+.is-desktop .footer__social .footer__linkedin img { width: 17px; height: 17px; }
+.is-desktop .footer__tagline--1 { top: 116px; }
+.is-desktop .footer__social { top: 162px; }
+
+/* Formulaires « Précisez votre besoin » : champs et choix arrondis, focus bleu */
+.form-back { color: var(--blue); font-weight: 600; }
+.form-back:hover { color: var(--blue-dark); }
+.form__legend { font-weight: 600; letter-spacing: -.02em; }
+.field__label { font-weight: 600; }
+.field input:not([type="checkbox"], [type="radio"]),
+.field select,
+.field textarea { border-color: var(--gray-300); border-radius: 12px; }
+.choice { border-color: var(--gray-300); border-radius: 14px; }
+.choice:has(input:checked) { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 8%, var(--white)); }
+.choice--consent, .choice--consent:has(input:checked) { border: 0; background: none; }
+.form__summary, .form__done { border-left: 0; border-radius: 22px; padding: 24px 28px; }
+.form__done { background: color-mix(in srgb, var(--blue) 10%, var(--white)); }
+.form__done button { border-radius: 999px; border-color: var(--navy); }
+
+@media (prefers-reduced-motion: reduce) {
+  .is-desktop .service, .cta__button { transition: none; }
+  .is-desktop .service:hover { transform: none; }
+}

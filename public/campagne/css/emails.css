@@ -1,0 +1,296 @@
+/* ICES — gabarit commun des 6 e-mails (converti de Figma S9wSUNBHYLt9D3gXUolwok).
+   Chaque bloc porte le nom du calque Figma correspondant. */
+
+:root {
+  --cyan: #00aed2;
+  --navy: #232f50;
+  --text: #364154;
+  --muted: #687386;
+  --line: #dfe6ed;
+  --canvas: #e2eef1;
+  --footer-text: #5b6b82;
+  --footer-accent: #28acea;
+  --linkedin: #0b5ac0;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  -webkit-font-smoothing: antialiased;
+}
+
+p { margin: 0; }
+
+/* Familles de polices utilisées dans les maquettes */
+.ff-arimo { font-family: 'Arimo', Arial, sans-serif; }
+.ff-mont { font-family: 'Montserrat', Arial, sans-serif; }
+.ff-roboto { font-family: 'Roboto', Arial, sans-serif; font-variation-settings: 'wdth' 100; }
+.ff-inter { font-family: 'Inter', Arial, sans-serif; }
+
+.b { font-weight: 700; }
+.r { font-weight: 400; }
+.navy { color: var(--navy); }
+.text { color: var(--text); }
+.justify { text-align: justify; }
+.pre > p { white-space: pre-wrap; }
+
+/* Cadre (frame 720 px) */
+.canvas {
+  width: 720px;
+  padding: 0 19px 32px;
+  background: var(--canvas);
+}
+
+/* E-mail ICES */
+.email {
+  width: 682px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Filet de marque / Filet de fermeture */
+.rule-top { height: 5px; background: var(--cyan); }
+.rule-bottom { height: 4px; background: var(--cyan); }
+
+/* En-tête */
+.hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 30px 0 28px 40px;
+}
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero__bg img {
+  position: absolute;
+  width: 100%;
+  height: 351.5%;
+  max-width: none;
+  left: var(--x, 0);
+  top: var(--y, 0);
+}
+.hero__identity {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hero__sep {
+  position: relative;
+  height: 1px;
+  background: var(--line);
+}
+
+/* Logo ICES original (217 × 61) */
+.logo {
+  position: relative;
+  width: 217px;
+  height: 61px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.logo img { position: absolute; display: block; max-width: none; }
+.logo p {
+  position: absolute;
+  left: 158.9px;
+  height: 10.99px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 9.07px;
+  line-height: normal;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* Promesse éditoriale */
+.promise {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #fff;
+  text-align: justify;
+  word-break: break-word;
+}
+.promise--cyan { color: var(--cyan); }
+.promise__title { font-size: 32px; line-height: 1.16; font-weight: 700; }
+.promise__lead { font-size: 16px; line-height: 25px; font-weight: 600; }
+
+/* Lettre d’ouverture */
+.letter {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 40px 40px;
+}
+.p { font-size: 16px; line-height: 26px; word-break: break-word; }
+.p--greet { font-weight: 700; color: var(--navy); }
+.p--body { color: var(--text); }
+
+/* Conviction */
+.conviction {
+  border-left: 3px solid var(--cyan);
+  padding: 4px 0 4px 20px;
+}
+.conviction p {
+  font-size: 20px;
+  line-height: 29px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* Sections de contenu */
+.section {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.section--about { width: 640px; gap: 24px; padding: 0 40px 40px; }
+.section--services { width: 640px; gap: 14px; padding: 40px; }
+.section--contact { gap: 24px; padding: 40px; }
+.separator { height: 1px; background: var(--line); }
+
+/* Titre de section */
+.section-title {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.mark { width: 28px; height: 3px; background: var(--cyan); }
+.section-title h2 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--navy);
+  word-break: break-word;
+}
+
+/* Présentation et mission */
+.stack-16 { display: flex; flex-direction: column; gap: 16px; }
+
+/* Liste des services */
+.services { display: flex; flex-direction: column; gap: 18px; }
+.service {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--navy);
+  word-break: break-word;
+}
+
+/* Notre différence */
+.difference {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 40px;
+  background: var(--navy);
+}
+.difference p {
+  font-size: 23px;
+  line-height: 31px;
+  font-weight: 700;
+  color: #fff;
+  text-align: justify;
+  word-break: break-word;
+}
+
+/* Appel à l’action */
+.cta { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.cta__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 24px;
+  border-radius: 4px;
+  background: var(--cyan);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: normal;
+  color: var(--navy);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.cta__note {
+  align-self: stretch;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--muted);
+}
+
+/* Signature */
+.signature {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 8px;
+}
+.signature__team { font-size: 16px; font-weight: 700; line-height: normal; color: var(--navy); }
+.signature__name { font-size: 12px; line-height: 19px; color: var(--muted); }
+
+/* Pied de mail (682 × 208, positions reprises de Figma) */
+.footer {
+  position: relative;
+  width: 682px;
+  height: 208px;
+  overflow: hidden;
+}
+.footer > * { position: absolute; }
+.footer img { display: block; max-width: none; }
+.footer__bg { left: -42px; top: 0; width: 724px; height: 208px; }
+.footer__bar { left: 0; top: 9px; width: 682px; height: 4px; }
+.footer__logo { left: 28px; top: 27px; width: 140px; height: 40.6px; }
+.footer__tagline {
+  left: 28px;
+  font-size: 10.5px;
+  line-height: normal;
+  color: var(--footer-text);
+  white-space: nowrap;
+}
+.footer__tagline--1 { top: 71px; }
+.footer__tagline--2 { top: 85px; }
+.footer__fb-glyph { left: 74.06px; top: 139.39px; width: 8.14px; height: 15.49px; }
+.footer__divider-v { left: 344px; top: 33px; width: 1px; height: 130px; }
+.footer__divider-h { left: 28px; top: 177px; width: 626px; height: 1px; }
+.footer__legal {
+  left: 259.5px;
+  top: 190.5px;
+  width: 163px;
+  font-size: 9.5px;
+  line-height: normal;
+  color: var(--footer-text);
+  text-align: center;
+  white-space: pre;
+}
+.footer__info { font-size: 12px; line-height: normal; white-space: nowrap; }
+.footer__city { left: 439px; top: 27px; font-weight: 600; color: var(--footer-accent); }
+.footer__phone { left: 439px; top: 55px; color: rgba(0, 0, 0, 0.59); }
+.footer__mail { left: 441px; top: 78px; color: rgba(0, 0, 0, 0.59); }
+.footer__web { left: 441px; top: 102px; color: rgba(0, 0, 0, 0.59); }
+.footer__icon-location { left: 413px; top: 31px; width: 11px; height: 11.32px; }
+.footer__icon-location img { position: absolute; top: -5.3%; left: -5.45%; width: 110.9%; height: 110.6%; }
+.footer__icon-phone { left: 411px; top: 57px; width: 11px; height: 11px; }
+.footer__icon-mail { left: 413px; top: 81px; width: 11px; height: 11px; }
+.footer__icon-globe { left: 413px; top: 103.32px; width: 12px; height: 12px; }
+.footer__social {
+  left: 33px;
+  top: 133px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.footer__social span { position: relative; display: block; width: 28px; height: 28px; }
+.footer__social img { width: 28px; height: 28px; object-fit: cover; }
+.footer__linkedin { background: var(--linkedin); }
+.footer__social .footer__linkedin img { position: absolute; left: 3px; top: 2px; width: 21px; height: 21px; }
