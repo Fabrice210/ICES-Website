@@ -1,9 +1,9 @@
 ---
 document: "Plan d'implémentation"
 statut: finalisé        # brouillon | finalisé — seul l'utilisateur valide le passage à « finalisé » (R-001)
-version: 1.0
-date: 2026-10-22
-valide_par: "Fabrice — 2026-10-22"
+version: 1.1
+date: 2026-10-31
+valide_par: "Fabrice — 2026-10-31"
 ---
 
 # 06 — Plan d'implémentation
@@ -26,7 +26,10 @@ valide_par: "Fabrice — 2026-10-22"
 | T1 | 1 | Créer `.env.example` et `PROJECT_STATE.md` | Claude | TRD | 2 fichiers | présents, sans valeur secrète | — |
 | T2 | 3 | Landing : ordre validé, transitions et `z-index` attachés à la position | Claude | App Flow (ordre) | `HomePage.tsx`, `useStackPin`, CSS des sections | US1 vérifiée en FR et EN, ordinateur et mobile ; `npm run test:visual` relancé, seuls les écarts attendus | T1 |
 | T3 | 3 | CTA « Parlons de vos besoins » → formulaire, type Devis présélectionné | Claude | PRD Q6 | contenus FR/EN, Contact | US2 vérifiée | T2 |
-| T4 | 3 | Formulaires : envoi réel, plus d'envoi simulé, erreur générique | Claude | TRD Q2 (service) | `forms.ts`, Contact, PartnerModal | US2 et US3 vérifiées avec le vrai service | décision TRD Q2 |
+| T4a | 3 | Fonction `api/demande.ts` (Vercel) : validation serveur (doc 05), champ piège, envoi Resend vers `FORMS_TO`, erreurs génériques ; `vercel.json` (réécriture SPA hors `/api` et `/campagne`, `cleanUrls`) ; `.env.example` | Claude | TRD, doc 05 | `api/demande.ts`, `vercel.json`, `.env.example`, tests | tests locaux de la fonction : corps valides acceptés et transmis à un Resend simulé ; champs manquants, formats faux, `formulaire` inconnu, corps trop gros et méthode autre que `POST` refusés ; champ piège rempli = rien envoyé | — |
+| T4 | 3 | Formulaires du site : envoi réel vers `/api/demande`, plus d'envoi simulé, champ piège `website`, erreur générique | Claude | T4a | `forms.ts`, Contact, PartnerModal | US2 et US3 vérifiées en local contre la fonction | T4a |
+| T4b | 3 | Pages de campagne ICES Emailing dans `public/campagne/` (6 pages + 6 formulaires, version DA), formulaires en JSON vers `/api/demande` | Claude | dépôt ICES Emailing (`scripts/build-netlify.mjs` adapté) | `public/campagne/` | les 12 adresses `/campagne/<sujet>` et `/campagne/<sujet>-besoin` s'affichent en local ; envoi accepté par la fonction | T4a |
+| T4c | 6 | Mise en service de l'envoi : compte Resend, domaine vérifié par DNS chez OVH, variables `RESEND_API_KEY`, `FORMS_FROM`, `FORMS_TO` dans Vercel ; déploiement de la branche | personne qui a les accès Vercel et OVH, avec l'accord de Fabrice | note de mise en service | site déployé | une demande de test de chaque type arrive dans contact@ | T4, T4b |
 | T5 | 3 | Plaquette PDF | Claude | PDF fourni par ICES | `src/assets/*.pdf`, lien | US4 vérifiée | PDF reçu |
 | T6 | 4 | Pages Réalisations (liste, détail) + cartes de la landing cliquables | Claude | maquette, contenus | routes, pages, contenus FR/EN | US5 vérifiée | T2, maquette |
 | T7 | 4 | Pages Actualités & Événements (liste, détail, filtre) | Claude | maquette, contenus | routes, pages | US6 vérifiée | T2, maquette |
@@ -46,10 +49,11 @@ valide_par: "Fabrice — 2026-10-22"
 
 ## Questions reportées
 > Validées comme reportées par l’utilisateur le 22/10/2026 (« je valide les six documents »). Chaque question se tranche avant la tâche qui en dépend (06-implementation-plan.md) ; le document repasse alors en brouillon jusqu’à revalidation.
-- Q1 — Travail directement dans `ICES-Website` (copie de l'utilisateur) ou dans une copie dédiée `automation/worktrees/site` comme pour Incub-OS et SM ?
+- ~~Q1 — Copie de travail~~ : tranchée le 2026-10-31, copie dédiée `automation/worktrees/site`, une branche `auto/<fiche>` par chantier (ici `auto/api-demande`).
 
 ## Historique
 | Version | Date | Changement | Validé par |
 |---|---|---|---|
 | 0.1 | 2026-10-22 | Création | — |
 | 1.0 | 2026-10-22 | Validé par l’utilisateur, questions reportées | Fabrice |
+| 1.1 | 2026-10-31 | Tâches T4a, T4b, T4c (fonction `/api/demande`, pages de campagne, mise en service) ; Q1 tranchée | Fabrice |

@@ -1,14 +1,14 @@
 ---
 document: "Schéma backend"
 statut: finalisé        # brouillon | finalisé — seul l'utilisateur valide le passage à « finalisé » (R-001)
-version: 1.0
-date: 2026-10-22
-valide_par: "Fabrice — 2026-10-22"
+version: 1.1
+date: 2026-10-31
+valide_par: "Fabrice — 2026-10-31"
 ---
 
 # 05 — Schéma backend
 
-> **Pas de backend ni de base de données en V1** : le site est statique (TRD). Ce document décrit donc (1) les structures de contenu versionnées dans `src/content/<langue>`, (2) les données envoyées par les formulaires au service externe. Si un CMS est retenu (TRD Q5), ce document sera repris avant toute création de table.
+> **Pas de base de données en V1** : le site est statique, avec une seule fonction serveur, `POST /api/demande` (TRD), qui valide et transmet les formulaires par e-mail sans rien stocker. Ce document décrit donc (1) les structures de contenu versionnées dans `src/content/<langue>`, (2) les corps JSON reçus par `/api/demande`. Si un CMS est retenu (TRD Q5), ce document sera repris avant toute création de table.
 
 ## Entités
 | Entité | Ce qu'elle représente |
@@ -19,6 +19,7 @@ valide_par: "Fabrice — 2026-10-22"
 | Référence | Un client ou un partenaire (logo dans la bande) |
 | Demande de contact | Données du formulaire de contact / devis, transmises au service, non stockées par le site |
 | Candidature partenaire | Données de la modale « Devenir partenaire », transmises au service, non stockées par le site |
+| Demande de campagne | Données d'un des 6 formulaires « Précisez votre besoin » des pages `/campagne/<sujet>` (ICES Emailing), non stockées par le site |
 
 ## Tables ou collections
 
@@ -88,6 +89,26 @@ valide_par: "Fabrice — 2026-10-22"
 | motivation | texte ≤ 5000 | non | — | — |
 | consentement | booléen vrai | oui | — | — |
 
+### Demande de campagne (champ `formulaire: "besoin-01"` à `"besoin-06"`)
+| Champ | Type | Obligatoire | Valeur par défaut | Index |
+|---|---|---|---|---|
+| sujet | texte ≤ 200 (libellé du bouton de l'e-mail) | oui | — | — |
+| nom | texte ≤ 120 | oui | — | — |
+| fonction | texte ≤ 120 | non | — | — |
+| organisation | texte ≤ 120 | oui | — | — |
+| pays | texte ≤ 80 | oui | — | — |
+| email | email valide | oui | — | — |
+| telephone | texte ≤ 30 | non | — | — |
+| consentement | `on` | oui | — | — |
+| champs du sujet | textes ≤ 5000 ou listes de choix, définis par formulaire dans `ICES EMAILING/docs/05-backend-schema.md` | selon le formulaire | — | — |
+
+Pour ces six formulaires, la fonction vérifie les champs communs ci-dessus ; les champs propres au sujet sont acceptés s'ils sont des textes (ou listes de textes) de 5000 caractères au plus, et recopiés dans l'e-mail.
+
+### Règles communes à tous les formulaires
+- `formulaire` doit être `contact`, `partenaire` ou `besoin-01` à `besoin-06`, sinon refus.
+- Champ piège `site` (formulaires de campagne) ou `website` (formulaires du site, à ajouter) : s'il est rempli, la fonction répond comme un succès mais n'envoie rien.
+- Corps JSON de 20 Ko au plus.
+
 ## Relations
 ```mermaid
 erDiagram
@@ -97,7 +118,7 @@ erDiagram
 
 ## Propriété des données
 - Contenus : ICES, versionnés dans le dépôt.
-- Demandes et candidatures : ICES, chez le service de formulaires retenu (TRD Q2).
+- Demandes et candidatures : ICES, reçues par e-mail dans contact@ices-consulting.com ; Resend ne sert qu'à l'envoi.
 
 ## Authentification
 - **Inscription / connexion / réinitialisation** : sans objet.
@@ -107,16 +128,16 @@ erDiagram
 | Entité | Lire | Créer | Modifier | Supprimer |
 |---|---|---|---|---|
 | Contenus (réalisations, publications, équipe, références) | public | équipe technique (commit) | équipe technique | équipe technique |
-| Demandes / candidatures | ICES (boîte du service) | visiteur (envoi) | — | ICES |
+| Demandes / candidatures / demandes de campagne | ICES (boîte contact@) | visiteur (envoi par `/api/demande`) | — | ICES |
 
 ## Validation des données
 - Dans le navigateur : champs obligatoires, format email, longueurs maximales ci-dessus, consentement coché.
-- Côté service : validation et anti-spam du service retenu (SEC-5) ; le site ne fait pas confiance à sa propre validation.
+- Côté serveur (`api/demande.ts`) : les mêmes règles sont revérifiées, plus les règles communes ci-dessus (SEC-5) ; le site ne fait pas confiance à la validation du navigateur.
 - Contenus : un script de contrôle (`npm run test:content`) vérifie les slugs uniques, les champs obligatoires et l'existence des images, en FR comme en EN.
 
 ## Conservation et suppression
 - Le site ne conserve aucune donnée personnelle.
-- Durée de conservation chez le service : à fixer par ICES et à indiquer dans la mention de consentement (TRD Q2).
+- Durée de conservation dans la boîte contact@ : à fixer par ICES et à indiquer dans la mention de consentement (Q1 ci-dessous).
 
 ## Migrations et données initiales
 - Données initiales : réalisations, actualités et équipe déjà présentes dans `home.ts` (sections de la landing), reprises dans les nouveaux fichiers.
@@ -131,3 +152,4 @@ erDiagram
 |---|---|---|---|
 | 0.1 | 2026-10-22 | Création | — |
 | 1.0 | 2026-10-22 | Validé par l’utilisateur, questions reportées | Fabrice |
+| 1.1 | 2026-10-31 | Fonction `/api/demande` ; demandes de campagne ICES Emailing ; règles communes | Fabrice |
