@@ -15,6 +15,7 @@
     "baseline:fonts": "node scripts/fetch-fonts.mjs",
     "baseline:capture": "node scripts/capture-baseline.mjs",
     "test:content": "node scripts/verify-content.mjs",
+    "test:api": "node scripts/test-api.mjs",
     "test:visual": "node scripts/visual/capture.mjs --target=react --out=baseline/react --base=http://localhost:4173 && node scripts/visual/compare.mjs --a=baseline/screenshots --b=baseline/react --out=baseline/diff",
     "test:timings": "node scripts/visual/timings.mjs --target=react --base=http://localhost:4173",
     "test:mobile": "node scripts/visual/mobile-audit.mjs --target=react --base=http://localhost:4173",

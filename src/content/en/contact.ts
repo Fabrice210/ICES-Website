@@ -36,7 +36,9 @@ export const contact: SiteContent['contact'] = {
     message: 'Your message*',
     consent: 'I agree that ICES may use my information to process my request.',
     submit: 'Send',
+    sending: 'Sending…',
     success: 'Message sent. We will get back to you within 48 working hours.',
+    error: 'Your message could not be sent. Please try again in a moment or write to us at contact@ices-consulting.com.',
   },
 }
 
@@ -89,6 +91,8 @@ export const partner: SiteContent['partner'] = {
       'I agree that the information provided may be used by ICES solely to assess our application.',
   },
   submit: 'Submit my application',
+  sending: 'Sending…',
+  error: 'Your application could not be sent. Please try again in a moment or write to us at contact@ices-consulting.com.',
   note: 'Every application is reviewed within 48 working hours by our business development teams.',
   success: {
     title: 'Application sent',

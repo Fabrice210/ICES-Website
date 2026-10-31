@@ -17,6 +17,7 @@ export function Contact() {
   const { contact, footer } = useContent()
   const [note, setNote] = useState('')
   const [type, setType] = useState(contact.form.types[0])
+  const [sending, setSending] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   const reduceMotion = useReducedMotion()
 
@@ -77,6 +78,8 @@ export function Contact() {
       form.reportValidity()
       return
     }
+    setSending(true)
+    setNote(contact.form.sending)
     try {
       await submitForm('contact', form)
       setNote(contact.form.success)
@@ -84,6 +87,9 @@ export function Contact() {
       setType(contact.form.types[0])
     } catch (error) {
       console.error(error)
+      setNote(contact.form.error)
+    } finally {
+      setSending(false)
     }
   }
 
@@ -207,7 +213,16 @@ export function Contact() {
               <input type="checkbox" name="consentement" required />
               <span>{f.consent}</span>
             </label>
-            <button className="ctc__submit" type="submit">
+            {/* Champ piège : invisible pour les visiteurs, rempli par les robots (refusé par api/demande). */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+            />
+            <button className="ctc__submit" type="submit" disabled={sending}>
               {f.submit} <Icon name="arrow" />
             </button>
             <p className="form-note" role="status" aria-live="polite">

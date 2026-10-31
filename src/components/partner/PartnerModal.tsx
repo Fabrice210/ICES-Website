@@ -11,6 +11,8 @@ export function PartnerModal({ dialogRef }: { dialogRef: RefObject<HTMLDialogEle
   const { fields } = partner
   const formRef = useRef<HTMLFormElement>(null)
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [failed, setFailed] = useState(false)
 
   useEffect(() => {
     const dialog = dialogRef.current
@@ -40,6 +42,7 @@ export function PartnerModal({ dialogRef }: { dialogRef: RefObject<HTMLDialogEle
     if (!sent) return
     formRef.current?.reset()
     setSent(false)
+    setFailed(false)
   }
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -49,12 +52,17 @@ export function PartnerModal({ dialogRef }: { dialogRef: RefObject<HTMLDialogEle
       form.reportValidity()
       return
     }
+    setSending(true)
+    setFailed(false)
     try {
       await submitForm('partenaire', form)
       setSent(true)
     } catch (error) {
-      // Pas de faux succès si l'envoi réel échoue : le formulaire reste affiché.
+      // Pas de faux succès si l'envoi réel échoue : le formulaire reste affiché, avec le message d'échec.
       console.error(error)
+      setFailed(true)
+    } finally {
+      setSending(false)
     }
   }
 
@@ -213,11 +221,22 @@ export function PartnerModal({ dialogRef }: { dialogRef: RefObject<HTMLDialogEle
             </span>
             <span>{fields.consent}</span>
           </label>
+          {/* Champ piège : invisible pour les visiteurs, rempli par les robots (refusé par api/demande). */}
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+          />
           <div className="pform__footer">
-            <button className="pform__submit" type="submit">
-              {partner.submit} <Icon name="arrow" />
+            <button className="pform__submit" type="submit" disabled={sending}>
+              {sending ? partner.sending : partner.submit} <Icon name="arrow" />
             </button>
-            <p className="pform__note">{partner.note}</p>
+            <p className="pform__note" role={failed ? 'alert' : undefined}>
+              {failed ? partner.error : partner.note}
+            </p>
           </div>
         </form>
 

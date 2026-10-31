@@ -36,7 +36,9 @@ export const contact: SiteContent['contact'] = {
     message: 'Votre message*',
     consent: 'J’accepte que mes informations soient utilisées par ICES pour traiter ma demande.',
     submit: 'Envoyer',
+    sending: 'Envoi en cours…',
     success: 'Message envoyé. Nous revenons vers vous sous 48 heures ouvrées.',
+    error: 'L’envoi n’a pas abouti. Réessayez dans un instant ou écrivez-nous à contact@ices-consulting.com.',
   },
 }
 
@@ -89,6 +91,8 @@ export const partner: SiteContent['partner'] = {
       'J’accepte que les informations saisies soient exploitées par ICES dans le cadre exclusif de l’évaluation de notre candidature.',
   },
   submit: 'Soumettre ma candidature',
+  sending: 'Envoi en cours…',
+  error: 'L’envoi n’a pas abouti. Réessayez dans un instant ou écrivez-nous à contact@ices-consulting.com.',
   note: 'Chaque candidature est étudiée sous 48 heures ouvrées par nos équipes de développement.',
   success: {
     title: 'Candidature envoyée',

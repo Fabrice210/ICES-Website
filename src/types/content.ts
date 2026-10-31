@@ -287,7 +287,9 @@ export interface SiteContent {
       message: string
       consent: string
       submit: string
+      sending: string
       success: string
+      error: string
     }
   }
   partner: {
@@ -307,7 +309,9 @@ export interface SiteContent {
       consent: string
     }
     submit: string
+    sending: string
     note: string
+    error: string
     success: { title: string; text: string; close: string }
   }
 }
