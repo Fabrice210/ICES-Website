@@ -18,7 +18,8 @@ export default async function handler(req, res) {
     res.setHeader('Allow', 'POST')
     return res.status(405).json({ ok: false })
   }
-  if (Number(req.headers['content-length'] || 0) > TAILLE_MAX) return res.status(413).json({ ok: false })
+  if (Number(req.headers['content-length'] || 0) > TAILLE_MAX)
+    return res.status(413).json({ ok: false })
 
   let corps
   try {

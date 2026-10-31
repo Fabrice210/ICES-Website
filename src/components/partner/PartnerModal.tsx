@@ -243,12 +243,7 @@ export function PartnerModal({ dialogRef }: { dialogRef: RefObject<HTMLDialogEle
         <div className="pform__success" hidden={!sent} role="status">
           <h3>{partner.success.title}</h3>
           <p>{partner.success.text}</p>
-          <button
-            className="btn btn--primary btn--spaced"
-            type="button"
-            data-close
-            onClick={close}
-          >
+          <button className="btn btn--primary btn--spaced" type="button" data-close onClick={close}>
             {partner.success.close}
           </button>
         </div>

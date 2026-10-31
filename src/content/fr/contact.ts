@@ -38,7 +38,8 @@ export const contact: SiteContent['contact'] = {
     submit: 'Envoyer',
     sending: 'Envoi en cours…',
     success: 'Message envoyé. Nous revenons vers vous sous 48 heures ouvrées.',
-    error: 'L’envoi n’a pas abouti. Réessayez dans un instant ou écrivez-nous à contact@ices-consulting.com.',
+    error:
+      'L’envoi n’a pas abouti. Réessayez dans un instant ou écrivez-nous à contact@ices-consulting.com.',
   },
 }
 
@@ -92,7 +93,8 @@ export const partner: SiteContent['partner'] = {
   },
   submit: 'Soumettre ma candidature',
   sending: 'Envoi en cours…',
-  error: 'L’envoi n’a pas abouti. Réessayez dans un instant ou écrivez-nous à contact@ices-consulting.com.',
+  error:
+    'L’envoi n’a pas abouti. Réessayez dans un instant ou écrivez-nous à contact@ices-consulting.com.',
   note: 'Chaque candidature est étudiée sous 48 heures ouvrées par nos équipes de développement.',
   success: {
     title: 'Candidature envoyée',

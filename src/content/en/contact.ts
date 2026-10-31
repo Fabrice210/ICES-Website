@@ -38,7 +38,8 @@ export const contact: SiteContent['contact'] = {
     submit: 'Send',
     sending: 'Sending…',
     success: 'Message sent. We will get back to you within 48 working hours.',
-    error: 'Your message could not be sent. Please try again in a moment or write to us at contact@ices-consulting.com.',
+    error:
+      'Your message could not be sent. Please try again in a moment or write to us at contact@ices-consulting.com.',
   },
 }
 
@@ -92,7 +93,8 @@ export const partner: SiteContent['partner'] = {
   },
   submit: 'Submit my application',
   sending: 'Sending…',
-  error: 'Your application could not be sent. Please try again in a moment or write to us at contact@ices-consulting.com.',
+  error:
+    'Your application could not be sent. Please try again in a moment or write to us at contact@ices-consulting.com.',
   note: 'Every application is reviewed within 48 working hours by our business development teams.',
   success: {
     title: 'Application sent',
