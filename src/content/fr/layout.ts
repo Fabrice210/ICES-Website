@@ -4,7 +4,7 @@ import { PENDING_LINK } from '../links'
 const navLinks = [
   { label: 'Nos offres', to: '/#offres' },
   { label: 'Incubation', to: '/#offres' },
-  { label: 'Réalisations', to: '/realisations' },
+  // Masqué pour le moment : { label: 'Réalisations', to: '/realisations' },
   { label: 'Formations', to: '/#actualites' },
 ]
 
@@ -56,7 +56,7 @@ export const footer: SiteContent['footer'] = {
     {
       title: 'RESSOURCES',
       links: [
-        { label: 'Réalisations', to: '/realisations' },
+        // Masqué pour le moment : { label: 'Réalisations', to: '/realisations' },
         { label: 'Formations', to: '/#actualites' },
         { label: 'Publications', to: '/#actualites' },
       ],

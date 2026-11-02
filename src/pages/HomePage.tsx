@@ -4,7 +4,8 @@ import { Approche } from '../sections/home/Approche'
 import { Equipe } from '../sections/home/Equipe'
 import { Cibles } from '../sections/home/Cibles'
 import { Offres } from '../sections/home/Offres'
-import { Realisations } from '../sections/home/Realisations'
+// Masqué pour le moment (Réalisations retirées du site, à remettre plus tard) :
+// import { Realisations } from '../sections/home/Realisations'
 import { Vision } from '../sections/home/Vision'
 import { HomeHero } from '../sections/home/HomeHero'
 
@@ -26,7 +27,8 @@ export function HomePage() {
       <StackPause short />
       <Offres />
       <Approche />
-      <Realisations />
+      {/* Masqué pour le moment : section « Missions & Réalisations ». */}
+      {/* <Realisations /> */}
       <Actualites />
       <Equipe />
     </div>
