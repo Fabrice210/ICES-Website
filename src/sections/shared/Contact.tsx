@@ -14,7 +14,8 @@ import { submitForm } from '../../services/forms'
  * en variable CSS (--grow) à chaque image, sans re-render React.
  */
 export function Contact() {
-  const { contact, footer } = useContent()
+  const { contact, footer, legal } = useContent()
+  const { privacyLink } = legal.labels
   const [note, setNote] = useState('')
   const [type, setType] = useState(contact.form.types[0])
   const sectionRef = useRef<HTMLElement>(null)
@@ -205,7 +206,12 @@ export function Contact() {
             />
             <label className="ctc__consent">
               <input type="checkbox" name="consentement" required />
-              <span>{f.consent}</span>
+              <span>
+                {f.consent}{' '}
+                <a href="/confidentialite" target="_blank" rel="noopener">
+                  {privacyLink}
+                </a>
+              </span>
             </label>
             <button className="ctc__submit" type="submit">
               {f.submit} <Icon name="arrow" />

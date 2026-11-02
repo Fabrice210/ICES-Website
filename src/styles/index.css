@@ -46,4 +46,5 @@
 /* Nouvelles pages (refonte V2). */
 @import './pages/realisations.css';
 @import './pages/article.css';
+@import './pages/legal.css';
 @import './touch.css';

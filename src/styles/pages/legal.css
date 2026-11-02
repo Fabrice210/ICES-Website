@@ -1,0 +1,358 @@
+/* =========================================================
+   Pages légales (mentions légales, confidentialité, cookies).
+   Même hero que les sous-pages (article.css), puis un texte de
+   lecture : sommaire collant à gauche dès 1100 px, sections
+   numérotées sous un filet, fiches « intitulé / valeur ».
+   Téléphone d'abord ; textes alignés à gauche.
+   ========================================================= */
+
+.alegal {
+  padding: 72px 0 96px;
+  background: var(--white);
+  color: var(--ink);
+}
+
+/* ---------- En-tête du texte ---------- */
+.alegal__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--gray-300);
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.alegal__head.is-in {
+  opacity: 1;
+  transform: none;
+}
+.alegal__updated {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.alegal__grid {
+  display: grid;
+  gap: 36px;
+  margin-top: 36px;
+}
+
+/* ---------- Sommaire ---------- */
+.alegal__toc-title {
+  margin-bottom: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.alegal__toc ol {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.alegal__toc a {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: baseline;
+  gap: 8px;
+  padding: 9px 12px 9px 0;
+  border-left: 2px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text);
+  transition:
+    color 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    padding 0.25s var(--ease);
+}
+.alegal__toc-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.alegal__toc a:hover {
+  color: var(--navy);
+}
+.alegal__toc a.is-active {
+  color: var(--navy);
+  font-weight: 600;
+}
+.alegal__toc a.is-active .alegal__toc-num {
+  color: var(--blue);
+}
+
+/* Téléphone et tablette : le sommaire est une carte grise en tête du texte. */
+.alegal__toc {
+  padding: 20px 20px 14px;
+  border-radius: 18px;
+  background: var(--gray-100);
+}
+
+/* ---------- Sections ---------- */
+.alegal__section {
+  padding: 28px 0 8px;
+  border-top: 1px solid var(--gray-300);
+}
+.alegal__section:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.alegal__section h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 16px;
+  font-size: clamp(22px, 5.6vw, 30px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+.alegal__num {
+  flex: none;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--blue);
+  font-variant-numeric: tabular-nums;
+}
+.alegal__section p,
+.alegal__section li {
+  max-width: 68ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+}
+.alegal__section p + p,
+.alegal__section p + ul,
+.alegal__section ul + p,
+.alegal__section dl + p,
+.alegal__section p + dl,
+.alegal__section dl + dl {
+  margin-top: 14px;
+}
+.alegal__section ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.alegal__section li {
+  position: relative;
+  padding-left: 20px;
+}
+.alegal__section li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 10px;
+  height: 2px;
+  background: var(--blue);
+}
+.alegal__section a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--blue) 45%, transparent);
+  text-underline-offset: 3px;
+  overflow-wrap: break-word;
+  transition:
+    text-decoration-color 0.25s var(--ease),
+    color 0.25s var(--ease);
+}
+.alegal__section a:hover {
+  color: var(--blue);
+  text-decoration-color: var(--blue);
+}
+
+/* Fiche « intitulé / valeur » (identité de l'éditeur, stockage de la langue…). */
+.alegal__facts {
+  max-width: 68ch;
+  margin: 0;
+  border-bottom: 1px solid var(--gray-300);
+}
+.alegal__facts div {
+  display: grid;
+  gap: 2px;
+  padding: 12px 0;
+  border-top: 1px solid var(--gray-300);
+}
+.alegal__facts dt {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.alegal__facts dd {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+/* Information à fournir par ICES : visible seulement en développement. */
+.alegal__missing {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px dashed #c77700;
+  border-radius: 6px;
+  background: #fff4e0;
+  color: #8a4f00;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ---------- Voir aussi ---------- */
+.alegal__related {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--gray-300);
+}
+.alegal__related-grid {
+  display: grid;
+  gap: 12px;
+}
+.alegal__card {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  padding: 24px 72px 24px 24px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--blue) 12%, var(--white));
+  color: var(--navy);
+  transition:
+    background 0.35s var(--ease),
+    color 0.35s var(--ease);
+}
+.alegal__card-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  transition: color 0.35s var(--ease);
+}
+.alegal__card-title {
+  font-size: clamp(22px, 5.6vw, 30px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.alegal__card-icon {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--navy);
+  color: var(--white);
+  transition:
+    background 0.35s var(--ease),
+    transform 0.35s var(--ease);
+}
+.alegal__card-icon .icon {
+  width: 16px;
+  height: 16px;
+}
+.alegal__card:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+.alegal__card:hover .alegal__card-tag {
+  color: var(--blue-light);
+}
+.alegal__card:hover .alegal__card-icon {
+  background: var(--blue);
+  transform: translateX(4px);
+}
+.alegal__card:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* ---------- Tablette ---------- */
+@media (min-width: 768px) {
+  .alegal__facts div {
+    grid-template-columns: minmax(160px, 34%) 1fr;
+    gap: 20px;
+    align-items: baseline;
+  }
+  .alegal__related-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .alegal__card {
+    min-height: 170px;
+    align-content: space-between;
+    padding: 28px 80px 28px 28px;
+  }
+}
+
+/* ---------- Ordinateur : sommaire collant à gauche ---------- */
+@media (min-width: 1100px) {
+  .alegal {
+    padding: 110px 0 130px;
+  }
+  .alegal__grid {
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 72px;
+    margin-top: 56px;
+  }
+  .alegal__toc {
+    position: sticky;
+    top: calc(var(--header-h) + 32px);
+    align-self: start;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+  }
+  .alegal__toc a {
+    padding-left: 14px;
+    border-left-color: var(--gray-300);
+  }
+  .alegal__toc a.is-active {
+    border-left-color: var(--blue);
+  }
+  .alegal__section {
+    padding: 40px 0 12px;
+  }
+  .alegal__section h2 {
+    margin-bottom: 20px;
+  }
+  .alegal__section p,
+  .alegal__section li,
+  .alegal__facts dd {
+    font-size: 16px;
+  }
+  .alegal__related {
+    margin-top: 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alegal__head {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .alegal__card,
+  .alegal__card-icon {
+    transition: none;
+  }
+}

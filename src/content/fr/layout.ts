@@ -84,8 +84,8 @@ export const footer: SiteContent['footer'] = {
   copyright: '© 2025 ICES. Tous droits réservés.',
   backToTop: 'Haut de page',
   legal: [
-    { label: 'Mentions légales', to: PENDING_LINK },
-    { label: 'Politique de confidentialité', to: PENDING_LINK },
-    { label: 'Cookies', to: PENDING_LINK },
+    { label: 'Mentions légales', to: '/mentions-legales' },
+    { label: 'Politique de confidentialité', to: '/confidentialite' },
+    { label: 'Cookies', to: '/cookies' },
   ],
 }

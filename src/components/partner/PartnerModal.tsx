@@ -7,7 +7,8 @@ const SUPPORTS_CLOSEDBY =
   typeof HTMLDialogElement !== 'undefined' && 'closedBy' in HTMLDialogElement.prototype
 
 export function PartnerModal({ dialogRef }: { dialogRef: RefObject<HTMLDialogElement | null> }) {
-  const { partner } = useContent()
+  const { partner, legal } = useContent()
+  const { privacyLink } = legal.labels
   const { fields } = partner
   const formRef = useRef<HTMLFormElement>(null)
   const [sent, setSent] = useState(false)
@@ -211,7 +212,12 @@ export function PartnerModal({ dialogRef }: { dialogRef: RefObject<HTMLDialogEle
             <span className="consent__box">
               <Icon name="check" />
             </span>
-            <span>{fields.consent}</span>
+            <span>
+              {fields.consent}{' '}
+              <a href="/confidentialite" target="_blank" rel="noopener">
+                {privacyLink}
+              </a>
+            </span>
           </label>
           <div className="pform__footer">
             <button className="pform__submit" type="submit">
@@ -224,12 +230,7 @@ export function PartnerModal({ dialogRef }: { dialogRef: RefObject<HTMLDialogEle
         <div className="pform__success" hidden={!sent} role="status">
           <h3>{partner.success.title}</h3>
           <p>{partner.success.text}</p>
-          <button
-            className="btn btn--primary btn--spaced"
-            type="button"
-            data-close
-            onClick={close}
-          >
+          <button className="btn btn--primary btn--spaced" type="button" data-close onClick={close}>
             {partner.success.close}
           </button>
         </div>

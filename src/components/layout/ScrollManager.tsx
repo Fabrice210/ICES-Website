@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { scrollToY } from '../../hooks/useSmoothScroll'
 import { useContent } from '../../i18n/useLanguage'
+import type { LegalSlug } from '../../types/content'
 
 /**
  * Position de défilement qui amène une section en haut de l'écran : les sections de
@@ -29,15 +30,18 @@ function sectionTop(el: HTMLElement): number {
  */
 export function ScrollManager() {
   const { pathname, hash, key } = useLocation()
-  const { meta } = useContent()
+  const { meta, legal } = useContent()
 
   useEffect(() => {
-    document.title = pathname.startsWith('/realisations')
-      ? meta.realisationsTitle
-      : pathname === '/prestations'
-        ? meta.prestationsTitle
-        : meta.homeTitle
-  }, [pathname, meta])
+    const legalPage = legal.pages[pathname.slice(1) as LegalSlug]
+    document.title = legalPage
+      ? legalPage.metaTitle
+      : pathname.startsWith('/realisations')
+        ? meta.realisationsTitle
+        : pathname === '/prestations'
+          ? meta.prestationsTitle
+          : meta.homeTitle
+  }, [pathname, meta, legal])
 
   useEffect(() => {
     if (!hash) {

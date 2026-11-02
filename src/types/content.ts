@@ -103,8 +103,43 @@ export interface Realisation {
   quote?: { text: string; cite: string }
 }
 
+/** Pages légales : adresse (sans « / ») et contenu. */
+export type LegalSlug = 'mentions-legales' | 'confidentialite' | 'cookies'
+
+/**
+ * Un bloc de texte légal : paragraphe, liste à puces ou fiche « intitulé : valeur ».
+ * Dans le texte, `[libellé](/adresse)` devient un lien. Une valeur de fiche à `null`
+ * reste à fournir par ICES : « À compléter » en développement, ligne masquée en production.
+ */
+export type LegalBlock =
+  string | { list: string[] } | { facts: { label: string; value: string | null }[] }
+
+export interface LegalPageContent {
+  /** Titre de l'onglet et description pour les moteurs de recherche (R-008). */
+  metaTitle: string
+  description: string
+  tag: string
+  title: string
+  text: string
+  image: string
+  /** Date de dernière mise à jour, affichée en tête du texte. */
+  updated: string
+  sections: { id: string; title: string; blocks: LegalBlock[] }[]
+}
+
 export interface SiteContent {
   meta: { homeTitle: string; prestationsTitle: string; realisationsTitle: string }
+  legal: {
+    labels: {
+      summary: string
+      updated: string
+      toComplete: string
+      related: string
+      /** Lien ajouté sous la case de consentement des formulaires. */
+      privacyLink: string
+    }
+    pages: Record<LegalSlug, LegalPageContent>
+  }
   languages: { code: 'fr' | 'en'; label: string }[]
   header: { home: HeaderVariant; prestations: HeaderVariant; partnerLabel: string }
   footer: {
