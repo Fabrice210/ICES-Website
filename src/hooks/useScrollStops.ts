@@ -9,6 +9,17 @@ const SETTLE_MS = 140
 const HOLD_MS = 650
 
 /**
+ * Vrai quand le repère est dans une section figée (useStackPin) en ce moment : il suit alors
+ * l'écran au lieu de la page, sa position ne veut plus rien dire et ferait remonter la page
+ * à chaque arrêt.
+ */
+function inPinnedSection(el: HTMLElement) {
+  const host = el.closest<HTMLElement>('section')
+  if (!host || host.style.position !== 'sticky') return false
+  return Math.abs(host.getBoundingClientRect().top - parseFloat(host.style.top || '0')) < 1
+}
+
+/**
  * Points d'arrêt du défilement entre sections.
  * - Arrêts francs : `.stack-pause` (temps de pause entre deux sections, la section d'avant
  *   reste figée et entière). Le haut de la pause s'aligne sur le bas de l'écran ; si un geste
@@ -45,6 +56,7 @@ export function useScrollStops() {
       let targetIsPause = false
       document.querySelectorAll<HTMLElement>('.snap-point, .stack-pause').forEach((el) => {
         if (el.offsetParent === null) return // display: none
+        if (inPinnedSection(el)) return
         const stop = stopOf(el, y, vh)
         const delta = stop - y
         if (Math.abs(delta) < 2) return
@@ -111,7 +123,8 @@ export function useScrollStops() {
       for (const el of document.querySelectorAll<HTMLElement>('.stack-pause')) {
         const stop = stopOf(el, window.scrollY, vh)
         // Tolérance : Lenis s'arrête parfois à un pixel de la pause, qui n'est alors plus à franchir.
-        const crossed = delta > 0 ? target < stop - 3 && stop <= next : next <= stop && stop < target - 3
+        const crossed =
+          delta > 0 ? target < stop - 3 && stop <= next : next <= stop && stop < target - 3
         if (crossed) {
           settledAt = stop
           holdUntil = Date.now() + HOLD_MS
