@@ -115,7 +115,6 @@ export function ValuesBento({
             </div>
             <p className="vbento__text">{value.text}</p>
             <div className="vbento__foot">
-              <span className="vbento__num">{String(i + 1).padStart(2, '0')}</span>
               <h4>{value.label}</h4>
             </div>
           </article>

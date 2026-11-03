@@ -59,7 +59,6 @@
 }
 
 .offr-card__top { position: absolute; left: 0; right: 0; top: 0; padding: calc(var(--k) * 26); }
-.offr-card__num { font-size: max(12px, calc(var(--k) * 13)); font-weight: 700; letter-spacing: .14em; opacity: .8; }
 .offr-card__segment {
   margin-top: calc(var(--k) * 8); max-width: 16ch;
   font-size: max(20px, calc(var(--k) * 27)); font-weight: 700; line-height: 1.15; letter-spacing: -.015em;
@@ -162,7 +161,6 @@
   .offr-card { flex-basis: var(--m-card); height: auto; border-radius: 22px; background: var(--white); cursor: default; }
   .offr-card__media { position: relative; z-index: 0; height: 200px; }
   .offr-card__top { padding: 16px 18px; }
-  .offr-card__num { font-size: var(--m-label); }
   .offr-card__segment { margin-top: 4px; font-size: var(--m-title); }
   .offr-card__axis { left: 18px; right: 18px; top: 152px; bottom: auto; }
   .offr-card__axis span { padding: 6px 12px; font-size: var(--m-label); }

@@ -85,7 +85,6 @@
 .vbento__tile:hover .vbento__text, .vbento__tile:focus-visible .vbento__text { opacity: 1; transform: none; transition-delay: .12s; }
 
 .vbento__foot { margin-top: auto; padding-top: calc(var(--k) * 12); }
-.vbento__num { font-size: max(12px, calc(var(--k) * 12)); font-weight: 700; letter-spacing: .12em; }
 .vbento__foot h4 {
   margin-top: calc(var(--k) * 4); font-size: max(17px, calc(var(--k) * 24)); font-weight: 800;
   letter-spacing: -.02em; color: var(--ink); transition: color .35s var(--ease);
@@ -195,7 +194,6 @@
     border-radius: 14px; background: var(--white);
   }
   .vbento__foot { grid-area: foot; margin-top: 0; padding-top: 2px; }
-  .vbento__num { font-size: var(--m-label); }
   .vbento__foot h4 { margin-top: 2px; font-size: var(--m-title); }
   .va-line { width: 80%; }
   .va-line__labels { display: none; }

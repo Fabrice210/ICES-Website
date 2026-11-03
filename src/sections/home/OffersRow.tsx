@@ -109,7 +109,6 @@ export function OffersRow({ offers }: { offers: SiteContent['home']['offers'] })
                 ))}
               </div>
               <div className="offr-card__top">
-                <span className="offr-card__num">{String(i + 1).padStart(2, '0')}</span>
                 <h3 className="offr-card__segment">{slide.segment}</h3>
               </div>
               <p className="offr-card__axis" aria-hidden="true">
