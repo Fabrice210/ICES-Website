@@ -52,6 +52,7 @@ export const home: SiteContent['home'] = {
     label: 'Notre ambition',
     title: 'La complexité devient la norme. Nous choisissons d’en faire un levier.',
     lead: 'Transformer les défis complexes en trajectoires durables, en impacts mesurables et en capacités pérennes, en combinant conseil stratégique, ingénierie de projets, gouvernance, technologies et intelligence des territoires.',
+    valuesTitle: 'Nos valeurs',
     values: [
       {
         label: 'Souveraineté',
@@ -326,11 +327,11 @@ export const home: SiteContent['home'] = {
           ', nous travaillons au plus près des institutions, des entreprises et des territoires. Cette connaissance fine des contextes locaux, des acteurs et des réalités de terrain nourrit notre capacité à concevoir et à déployer des transformations durables à l’échelle de l’Afrique francophone.',
       },
       listLabel: 'Nos implantations',
-      // Pays de l'ancienne carte Figma (le Congo y est marqué « Bientôt »).
+      // Pays de l'ancienne carte Figma (le Congo-Brazzaville y est marqué « Bientôt »).
       countries: [
         { id: '204', name: 'Bénin', prep: 'au', role: 'Siège', place: 'Cotonou' },
         { id: '324', name: 'Guinée', prep: 'en', role: 'Bureau', place: 'Conakry' },
-        { id: '178', name: 'Congo', prep: 'au', role: 'Bientôt', place: 'Prochaine implantation' },
+        { id: '178', name: 'Congo-Brazzaville', prep: 'au', role: 'Bientôt', place: 'Prochaine implantation' },
       ],
       globeHint: 'Faites tourner le globe',
     },

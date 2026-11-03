@@ -80,10 +80,13 @@ const art = (today: string): ReactNode[] => [
 export function ValuesBento({
   title,
   intro,
+  label,
   values,
 }: {
   title?: string
   intro?: string
+  /** Petit intitulé au-dessus de la grille (version à côté d'un texte). */
+  label?: string
   values: Value[]
 }) {
   const { ref, inView } = useInView<HTMLDivElement>(0.2)
@@ -93,7 +96,9 @@ export function ValuesBento({
   return (
     <div
       ref={ref}
-      className={['vbento-wrap', title ? '' : 'vbento-wrap--side', inView ? 'is-in' : ''].filter(Boolean).join(' ')}
+      className={['vbento-wrap', title ? '' : 'vbento-wrap--side', inView ? 'is-in' : '']
+        .filter(Boolean)
+        .join(' ')}
     >
       {title && (
         <div className="vbento-head">
@@ -101,6 +106,7 @@ export function ValuesBento({
           {intro && <p className="vbento-head__intro">{intro}</p>}
         </div>
       )}
+      {label && <h3 className="vbento-label">{label}</h3>}
       <div className="vbento">
         {values.map((value, i) => (
           <article
@@ -110,13 +116,11 @@ export function ValuesBento({
             style={{ '--i': i + 1 } as CSSProperties}
             tabIndex={0}
           >
+            <h4 className="vbento__title">{value.label}</h4>
             <div className="vbento__art" aria-hidden="true">
               {ART[i] ?? null}
             </div>
             <p className="vbento__text">{value.text}</p>
-            <div className="vbento__foot">
-              <h4>{value.label}</h4>
-            </div>
           </article>
         ))}
       </div>

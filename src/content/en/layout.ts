@@ -79,7 +79,8 @@ export const footer: SiteContent['footer'] = {
   },
   socials: [
     { label: 'LinkedIn', icon: 'linkedin', href: PENDING_LINK },
-    { label: 'Twitter / X', icon: 'twitter', href: PENDING_LINK },
+    { label: 'Facebook', icon: 'facebook', href: PENDING_LINK },
+    { label: 'Instagram', icon: 'instagram', href: PENDING_LINK },
   ],
   copyright: '© 2025 ICES. All rights reserved.',
   backToTop: 'Back to top',

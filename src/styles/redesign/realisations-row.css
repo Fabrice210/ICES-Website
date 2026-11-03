@@ -9,7 +9,8 @@
 .real2__pin { padding: 110px 0 100px; }
 
 .real2__head {
-  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: calc(var(--k) * 48); align-items: end;
+  /* Intro plus large que le titre : elle tient en trois lignes. */
+  display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: calc(var(--k) * 48); align-items: end;
 }
 .real2__title {
   max-width: 12ch; font-size: max(32px, calc(var(--k) * 64)); font-weight: 800; line-height: 1.02; letter-spacing: -.03em;
@@ -60,11 +61,10 @@
 }
 .real2-card__link--solid { background: var(--white); color: var(--ink); }
 
-.real2-card__num { font-size: max(12px, calc(var(--k) * 13)); font-weight: 700; letter-spacing: .14em; opacity: .8; }
 /* Titres réels des missions (longs) : taille réduite et 4 lignes au plus. */
 .real2-card__title {
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden;
-  margin-top: calc(var(--k) * 8); max-width: 18ch;
+  max-width: 18ch;
   font-size: max(19px, calc(var(--k) * 24)); font-weight: 700; line-height: 1.2; letter-spacing: -.015em;
 }
 .real2-card__link--solid .real2-card__title { max-width: 14ch; font-size: max(20px, calc(var(--k) * 28)); }
@@ -97,10 +97,15 @@
 }
 /* Défilement horizontal piloté par le scroll (≥ 1024 px de large). */
 .real2.is-scrolly { height: calc(100svh + var(--dist, 0px)); }
+/* Contenu calé sous le header (pas centré : moins de vide après Notre approche) ; les cartes
+   prennent la hauteur restante de l'écran. */
 .real2.is-scrolly .real2__pin {
   position: sticky; top: 0; height: 100svh; overflow: hidden;
-  display: flex; flex-direction: column; justify-content: center;
+  display: flex; flex-direction: column; justify-content: flex-start;
 }
+.real2.is-scrolly .real2__row { flex: 1; min-height: 0; display: flex; }
+.real2.is-scrolly .real2__track { flex: 1; min-width: 0; height: 100%; }
+.real2.is-scrolly .real2-card { height: auto; max-height: calc(var(--k) * 600); }
 .real2.is-scrolly .real2__track { transform: translateX(calc(var(--p, 0) * var(--dist, 0px) * -1)); will-change: transform; }
 /* Sinon : rangée native qu'on fait glisser, aimantée carte par carte. */
 .real2:not(.is-scrolly) .real2__track {
@@ -116,7 +121,7 @@
 }
 /* Téléphone : en-tête empilé, cartes compactes à ~78 % de la largeur. */
 @media (max-width: 720px) {
-  .real2__pin { padding: 88px 0 80px; }
+  .real2__pin { padding: 48px 0 80px; }
   .real2__head { grid-template-columns: 1fr; gap: 14px; }
   .real2__title { font-size: var(--m-h2); line-height: 1.1; letter-spacing: -.02em; }
   .real2__kicker { font-size: var(--m-label); }
@@ -125,7 +130,6 @@
   .real2__track { --w: var(--m-card); gap: var(--m-gap); }
   .real2-card { height: 380px; }
   .real2-card__link { padding: 20px; border-radius: 22px; }
-  .real2-card__num { font-size: var(--m-label); }
   .real2-card__title { font-size: var(--m-title); }
   .real2-card__foot { font-size: var(--m-body); }
   .real2-card__btn { width: var(--m-tap); height: var(--m-tap); }

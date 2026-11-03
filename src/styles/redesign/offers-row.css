@@ -60,7 +60,7 @@
 
 .offr-card__top { position: absolute; left: 0; right: 0; top: 0; padding: calc(var(--k) * 26); }
 .offr-card__segment {
-  margin-top: calc(var(--k) * 8); max-width: 16ch;
+  max-width: 16ch;
   font-size: max(20px, calc(var(--k) * 27)); font-weight: 700; line-height: 1.15; letter-spacing: -.015em;
 }
 
@@ -135,9 +135,10 @@
 /* Ordinateur et tablette : un écran entier, tailles en --u (mêmes rapports qu'Ambition). */
 @media (min-width: 721px) {
   .offr { --u: min(calc(100vw / 1440), calc(100svh / 900)); --k: var(--u); padding: 0; }
+  /* Hauteur du contenu (pas d'écran entier) : Notre approche suit juste en dessous, sur le même bleu. */
   .offr__screen {
-    min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
-    padding-top: calc(var(--header-h) + var(--u) * 32); padding-bottom: calc(var(--u) * 40);
+    display: flex; flex-direction: column; justify-content: center;
+    padding-top: calc(var(--header-h) + var(--u) * 32); padding-bottom: calc(var(--u) * 32);
   }
   .offr-card { height: max(360px, calc(var(--u) * 540)); }
 }
@@ -152,7 +153,7 @@
 /* Téléphone : autre disposition, sans panneau à ouvrir. Carte compacte (≈ 78 % de la
    largeur) : photo en haut (numéro, segment, axe), puis l'accroche et le devis en dessous. */
 @media (max-width: 720px) {
-  .offr { padding: 88px 0 80px; }
+  .offr { padding: 88px 0 40px; }
   .offr__head { flex-direction: column; align-items: flex-start; gap: 14px; margin-bottom: 22px; }
   .offr__title { font-size: var(--m-h2); line-height: 1.1; letter-spacing: -.02em; }
   .offr__brochure { min-height: var(--m-tap); padding: .8em 1.3em; font-size: var(--m-body); }

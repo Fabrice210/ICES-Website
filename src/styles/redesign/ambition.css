@@ -26,7 +26,8 @@
   .amb { --u: min(calc(100vw / 1440), calc(100svh / 900)); padding: 0; }
   .amb__screen {
     min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
-    padding-top: calc(var(--header-h) + var(--u) * 32); padding-bottom: calc(var(--curve-h) + var(--u) * 32);
+    /* Contenu centré dans la partie visible sous le header (même marge en haut et en bas). */
+    padding-top: calc(var(--header-h) + var(--u) * 32); padding-bottom: calc(var(--u) * 32);
   }
   .amb__split { gap: calc(var(--u) * 64); }
   .amb__label { font-size: max(12px, calc(var(--u) * 13)); }

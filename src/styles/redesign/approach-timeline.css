@@ -12,7 +12,7 @@
 
 .apt__title { font-size: max(32px, calc(var(--k) * 64)); font-weight: 800; line-height: 1.02; letter-spacing: -.03em; }
 .apt__intro {
-  max-width: 50ch; margin-top: calc(var(--k) * 16);
+  margin-top: calc(var(--k) * 16);
   font-size: max(14px, calc(var(--k) * 16)); line-height: 1.6; color: color-mix(in srgb, var(--white) 86%, transparent);
 }
 .apt__head > * {
@@ -76,11 +76,10 @@
 
 /* Ordinateur et tablette : tailles en --u. */
 @media (min-width: 721px) {
-  /* Un écran entier, contenu centré sous le header (comme les autres sections). */
+  /* Entre Nos offres et Missions, sur le même bleu : hauteur du contenu, marges serrées. */
   .apt {
     --u: min(calc(100vw / 1440), calc(100svh / 900)); --k: var(--u);
-    min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
-    padding: calc(var(--header-h) + var(--u) * 32) 0 calc(var(--u) * 40);
+    padding: calc(var(--u) * 56) 0 calc(var(--u) * 24);
   }
   .apt > .container { width: 100%; }
 }
@@ -92,7 +91,7 @@
 
 /* Téléphone : frise verticale, ligne à gauche, étapes à droite. */
 @media (max-width: 720px) {
-  .apt { padding: 80px 0 72px; }
+  .apt { padding: 40px 0 24px; }
   .apt__title { font-size: var(--m-h2); line-height: 1.1; letter-spacing: -.02em; }
   .apt__intro { margin-top: 12px; font-size: var(--m-lead); }
   .apt__steps { grid-template-columns: 1fr; margin-top: 32px; }

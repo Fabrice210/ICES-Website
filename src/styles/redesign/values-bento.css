@@ -84,12 +84,18 @@
 .vbento__tile:hover .vbento__art, .vbento__tile:focus-visible .vbento__art { opacity: 0; transform: scale(.9); }
 .vbento__tile:hover .vbento__text, .vbento__tile:focus-visible .vbento__text { opacity: 1; transform: none; transition-delay: .12s; }
 
-.vbento__foot { margin-top: auto; padding-top: calc(var(--k) * 12); }
-.vbento__foot h4 {
-  margin-top: calc(var(--k) * 4); font-size: max(17px, calc(var(--k) * 24)); font-weight: 800;
-  letter-spacing: -.02em; color: var(--ink); transition: color .35s var(--ease);
+/* Intitulé « Nos valeurs » au-dessus de la grille. */
+.vbento-label {
+  margin-bottom: 14px; font-size: max(12px, calc(var(--k) * 12)); font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--blue);
 }
-.vbento__tile:hover .vbento__foot h4, .vbento__tile:focus-visible .vbento__foot h4 { color: var(--white); }
+
+/* Nom de la valeur, en haut de la tuile ; au survol il laisse la place à la description. */
+.vbento__title {
+  font-size: max(17px, calc(var(--k) * 24)); font-weight: 800;
+  letter-spacing: -.02em; color: var(--ink); transition: color .35s var(--ease), opacity .3s var(--ease);
+}
+.vbento__tile:hover .vbento__title, .vbento__tile:focus-visible .vbento__title { opacity: 0; }
 
 /* --- Mini-animations (couleur = currentColor = teinte de la valeur) --- */
 /* Souveraineté : un cadre scanne la grille et sécurise une case. */
@@ -178,7 +184,7 @@
   .vbento__tile { min-height: calc(var(--k) * 210); }
 }
 /* Téléphone : titre au-dessus de l'intro, tuiles compactes en ligne (illustration à gauche,
-   numéro + valeur + description à droite). */
+   valeur + description à droite). */
 @media (max-width: 720px) {
   .vbento-head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
   .vbento-head__title { font-size: var(--m-h2); padding-bottom: 12px; }
@@ -186,22 +192,21 @@
   .vbento-head__intro { font-size: var(--m-lead); }
   .vbento { grid-template-columns: 1fr; grid-template-areas: "v1" "v2" "v3" "v4" "v5"; gap: 20px; }
   .vbento__tile {
-    display: grid; grid-template-columns: 76px 1fr; grid-template-areas: "art foot" "art text";
+    display: grid; grid-template-columns: 76px 1fr; grid-template-areas: "art title" "art text";
     column-gap: 14px; align-items: start; min-height: 0; padding: 14px; border-radius: 20px;
   }
   .vbento__art {
     --k: .5px; grid-area: art; width: 76px; height: 76px; min-height: 0;
     border-radius: 14px; background: var(--white);
   }
-  .vbento__foot { grid-area: foot; margin-top: 0; padding-top: 2px; }
-  .vbento__foot h4 { margin-top: 2px; font-size: var(--m-title); }
+  .vbento__title { grid-area: title; font-size: var(--m-title); }
   .va-line { width: 80%; }
   .va-line__labels { display: none; }
 
   /* Téléphone, souris ou tactile : la description est toujours lisible sous le titre
      (plus de remplissage au survol qui la cachait) ; carte blanche bordée. */
   .vbento__tile {
-    grid-template-areas: "art foot" "text text"; row-gap: 12px; align-items: center;
+    grid-template-areas: "art title" "text text"; row-gap: 12px; align-items: center;
     padding: 16px 16px 18px; border: 1px solid var(--gray-200);
     background: var(--white); box-shadow: 0 1px 0 var(--gray-200), 0 10px 24px color-mix(in srgb, var(--navy) 6%, transparent);
   }
@@ -215,7 +220,7 @@
     transform: none; color: var(--tone, var(--blue)); box-shadow: 0 1px 0 var(--gray-200), 0 10px 24px color-mix(in srgb, var(--navy) 6%, transparent);
   }
   .vbento__tile:hover .vbento__art, .vbento__tile:focus-visible .vbento__art { opacity: 1; transform: none; }
-  .vbento__tile:hover .vbento__foot h4, .vbento__tile:focus-visible .vbento__foot h4 { color: var(--ink); }
+  .vbento__tile:hover .vbento__title, .vbento__tile:focus-visible .vbento__title { opacity: 1; }
   .vbento__tile:hover .vbento__text, .vbento__tile:focus-visible .vbento__text { color: var(--text); transition-delay: 0s; }
 }
 /* Sans survol (tactile) : la description est affichée sous l'illustration. */
@@ -235,10 +240,27 @@
   .vbento-wrap--side .vbento {
     grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "v1 v2" "v1 v3" "v4 v5";
     gap: calc(var(--k) * 12); max-width: calc(var(--k) * 520); margin-left: auto;
+    grid-auto-rows: 1fr; /* rangées égales : chaque description a la même place */
   }
-  .vbento-wrap--side .vbento__tile { min-height: calc(var(--k) * 132); padding: calc(var(--k) * 18); border-radius: calc(var(--k) * 22); }
-  .vbento-wrap--side .vbento__foot h4 { font-size: max(15px, calc(var(--k) * 18)); }
-  .vbento-wrap--side .vbento__text { font-size: max(12px, calc(var(--k) * 13)); }
+  .vbento-wrap--side .vbento__tile { min-height: calc(var(--k) * 128); padding: calc(var(--k) * 14) calc(var(--k) * 16); border-radius: calc(var(--k) * 22); }
+  .vbento-wrap--side .vbento__title { font-size: max(15px, calc(var(--k) * 17)); }
+  .vbento-wrap--side .vbento__art { min-height: calc(var(--k) * 64); }
+  .vbento-label { max-width: calc(var(--k) * 520); margin: 0 0 calc(var(--k) * 14) auto; }
+  /* Description au survol : elle doit tenir dans la tuile, de son haut à son bas. */
+  .vbento-wrap--side .vbento__text {
+    left: calc(var(--k) * 16); right: calc(var(--k) * 16); top: calc(var(--k) * 14);
+    font-size: max(11.5px, calc(var(--k) * 12.5)); line-height: 1.42;
+  }
+}
+/* Tablette paysage : colonne étroite, tuiles plus hautes pour que la description tienne. */
+@media (min-width: 721px) and (max-width: 1199px) and (orientation: landscape) {
+  .vbento-wrap--side .vbento__tile { min-height: calc(var(--k) * 190); }
+}
+@media (min-width: 1200px) and (max-height: 800px) {
+  .vbento-wrap--side .vbento__tile { min-height: calc(var(--k) * 180); }
+}
+@media (min-width: 721px) and (max-width: 1100px) and (orientation: landscape) {
+  .vbento-wrap--side .vbento__tile { min-height: calc(var(--k) * 236); }
 }
 @media (min-width: 721px) and (max-width: 1100px) and (orientation: portrait) {
   .vbento-wrap--side .vbento { max-width: none; margin-left: 0; }

@@ -65,7 +65,6 @@ export function Realisations() {
                     alt=""
                     loading="lazy"
                   />
-                  <span className="real2-card__num">{String(i + 1).padStart(2, '0')}</span>
                   <h3 className="real2-card__title">{work.title}</h3>
                   <span className="real2-card__foot">
                     {realisations.cardCta}
@@ -81,7 +80,6 @@ export function Realisations() {
                 className="real2-card__link real2-card__link--solid"
                 to={realisations.link.to}
               >
-                <span className="real2-card__num">{String(total).padStart(2, '0')}</span>
                 <h3 className="real2-card__title">{realisations.link.label}</h3>
                 <span className="real2-card__foot">
                   <span className="real2-card__btn" aria-hidden="true">

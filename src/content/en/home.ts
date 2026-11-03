@@ -52,6 +52,7 @@ export const home: SiteContent['home'] = {
     label: 'Our ambition',
     title: 'Complexity is becoming the norm. We choose to make it a lever.',
     lead: 'Turning complex challenges into sustainable trajectories, measurable impact and lasting capabilities, by combining strategic consulting, project engineering, governance, technology and territorial intelligence.',
+    valuesTitle: 'Our values',
     values: [
       {
         label: 'Sovereignty',
@@ -327,7 +328,7 @@ export const home: SiteContent['home'] = {
       countries: [
         { id: '204', name: 'Benin', prep: 'in', role: 'Head office', place: 'Cotonou' },
         { id: '324', name: 'Guinea', prep: 'in', role: 'Office', place: 'Conakry' },
-        { id: '178', name: 'Congo', prep: 'in', role: 'Coming soon', place: 'Next location' },
+        { id: '178', name: 'Congo-Brazzaville', prep: 'in', role: 'Coming soon', place: 'Next location' },
       ],
       globeHint: 'Drag to spin the globe',
     },

@@ -172,6 +172,8 @@ export interface SiteContent {
       title: string
       /** L'ambition d'ICES, mise en valeur sous le titre. */
       lead: string
+      /** Intitulé au-dessus de la grille des valeurs. */
+      valuesTitle: string
       values: { label: string; text: string; tone: Tone }[]
       link: LinkItem
     }

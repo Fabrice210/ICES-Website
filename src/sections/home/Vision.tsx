@@ -48,7 +48,7 @@ export function Vision() {
             </SmartLink>
           </div>
 
-          <ValuesBento values={vision.values} />
+          <ValuesBento label={vision.valuesTitle} values={vision.values} />
         </div>
       </div>
     </section>
