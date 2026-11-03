@@ -1,0 +1,139 @@
+/* =========================================================
+   Page Expertises — refonte DA alignée sur l'accueil :
+   - Nos domaines : grand titre gras, cartes arrondies grises,
+     icône à la teinte du domaine qui envahit la carte au survol ;
+   - Notre positionnement : bande bleue en dôme, chiffres en frise
+     (même écriture que « Notre approche »).
+   ========================================================= */
+.xdom { --k: 1px; padding: 120px 0 200px; background: var(--white); color: var(--ink); }
+
+.xdom__head {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--k) * 48);
+  align-items: end; margin-bottom: calc(var(--k) * 56);
+}
+.xdom__title { font-size: max(34px, calc(var(--k) * 76)); font-weight: 800; line-height: .95; letter-spacing: -.035em; text-wrap: balance; }
+.xdom__lead { display: grid; gap: 12px; font-size: max(14px, calc(var(--k) * 15)); line-height: 1.65; color: var(--text); }
+.xdom__claim { font-size: max(17px, calc(var(--k) * 21)); font-weight: 700; line-height: 1.35; color: var(--ink); text-wrap: balance; }
+.xdom__head > * {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .8s var(--ease), transform .9s cubic-bezier(.22, 1, .36, 1);
+}
+.xdom__head > :nth-child(2) { transition-delay: .12s; }
+.xdom__head.is-in > * { opacity: 1; transform: none; }
+
+.xdom__grid {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: calc(var(--k) * 16);
+  margin: 0; padding: 0; list-style: none;
+}
+.xdom-card {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-direction: column; gap: 12px; min-height: 300px;
+  padding: calc(var(--k) * 24); border-radius: calc(var(--k) * 24); background: var(--gray-100);
+  opacity: 0; transform: translateY(40px);
+  transition: opacity .7s var(--ease) calc(var(--i, 0) * 60ms), transform .8s cubic-bezier(.22, 1, .36, 1) calc(var(--i, 0) * 60ms), color .35s var(--ease);
+}
+.xdom__grid.is-in .xdom-card { opacity: 1; transform: none; }
+/* Le fond de teinte part de l'icône et couvre la carte au survol. */
+.xdom-card::before {
+  content: ""; position: absolute; z-index: -1; left: calc(var(--k) * 24 + 26px); top: calc(var(--k) * 24 + 26px);
+  width: 52px; height: 52px; border-radius: 50%; background: var(--tone, var(--blue));
+  transform: translate(-50%, -50%) scale(0); transition: transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+.xdom-card__icon {
+  display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%;
+  background: var(--tone, var(--blue)); color: var(--white); margin-bottom: auto;
+  transition: background .35s var(--ease);
+}
+.xdom-card__icon .icon { width: 22px; height: 22px; }
+.xdom-card__title { margin-top: calc(var(--k) * 40); font-size: max(16px, calc(var(--k) * 18)); font-weight: 700; line-height: 1.25; }
+.xdom-card__text { font-size: max(13px, calc(var(--k) * 14)); line-height: 1.55; color: var(--text); transition: color .35s var(--ease); }
+@media (hover: hover) {
+  .xdom-card:hover { color: var(--white); }
+  .xdom-card:hover::before { transform: translate(-50%, -50%) scale(16); }
+  .xdom-card:hover .xdom-card__icon { background: color-mix(in srgb, var(--white) 18%, transparent); }
+  .xdom-card:hover .xdom-card__text { color: color-mix(in srgb, var(--white) 88%, transparent); }
+}
+
+.xpos {
+  --k: 1px; --line: color-mix(in srgb, var(--white) 38%, transparent);
+  position: relative; z-index: 1; padding: 40px 0 120px; background: var(--blue); color: var(--white);
+}
+.xpos__head {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px calc(var(--k) * 56); align-items: end;
+}
+.xpos__label {
+  grid-column: 1 / -1; font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--white) 80%, transparent);
+}
+.xpos__title { font-size: max(30px, calc(var(--k) * 60)); font-weight: 800; line-height: 1.02; letter-spacing: -.03em; text-wrap: balance; }
+.xpos__side { display: grid; gap: 22px; justify-items: start; }
+.xpos__text { font-size: max(14px, calc(var(--k) * 16)); line-height: 1.6; color: color-mix(in srgb, var(--white) 86%, transparent); }
+.xpos__cta { min-height: 44px; background: var(--white); color: var(--blue); display: inline-flex; align-items: center; gap: 10px; }
+.xpos__cta:hover { background: var(--navy); color: var(--white); }
+.xpos__cta .icon { width: 14px; height: 14px; }
+.xpos__head > * {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .8s var(--ease), transform .9s cubic-bezier(.22, 1, .36, 1), background .3s var(--ease), color .3s var(--ease);
+}
+.xpos__head > :nth-child(3) { transition-delay: .12s, .12s, 0s, 0s; }
+.xpos__head.is-in > * { opacity: 1; transform: none; }
+
+.xpos__stats {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: calc(var(--k) * 72) 0 0; padding: 0; list-style: none;
+}
+.xpos__stat { --d: calc(var(--i, 0) * 260ms); display: flex; flex-direction: column; padding-right: calc(var(--k) * 36); }
+.xpos__value {
+  font-size: max(48px, calc(var(--k) * 88)); font-weight: 300; line-height: 1; letter-spacing: -.02em;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .6s var(--ease) calc(var(--d) + 150ms), transform .7s cubic-bezier(.22, 1, .36, 1) calc(var(--d) + 150ms);
+}
+.xpos__rail {
+  position: relative; display: block; height: 1px; margin: calc(var(--k) * 18) calc(var(--k) * -36) 0 0;
+  background: var(--line); transform: scaleX(0); transform-origin: left; transition: transform 260ms linear var(--d);
+}
+.xpos__stat:last-child .xpos__rail { margin-right: 0; }
+.xpos__rail::before {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 1px; height: 13px; background: var(--white);
+  transform: scaleY(0); transform-origin: bottom; transition: transform .3s var(--ease) var(--d);
+}
+.xpos__name {
+  margin-top: 16px; font-size: max(14px, calc(var(--k) * 16)); font-weight: 600; line-height: 1.35;
+  opacity: 0; transition: opacity .6s var(--ease) calc(var(--d) + 250ms);
+}
+.xpos__stats.is-in .xpos__value, .xpos__stats.is-in .xpos__name { opacity: 1; transform: none; }
+.xpos__stats.is-in .xpos__rail, .xpos__stats.is-in .xpos__rail::before { transform: none; }
+
+@media (max-width: 1180px) {
+  .xdom__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .xdom__head, .xpos__head { grid-template-columns: minmax(0, 1fr); }
+  .xdom__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .xpos__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+  .xpos__stat:nth-child(2) .xpos__rail { margin-right: 0; }
+}
+@media (max-width: 720px) {
+  .xdom { padding: 72px 0 120px; }
+  .xdom__title { font-size: var(--m-h2); }
+  .xdom__claim { font-size: var(--m-title); }
+  .xdom__lead { font-size: var(--m-lead); }
+  .xdom__grid { gap: var(--m-gap); }
+  .xdom-card { min-height: 0; padding: 20px; }
+  .xdom-card__title { margin-top: 20px; font-size: var(--m-title); }
+  .xdom-card__text { font-size: var(--m-body); }
+  .xpos { padding: 24px 0 80px; }
+  .xpos__title { font-size: var(--m-h2); }
+  .xpos__text { font-size: var(--m-lead); }
+  .xpos__stats { margin-top: 48px; }
+  .xpos__value { font-size: 48px; }
+  .xpos__name { font-size: var(--m-body); }
+}
+@media (max-width: 480px) {
+  .xdom__grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .xdom__head > *, .xdom-card, .xpos__head > *, .xpos__value, .xpos__name, .xpos__rail, .xpos__rail::before {
+    opacity: 1; transform: none; transition: none;
+  }
+}

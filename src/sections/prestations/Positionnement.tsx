@@ -1,36 +1,40 @@
-import { image } from '../../assets/images'
+import type { CSSProperties } from 'react'
 import { Icon } from '../../components/icons/Icon'
-import { FallbackImg } from '../../components/ui/FallbackImg'
 import { SmartLink } from '../../components/ui/SmartLink'
+import { useInView } from '../../hooks/useInView'
 import { useContent } from '../../i18n/useLanguage'
 
+/* Notre positionnement — bande bleue en dôme comme « Nos offres » et « Notre approche » :
+   grand titre blanc, bouton pilule, chiffres en frise (grand chiffre fin, ligne, libellé). */
 export function Positionnement() {
   const { positioning } = useContent().prestations
+  const { ref: headRef, inView: headIn } = useInView<HTMLDivElement>()
+  const { ref: statsRef, inView: statsIn } = useInView<HTMLUListElement>(0.2)
 
   return (
-    <section className="band positioning" aria-labelledby="pos-title">
-      <div className="band__bg media">
-        <FallbackImg src={image(positioning.image)} alt="" loading="lazy" />
-      </div>
+    <section className="xpos curve-top" aria-labelledby="pos-title">
       <div className="container">
-        <p className="section-label section-label--light">{positioning.label}</p>
-        <div className="positioning__grid">
-          <div>
-            <h2 id="pos-title">{positioning.title}</h2>
-            <p>{positioning.text}</p>
-            <SmartLink className="btn btn--ghost-light" to={positioning.cta.to}>
+        <div ref={headRef} className={headIn ? 'xpos__head is-in' : 'xpos__head'}>
+          <p className="xpos__label">{positioning.label}</p>
+          <h2 className="xpos__title" id="pos-title">
+            {positioning.title}
+          </h2>
+          <div className="xpos__side">
+            <p className="xpos__text">{positioning.text}</p>
+            <SmartLink className="btn btn--pill xpos__cta" to={positioning.cta.to}>
               {positioning.cta.label} <Icon name="arrow" />
             </SmartLink>
           </div>
-          <div className="stats">
-            {positioning.stats.map((stat) => (
-              <div key={stat.label} className="stat">
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </div>
-            ))}
-          </div>
         </div>
+        <ul ref={statsRef} className={statsIn ? 'xpos__stats is-in' : 'xpos__stats'}>
+          {positioning.stats.map((stat, i) => (
+            <li key={stat.label} className="xpos__stat" style={{ '--i': i } as CSSProperties}>
+              <strong className="xpos__value">{stat.value}</strong>
+              <span className="xpos__rail" aria-hidden="true" />
+              <span className="xpos__name">{stat.label}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )
