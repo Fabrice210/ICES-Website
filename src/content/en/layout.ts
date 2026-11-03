@@ -50,7 +50,6 @@ export const footer: SiteContent['footer'] = {
       links: [
         { label: 'Expertise', to: '/prestations' },
         { label: 'Offers', to: '/#offres' },
-        { label: 'Solutions', to: '/#offres' },
       ],
     },
     {
@@ -58,7 +57,7 @@ export const footer: SiteContent['footer'] = {
       links: [
         // Masqué pour le moment : { label: 'Projects', to: '/realisations' },
         { label: 'Training', to: '/#actualites' },
-        { label: 'Publications', to: '/#actualites' },
+        { label: 'Events', to: '/#actualites' },
       ],
     },
   ],
@@ -66,7 +65,6 @@ export const footer: SiteContent['footer'] = {
     title: 'COMPANY',
     links: [
       { label: 'About us', to: '/#vision' },
-      { label: 'Careers', to: PENDING_LINK },
       { label: 'Contact', to: '#contact' },
     ],
   },
