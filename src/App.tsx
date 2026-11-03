@@ -2,6 +2,9 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { IconSprite } from './components/icons/IconSprite'
 import { SiteLayout } from './components/layout/SiteLayout'
 import { HomePage } from './pages/HomePage'
+import { ActualitesPage } from './pages/ActualitesPage'
+import { FormationsPage } from './pages/FormationsPage'
+import { IncubationPage } from './pages/IncubationPage'
 import { PrestationsPage } from './pages/PrestationsPage'
 // Masqué pour le moment (Réalisations retirées du site, à remettre plus tard) :
 // import { RealisationDetailPage } from './pages/RealisationDetailPage'
@@ -16,6 +19,9 @@ export function App() {
         <Route element={<SiteLayout />}>
           <Route index element={<HomePage />} />
           <Route path="prestations" element={<PrestationsPage />} />
+          <Route path="incubation" element={<IncubationPage />} />
+          <Route path="actualites" element={<ActualitesPage />} />
+          <Route path="formations" element={<FormationsPage />} />
           {/* Masqué pour le moment : pages Réalisations (une adresse /realisations renvoie à l'accueil). */}
           {/* <Route path="realisations" element={<RealisationsPage />} /> */}
           {/* <Route path="realisations/:slug" element={<RealisationDetailPage />} /> */}

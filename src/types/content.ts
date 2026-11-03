@@ -128,7 +128,16 @@ export interface LegalPageContent {
 }
 
 export interface SiteContent {
-  meta: { homeTitle: string; prestationsTitle: string; realisationsTitle: string }
+  meta: {
+    homeTitle: string
+    prestationsTitle: string
+    realisationsTitle: string
+    incubationTitle: string
+    newsTitle: string
+    trainingTitle: string
+  }
+  /** Pages Incubation, Actualités & Événements et Formations (cf. pages/*Page.tsx). */
+  subpages: Subpages
   legal: {
     labels: {
       summary: string
@@ -346,5 +355,59 @@ export interface SiteContent {
     submit: string
     note: string
     success: { title: string; text: string; close: string }
+  }
+}
+
+/** En-tête d'une sous-page (ArticleHero). */
+export interface SubpageHero {
+  tag: string
+  image: string
+  title: string
+  text: string
+}
+
+export interface Step {
+  title: string
+  text: string
+}
+
+export interface Subpages {
+  incubation: {
+    hero: SubpageHero
+    program: { title: string; lead: string; pillars: IconCard[] }
+    /** Libellés des chiffres lus dans l'API publique d'Incub-OS. */
+    stats: { startups: string; cohorts: string; alumni: string; partners: string }
+    journey: { label: string; title: string; text: string; steps: Step[] }
+    cohorts: {
+      title: string
+      lead: string
+      open: string
+      closed: string
+      /** {n} : places restantes. */
+      seats: string
+      closing: string
+      start: string
+      apply: string
+      loading: string
+      empty: string
+      emptyCta: LinkItem
+    }
+    alumni: { title: string; lead: string }
+    cta: { title: string; text: string; apply: LinkItem; partner: LinkItem }
+  }
+  news: {
+    hero: SubpageHero
+    filtersLabel: string
+    all: string
+    featured: string
+    empty: string
+    emptyCta: LinkItem
+    cta: { title: string; text: string; link: LinkItem }
+  }
+  training: {
+    hero: SubpageHero
+    goals: { title: string; lead: string; request: string; cards: IconCard[] }
+    formats: { title: string; lead: string; items: Step[] }
+    cta: { title: string; text: string; request: LinkItem; brochure: string }
   }
 }

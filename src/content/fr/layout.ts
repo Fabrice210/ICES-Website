@@ -3,15 +3,18 @@ import { PENDING_LINK } from '../links'
 
 const navLinks = [
   { label: 'Nos offres', to: '/#offres' },
-  { label: 'Incubation', to: '/#offres' },
+  { label: 'Incubation', to: '/incubation' },
   // Masqué pour le moment : { label: 'Réalisations', to: '/realisations' },
-  { label: 'Formations', to: '/#actualites' },
+  { label: 'Formations', to: '/formations' },
 ]
 
 export const meta: SiteContent['meta'] = {
   homeTitle: 'ICES · Façonnons l’Afrique de demain',
   prestationsTitle: 'Nos expertises · ICES',
   realisationsTitle: 'Réalisations · ICES',
+  incubationTitle: 'Incubation · ICES',
+  newsTitle: 'Actualités & Événements · ICES',
+  trainingTitle: 'Formations · ICES',
 }
 
 export const languages: SiteContent['languages'] = [
@@ -56,8 +59,8 @@ export const footer: SiteContent['footer'] = {
       title: 'RESSOURCES',
       links: [
         // Masqué pour le moment : { label: 'Réalisations', to: '/realisations' },
-        { label: 'Formations', to: '/#actualites' },
-        { label: 'Événements', to: '/#actualites' },
+        { label: 'Formations', to: '/formations' },
+        { label: 'Événements', to: '/actualites' },
       ],
     },
   ],

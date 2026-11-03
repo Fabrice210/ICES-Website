@@ -5,6 +5,7 @@ import { legal } from './legal'
 import { footer, header, languages, meta } from './layout'
 import { prestations } from './prestations'
 import { realisations } from './realisations'
+import { subpages } from './subpages'
 
 export const en: SiteContent = {
   meta,
@@ -15,6 +16,7 @@ export const en: SiteContent = {
   home,
   prestations,
   realisations,
+  subpages,
   contact,
   partner,
 }

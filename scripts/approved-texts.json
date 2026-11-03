@@ -16,5 +16,431 @@
     "page": "titre de l’onglet de la page /realisations",
     "remplace": "(nouvelle page, même forme que « Nos expertises · ICES »)",
     "demande": "2026-10-22, pages de la maquette V2 validées par l’utilisateur"
+  },
+  {
+    "text": "Incubation · ICES",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Actualités & Événements · ICES",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Formations · ICES",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Des idées transformées en solutions à fort impact.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "ICES détecte, sélectionne et accompagne les porteurs de projets innovants, startups et PME à fort potentiel, de la candidature jusqu’à leur autonomie.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Le programme d’incubation",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Chaque startup est suivie sur Incub-OS, la plateforme d’incubation d’ICES : coaching, plan de formation, jalons et indicateurs sont partagés entre l’équipe du centre et les fondateurs.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Détection & sélection",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Détection, sélection et accompagnement de porteurs de projets innovants, par cohortes et sur dossier.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Incubation de startups et de PME à fort potentiel : coaching, formations et suivi des jalons.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Accès aux financements",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Accompagnement à l’accès aux financements : capital-risque, fonds d’amorçage, ZLECAf.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Startups accompagnées",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Cohortes",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Startups diplômées",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Le parcours",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "De la candidature à l’autonomie.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Un parcours en quatre temps, suivi de bout en bout sur la plateforme Incub-OS.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Le porteur de projet dépose son dossier en ligne pour une cohorte ouverte.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Les dossiers sont présélectionnés, puis évalués par un jury.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Coaching, plan de formation personnalisé et jalons suivis avec un coach référent.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Graduation",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "La startup diplômée garde un espace pour piloter sa croissance en autonomie.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Nos cohortes",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Les cohortes et leur calendrier, à jour depuis la plateforme Incub-OS.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Candidatures ouvertes",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Candidatures closes",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "{n} places restantes",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Clôture des candidatures",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Début du programme",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Candidater",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Chargement des cohortes…",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Aucune cohorte n’est ouverte pour le moment. Écrivez-nous pour être informé de la prochaine.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Être informé",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Ils sont passés par le programme",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Startups diplômées du programme d’incubation.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Vous portez un projet innovant ?",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Rejoignez une cohorte, ou soutenez le programme en devenant partenaire.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Voir les cohortes",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Partager l’expertise, faire avancer les transformations.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Les actualités d’ICES et les rencontres que nous organisons autour des enjeux de transformation en Afrique.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Filtrer par type",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Tout",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "À la une",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "De nouvelles actualités et de nouveaux rendez-vous seront bientôt annoncés.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Nous écrire",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Organiser une rencontre avec ICES ?",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Conférence, atelier ou table ronde : construisons ensemble un rendez-vous autour de vos enjeux.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Nous contacter",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Développer les compétences qui font les transformations.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "ICES conçoit des formations et des programmes de renforcement des capacités pour les secteurs public et privé.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Choisir selon votre objectif",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Quatre familles de programmes, adaptées à votre organisation et à vos équipes.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Demander le programme",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Diriger & gouverner",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Formation en leadership, management et gouvernance, pour les secteurs public et privé.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Transformation digitale & IA",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Academy transformation digitale et intelligence artificielle.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Certifications professionnelles",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Préparation aux certifications ISO, cybersécurité, PMP, ESG…",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Renforcement des capacités",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Programmes de renforcement des capacités institutionnelles, avec les bailleurs de fonds.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Des programmes à votre mesure",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Chaque programme part de vos enjeux, de vos équipes et de votre contexte.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Pour votre organisation",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Un programme conçu avec vous, pour vos équipes, dans vos locaux ou à distance.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Avec vos partenaires",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Des programmes de renforcement des capacités menés avec les bailleurs de fonds et les institutions.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Construisons votre programme.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Dites-nous qui former et sur quels enjeux : nous revenons vers vous avec une proposition.",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
+  },
+  {
+    "text": "Demander un programme",
+    "page": "pages /incubation, /actualites, /formations (src/content/fr/subpages.ts)",
+    "remplace": "(nouvelles pages)",
+    "demande": "2026-11-04, demandé par l’utilisateur (« Il reste les pages incubation… actualités et événements et celle des formations ») ; rédaction à partir des offres du site, à valider par ICES"
   }
 ]

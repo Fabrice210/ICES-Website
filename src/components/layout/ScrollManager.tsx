@@ -40,7 +40,13 @@ export function ScrollManager() {
         ? meta.realisationsTitle
         : pathname === '/prestations'
           ? meta.prestationsTitle
-          : meta.homeTitle
+          : pathname === '/incubation'
+            ? meta.incubationTitle
+            : pathname === '/actualites'
+              ? meta.newsTitle
+              : pathname === '/formations'
+                ? meta.trainingTitle
+                : meta.homeTitle
   }, [pathname, meta, legal])
 
   useEffect(() => {

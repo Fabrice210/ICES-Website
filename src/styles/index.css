@@ -44,6 +44,7 @@
 @import './redesign/realisations-row.css';
 @import './redesign/approach-timeline.css';
 @import './redesign/expertises-page.css';
+@import './redesign/subpages.css';
 /* Nouvelles pages (refonte V2). */
 @import './pages/realisations.css';
 @import './pages/article.css';
