@@ -1,9 +1,9 @@
 import type { SiteContent } from '../../types/content'
 
 /*
- * Legal pages. Details only ICES can provide (legal form, RCCM, IFU, publication director,
- * retention period) are `null`: shown as "To be completed" in development and hidden in
- * production while missing. To be reviewed by a lawyer before going live.
+ * Legal pages. Legal form, RCCM, IFU, company term and publication director were provided
+ * by ICES on 4 November 2026. What ICES has not provided yet (data retention period) stays
+ * `null`: shown as "To be completed" in development and hidden in production while missing. To be reviewed by a lawyer before going live.
  */
 
 const updated = '2 November 2026'
@@ -25,7 +25,7 @@ export const legal: SiteContent['legal'] = {
       title: 'Legal notice',
       text: 'Who publishes this website, who hosts it and on what terms you may use it.',
       image: 'photo-1486406146926-c627a92ad1ab-w2000.jpg',
-      updated,
+      updated: '4 November 2026',
       sections: [
         {
           id: 'editeur',
@@ -35,13 +35,17 @@ export const legal: SiteContent['legal'] = {
             {
               facts: [
                 { label: 'Name', value: 'ICES' },
-                { label: 'Legal form', value: null },
+                { label: 'Legal form', value: 'Limited liability company (SARL)' },
                 {
                   label: 'Registered office',
                   value: 'Quartier Akogbato Fidjrossè, Cotonou, Benin',
                 },
-                { label: 'RCCM', value: null },
-                { label: 'IFU', value: null },
+                { label: 'RCCM', value: 'Cotonou, RB/COT/25 B 41586' },
+                { label: 'IFU', value: '3202588798784' },
+                {
+                  label: 'Company term',
+                  value: '99 years, from 24 November 2025 to 24 November 2124',
+                },
                 { label: 'Phone', value: '+229 01 66 82 17 71' },
                 { label: 'Email', value: 'contact@ices-consulting.com' },
               ],
@@ -52,7 +56,16 @@ export const legal: SiteContent['legal'] = {
         {
           id: 'publication',
           title: 'Publication director',
-          blocks: [{ facts: [{ label: 'Name and position', value: null }] }],
+          blocks: [
+            {
+              facts: [
+                {
+                  label: 'Name and position',
+                  value: 'Bernadin Jean-Marie Fiogbe, managing director (gérant)',
+                },
+              ],
+            },
+          ],
         },
         {
           id: 'hebergement',

@@ -1,9 +1,10 @@
 import type { SiteContent } from '../../types/content'
 
 /*
- * Pages légales. Les informations que seul ICES peut fournir (forme juridique, RCCM, IFU,
- * directeur de la publication, durée de conservation) sont à `null` : elles s'affichent
- * « À compléter » en développement et sont masquées en production tant qu'elles manquent.
+ * Pages légales. Forme juridique, RCCM, IFU, durée de la société et directeur de la
+ * publication ont été fournis par ICES le 4 novembre 2026. Reste à `null` ce qu'ICES n'a pas
+ * encore fourni (durée de conservation des données) : affiché « À compléter » en
+ * développement, masqué en production tant qu'il manque.
  * Textes à faire relire par un juriste avant la mise en ligne.
  */
 
@@ -26,7 +27,7 @@ export const legal: SiteContent['legal'] = {
       title: 'Mentions légales',
       text: 'Qui édite ce site, qui l’héberge et dans quelles conditions vous pouvez l’utiliser.',
       image: 'photo-1486406146926-c627a92ad1ab-w2000.jpg',
-      updated,
+      updated: '4 novembre 2026',
       sections: [
         {
           id: 'editeur',
@@ -36,10 +37,14 @@ export const legal: SiteContent['legal'] = {
             {
               facts: [
                 { label: 'Dénomination', value: 'ICES' },
-                { label: 'Forme juridique', value: null },
+                { label: 'Forme juridique', value: 'Société à responsabilité limitée (SARL)' },
                 { label: 'Siège social', value: 'Quartier Akogbato Fidjrossè, Cotonou, Bénin' },
-                { label: 'RCCM', value: null },
-                { label: 'IFU', value: null },
+                { label: 'RCCM', value: 'Cotonou, RB/COT/25 B 41586' },
+                { label: 'IFU', value: '3202588798784' },
+                {
+                  label: 'Durée de la société',
+                  value: '99 ans, du 24 novembre 2025 au 24 novembre 2124',
+                },
                 { label: 'Téléphone', value: '+229 01 66 82 17 71' },
                 { label: 'E-mail', value: 'contact@ices-consulting.com' },
               ],
@@ -50,7 +55,9 @@ export const legal: SiteContent['legal'] = {
         {
           id: 'publication',
           title: 'Directeur de la publication',
-          blocks: [{ facts: [{ label: 'Nom et fonction', value: null }] }],
+          blocks: [
+            { facts: [{ label: 'Nom et fonction', value: 'Bernadin Jean-Marie Fiogbe, gérant' }] },
+          ],
         },
         {
           id: 'hebergement',
